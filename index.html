@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./core/style.css">
-    <title>Midterm anatomy</title>
+    <title>Midterm Anatomy</title>
 </head>
 <body>
     <h4 style="font-family: 'Prompt'; position: absolute; bottom: 0; right: 0; margin: 10px;">สารจากรุ่นสู่รุ้น | Dev By TanaTherd</h4>
@@ -25,6 +25,7 @@
         <div id="options-container" class="options-container"></div>
         <div id="result" class="result"></div>
         <button id="back-button" style="font-family: 'Prompt'; position: absolute; bottom: 0; left: 10px; margin: 10px; display: none; font-size: 17.25px;" onclick="goBack()">Back</button>
+
         
     </div>
 
@@ -37,7 +38,7 @@
             <div class="bar"></div>
         </div>
         <ul class="nav-list">
-            <li><a href="index.html">Midterm</a></li>
+            <li><a href="./index.html">Midterm</a></li>
             <li><a href="./pages/LabPing.html">Lab Ping</a></li>
             <li><a href="./pages/EMR.html">EMR</a></li>
         </ul>
@@ -48,7 +49,11 @@
 <script src="./core/script.js"></script>
 
 <script>
+
 let backButtonClicked = false;
+let correctAnswersCount = 0;  // เพิ่มตัวแปรเก็บจำนวนข้อที่ตอบถูก
+let IncorrectAnswersCount = 0;
+let confettiDisplayed = false;  // เพิ่มตัวแปรเพื่อตรวจสอบว่า Confetti ถูกแสดงหรือไม่
 function toggleMenu() {
             const menuToggle = document.querySelector('.menu-toggle');
             const navList = document.querySelector('.nav-list');
@@ -172,8 +177,10 @@ function toggleMenu() {
     function displayQuestion() {
         if (backButtonClicked) {
             currentQuestionIndex = (currentQuestionIndex - 1 + totalQuestions) % totalQuestions;
+            correctAnswersCount--;
         } else {
             currentQuestionIndex = (currentQuestionIndex + 1) % totalQuestions;  // ใช้ totalQuestions แทน questions.length
+            correctAnswersCount++;
         }
         const currentQuestion = questions[currentQuestionIndex];     
         backButtonClicked = false; // Reset the flag
@@ -207,20 +214,27 @@ function toggleMenu() {
 
 
     function checkAnswer(selectedIndex) {
-        const currentQuestion = questions[currentQuestionIndex];
-        const correctIndex = currentQuestion.options.findIndex(option => option === currentQuestion.correctAnswer);
-        document.getElementById('question-title').innerHTML = currentQuestion.question;
+    const currentQuestion = questions[currentQuestionIndex];
+    const correctIndex = currentQuestion.options.findIndex(option => option === currentQuestion.correctAnswer);
+    document.getElementById('question-title').innerHTML = currentQuestion.question;
 
-        const resultElement = document.getElementById('result');
-        if (selectedIndex === correctIndex) {
-            resultElement.textContent = 'Correct!';
-            resultElement.classList.remove('incorrect');
-            setTimeout(displayQuestion, 1000);
+    const resultElement = document.getElementById('result');
+    if (selectedIndex === correctIndex) {
+        resultElement.textContent = 'Correct!';
+        resultElement.classList.remove('incorrect');
+
+        if (correctAnswersCount === totalQuestions & IncorrectAnswersCount === 0) {
+            displayCelebration();  // Trigger celebration effect
         } else {
-            resultElement.textContent = 'Incorrect! Try again.';
-            resultElement.classList.add('incorrect');
+            setTimeout(displayQuestion, 1000);
         }
+    } else {
+        resultElement.textContent = 'Incorrect! Try again.';
+        resultElement.classList.add('incorrect');
+        IncorrectAnswersCount = IncorrectAnswersCount + 1;
     }
+}
+
     // Display the first question
     displayQuestion();
 
@@ -248,6 +262,71 @@ function toggleMenu() {
     // เรียกใช้งานฟังก์ชัน checkDevTools
     checkDevTools();
 
+
+
+
+// Function เพิ่ม effect Confetti
+function addConfetti() {
+    const confettiContainer = document.createElement('div');
+    confettiContainer.id = 'confetti-container';
+    document.body.appendChild(confettiContainer);
+
+    // สร้าง Confetti
+    for (let i = 0; i < 200; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.backgroundColor = getRandomColor();
+        confetti.style.left = Math.random() * window.innerWidth + 'px';
+        confetti.style.animationDuration = Math.random() * 2 + 1 + 's';
+        confetti.style.opacity = Math.random();
+        confettiContainer.appendChild(confetti);
+    }
+
+    // ลบ Confetti หลังจาก animation เสร็จสิ้น
+    setTimeout(() => {
+        document.body.removeChild(confettiContainer);
+        congratsEffect.style.transition = 'opacity 1s ease-in-out';
+        congratsEffect.style.opacity = '0';  // ทำให้ opacity เป็น 0 เพื่อให้หายไป
+    }, 15000);
+}
+
+// Function สุ่มสี
+function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+// Function แสดงประกาศยินดีพร้อม Effect Confetti
+function displayCelebration() {
+    // เพิ่ม effect แสดงประกาศยินดี
+    const congratsEffect = document.createElement('div');
+    congratsEffect.id = 'congratulation-effect';
+    congratsEffect.textContent = 'Congratulations!';  // ข้อความประกาศยินดี
+    congratsEffect.style.position = 'absolute';
+    congratsEffect.style.top = '100px';
+    congratsEffect.style.font = 'Prompt';
+    document.body.appendChild(congratsEffect);
+
+    // เพิ่ม effect Confetti
+    addConfetti();
+
+    setTimeout(() => {
+        window.open("https://youtu.be/jSG1hwdST7I?si=xVP3SnqtFz1RfZaE&t=108", '_blank');
+    },2000);
+
+    // รีเซ็ต correctAnswersCount และ แสดง effect ลงทะเบียน
+    setTimeout(() => {
+        document.body.removeChild(congratsEffect);
+        correctAnswersCount = 0;  // รีเซ็ต correctAnswersCount สำหรับการทดลองในอนาคต
+        IncorrectAnswersCount = 0;
+        displayQuestion();  // ดำเนินการไปที่คำถามถัดไป
+    },6000);
+}
+ 
 </script>
 
 
