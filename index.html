@@ -24,7 +24,11 @@
         <p id="question-title">TEST</p>
         <div id="options-container" class="options-container"></div>
         <div id="result" class="result"></div>
+        <button id="back-button" style="font-family: 'Prompt'; position: absolute; bottom: 0; left: 10px; margin: 10px; display: none;" onclick="goBack()">Back</button>
+        
     </div>
+
+
 
     <div class="nav-menu">
         <div class="menu-toggle" onclick="toggleMenu()">
@@ -35,7 +39,7 @@
         <ul class="nav-list">
             <li><a href="index.html">Midterm</a></li>
             <li><a href="./pages/LabPing.html">Lab Ping</a></li>
-            <li><a href="./pages/EMR.html">EMR</a></li>
+            <li><a href="./pages/LabPing.html">EMR</a></li>
         </ul>
     </div>
 
@@ -44,7 +48,7 @@
 <script src="./core/script.js"></script>
 
 <script>
-
+let backButtonClicked = false;
 function toggleMenu() {
             const menuToggle = document.querySelector('.menu-toggle');
             const navList = document.querySelector('.nav-list');
@@ -52,7 +56,7 @@ function toggleMenu() {
             navList.classList.toggle('show');
         }
     const questions = [
-        { question: "<B>ขณะที่นั่งฟังเพลงใกล้ลำโพงมากเกินไป เกิดอาการหูอื้อ เนื่องจาก โครงสร้างใดถูกกระตุ้นมากเกินไป</B>",options: ["Spiral organ", "Macular utriculi", "Macula sacculi", "Crista ampullaris", "Bulbous corpuscle"], correctAnswer: "Spiral organ" },
+    { question: "<B>ขณะที่นั่งฟังเพลงใกล้ลำโพงมากเกินไป เกิดอาการหูอื้อ เนื่องจาก โครงสร้างใดถูกกระตุ้นมากเกินไป</B>",options: ["Spiral organ", "Macular utriculi", "Macula sacculi", "Crista ampullaris", "Bulbous corpuscle"], correctAnswer: "Spiral organ" },
         { question: "<b>บริเวณใดของกระดูก humerus ที่มีการหักง่ายที่สุด</b>",options: ["Condyle","Greater tubercle","Head","Surgical neck","Shaft"], correctAnswer: "Surgical neck" },
         { question: "<b>การมองเห็นจะแปลผลที่บริเวณใดของสมอง</b>", options: ["area 5","area 3,1,2","area 17","area 4","area 44,45"], correctAnswer: "area 17" },
         { question: "<b>เนื้อเยื่อบุผิวที่เซลล์เรียงตัวคล้ายหลายชั้นแต่มีเพียงชั้นเดียว เซลล์บนมีรูปร่างเป็นทรงกระบอกและมีเซลล์ที่สร้างเมือกแทรกอยู่ เรียกเนื้อเยื่อบุผิวชนิดดังกล่าวว่าอะไร</b>", options: ["Pseudostratified columnar epithelium with goblet cell","Stratified columnar epithelium with goblet cells","Pseudostratified cuboidal epithelium with peg cells","Simple squamous epithelium with keratinocytes","Stratified cuboidal epithelium with Langerhan cells"], correctAnswer: "Pseudostratified columnar epithelium with goblet cell" },
@@ -165,33 +169,42 @@ function toggleMenu() {
 
     const totalQuestions = questions.length;
 
-function displayQuestion() {
-        currentQuestionIndex = (currentQuestionIndex + 1) % totalQuestions;  // ใช้ totalQuestions แทน questions.length
-        const currentQuestion = questions[currentQuestionIndex];
-
-    document.getElementById('options-container').innerHTML = '';
-    document.getElementById('question-title').innerHTML = currentQuestion.question;
-    document.getElementById('current-question-number').textContent = currentQuestionIndex + 1;
-        document.getElementById('total-questions').textContent = totalQuestions;  // อัปเดตจำนวนข้อทั้งหมด
-
-    currentQuestion.options = shuffleArray(currentQuestion.options);
-
-    currentQuestion.options.forEach((option, index) => {
-        const optionElement = document.createElement('div');
-        optionElement.classList.add('option');
-        optionElement.textContent = option;
-        optionElement.addEventListener('click', () => checkAnswer(index));
-        document.getElementById('options-container').appendChild(optionElement);
-
-        // ตรวจสอบถ้าเป็น correctAnswer ให้เพิ่ม class สีเขียวตรงนี้
-        if (option === currentQuestion.correctAnswer && document.getElementById('switch').checked) {
-            optionElement.classList.add('green-background');
+    function displayQuestion() {
+        if (backButtonClicked) {
+            currentQuestionIndex = (currentQuestionIndex - 1 + totalQuestions) % totalQuestions;
+        } else {
+            currentQuestionIndex = (currentQuestionIndex + 1) % totalQuestions;  // ใช้ totalQuestions แทน questions.length
         }
-    });
+        const currentQuestion = questions[currentQuestionIndex];     
+        backButtonClicked = false; // Reset the flag
+
+        document.getElementById('options-container').innerHTML = '';
+        document.getElementById('question-title').innerHTML = currentQuestion.question;
+        document.getElementById('current-question-number').textContent = currentQuestionIndex + 1;
+            document.getElementById('total-questions').textContent = totalQuestions;  // อัปเดตจำนวนข้อทั้งหมด
+
+        currentQuestion.options = shuffleArray(currentQuestion.options);
+
+        document.getElementById('back-button').style.display = (currentQuestionIndex > 0) ? 'block' : 'none';
+
+        currentQuestion.options.forEach((option, index) => {
+            const optionElement = document.createElement('div');
+            optionElement.classList.add('option');
+            optionElement.textContent = option;
+            optionElement.addEventListener('click', () => checkAnswer(index));
+            document.getElementById('options-container').appendChild(optionElement);
+
+            // ตรวจสอบถ้าเป็น correctAnswer ให้เพิ่ม class สีเขียวตรงนี้
+            if (option === currentQuestion.correctAnswer && document.getElementById('switch').checked) {
+                optionElement.classList.add('green-background');
+            }
+        });
 
 
-    document.getElementById('result').textContent = '';
-}
+        document.getElementById('result').textContent = '';
+    }
+
+
 
     function checkAnswer(selectedIndex) {
         const currentQuestion = questions[currentQuestionIndex];
@@ -208,10 +221,13 @@ function displayQuestion() {
             resultElement.classList.add('incorrect');
         }
     }
-
     // Display the first question
     displayQuestion();
 
+    function goBack() {
+        backButtonClicked = true;
+            displayQuestion();
+    }
 
 
     // ตรวจสอบการเปิด Developer Tools
