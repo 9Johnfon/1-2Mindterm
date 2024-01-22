@@ -1,0 +1,268 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap');
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* ให้ body มีความสูงขั้นต่ำเท่ากับ viewport */
+        }
+/* สไตล์สำหรับหน้าจอขนาดเล็ก (เช่น โทรศัพท์) */
+@media only screen and (max-width: 600px) {
+    #question-container {
+        max-width: 100%;
+    }
+    .switch {
+        position: static;
+        margin-bottom: 10px;
+    }
+    /* เพิ่มการปรับขนาดหรือการซ่อนส่วนหนึ่งๆ ของเว็บไซต์ที่ไม่ต้องการแสดงในหน้าจอขนาดเล็ก */
+}
+
+/* สไตล์สำหรับหน้าจอขนาดกลาง (เช่น แท็บเล็ต) */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+    /* เพิ่มสไตล์ที่ต้องการให้แสดงผลในหน้าจอขนาดกลาง */
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+        .switch {
+            position: fixed;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            top: 10px; 
+            right: 10px;
+            z-index: 1000;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: background-color 0.4s ease;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: transform 0.4s ease, background-color 0.4s ease;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #4CAF50;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+            background-color: #fff;
+        }
+        #question-title {
+            animation: fadeIn 1s ease;
+            transition: color 0.3s ease;
+        }
+
+        #question-container.green-background {
+            background-color: #4CAF50; /* สีเขียว */
+            color: white;
+        }
+
+        #question-container {
+            background-color: #fff;
+            position: relative;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #options-container {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        .option {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .option:hover {
+            background-color: #ddd;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .option.green-background {
+            background-color: #80c982; /* สีเขียว */
+            color: white;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        h4 {
+            position: absolute;
+            right: 0;
+            margin: 10px;
+            color: #555;
+        }
+        h4 {
+            font-family: 'Prompt';
+            margin: 10px;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            color: #555;
+        }
+
+        h4:nth-child(2) {
+            right: 0;
+        }
+        .incorrect {
+            color: red;
+        }
+
+        /* Common styles for menu toggle and navigation */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+            background: none;
+            border: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 20%;
+            justify-content: space-between;
+            padding: 15px;
+            z-index: 1000;
+        }
+
+        .nav-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        .nav-list li {
+            margin-right: 15px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .nav-list a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-list a:hover {
+            color: #4CAF50;
+        }
+
+        /* Styles for the hamburger icon */
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 6px 0;
+            transition: background-color 0.3s, transform 0.3s ease-in-out;
+        }
+
+        /* Styles for active state of hamburger icon */
+        .menu-toggle.active .bar:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .menu-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .bar:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Media query for responsive design */
+        @media screen and (max-width: 600px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-list {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                border-radius: 5px;
+                z-index: 999;
+            }
+
+            .nav-list.show {
+                display: flex;
+            }
+
+            .nav-list li {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .nav-menu {
+                justify-content: space-between;
+                padding: 15px;
+            }
+
+            .bar {
+                width: 30px;
+            }
+        }
