@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../core/style.css">
-    <title>Midterm anatomy</title>
+    <title>Midterm anatomy Lab</title>
 </head>
 <body>
     <h4 style="font-family: 'Prompt'; position: absolute; bottom: 0; right: 0; margin: 10px;">สารจากรุ่นสู่รุ้น | Dev By TanaTherd</h4>
@@ -24,7 +24,11 @@
         <p id="question-title">TEST</p>
         <div id="options-container" class="options-container"></div>
         <div id="result" class="result"></div>
+        <button id="back-button" style="font-family: 'Prompt'; position: absolute; bottom: 0; left: 10px; margin: 10px; display: none;" onclick="goBack()">Back</button>
+        
     </div>
+
+
 
     <div class="nav-menu">
         <div class="menu-toggle" onclick="toggleMenu()">
@@ -44,7 +48,7 @@
 <script src="./core/script.js"></script>
 
 <script>
-
+let backButtonClicked = false;
 function toggleMenu() {
             const menuToggle = document.querySelector('.menu-toggle');
             const navList = document.querySelector('.nav-list');
@@ -52,7 +56,7 @@ function toggleMenu() {
             navList.classList.toggle('show');
         }
     const questions = [
-        { question: "<B><img src='../images/1.PNG'><br/>จงบอกชื่อระนาบ (plane) ของสมอง (brian)</B>",options: ["Sagittal plane","Oblique plane","Mid-sagittal plane","Coronal plane","Horizontal plane"], correctAnswer: "Sagittal plane" },
+    { question: "<B><img src='../images/1.PNG'><br/>จงบอกชื่อระนาบ (plane) ของสมอง (brian)</B>",options: ["Sagittal plane","Oblique plane","Mid-sagittal plane","Coronal plane","Horizontal plane"], correctAnswer: "Sagittal plane" },
         { question: "<B><img src='../images/2.PNG'><br/>จงระบุชนิดของเนื้อเยื่อบุผิว (epithelium) บริเวณที่ปีกกาสีแดง</B>",options: ["Stratified columnar epithelium","Pseudostratified squamous epithelium","Simple cuboidal epithelium","Simple squamous epithelium","Simple columnar epithelium"], correctAnswer: "Simple columnar epithelium" },
         { question: "<B><img src='../images/3.PNG'><br/>จงระบะชนิดของเนื้อเยื่อบุผิว (epithelium)</B>",options: ["Stratified columnar epithelium","Transitional epithelium","Simple cuboidal epithelium","Stratified cuboidal epithelium","Stratified squamous epithelium"], correctAnswer: "Transitional epithelium" },
         { question: "<B><img src='../images/4.PNG'><br/></B>",options: ["Microvilli","Gap junction","Stereocilia","Hemidesmosome","Cilia"], correctAnswer: "Microvilli" },
@@ -112,7 +116,6 @@ function toggleMenu() {
         { question: "<B><img src='../images/59.PNG'><br/></B>",options: ["Trachea","Main bronchus","Lobar bronchus","Larynx"], correctAnswer: "Trachea" },
         { question: "<B><img src='../images/60.PNG'><br/></B>",options: ["Sphenoidal air sinus","Superior nasal meatus","Ethmoidal air sinus","Frontal air sinus","Maxillary air sinus"], correctAnswer: "Sphenoidal air sinus" },
         { question: "<B><img src='../images/61.PNG'><br/></B>",options: ["Oblique fissure","Frontal fissure","Coronal fissure","Horizontal fissure","Transverse fissure"], correctAnswer: "Oblique fissure" }
-
 ];
       
     let currentQuestionIndex = -1;
@@ -145,33 +148,42 @@ function toggleMenu() {
 
     const totalQuestions = questions.length;
 
-function displayQuestion() {
-        currentQuestionIndex = (currentQuestionIndex + 1) % totalQuestions;  // ใช้ totalQuestions แทน questions.length
-        const currentQuestion = questions[currentQuestionIndex];
-
-    document.getElementById('options-container').innerHTML = '';
-    document.getElementById('question-title').innerHTML = currentQuestion.question;
-    document.getElementById('current-question-number').textContent = currentQuestionIndex + 1;
-        document.getElementById('total-questions').textContent = totalQuestions;  // อัปเดตจำนวนข้อทั้งหมด
-
-    currentQuestion.options = shuffleArray(currentQuestion.options);
-
-    currentQuestion.options.forEach((option, index) => {
-        const optionElement = document.createElement('div');
-        optionElement.classList.add('option');
-        optionElement.textContent = option;
-        optionElement.addEventListener('click', () => checkAnswer(index));
-        document.getElementById('options-container').appendChild(optionElement);
-
-        // ตรวจสอบถ้าเป็น correctAnswer ให้เพิ่ม class สีเขียวตรงนี้
-        if (option === currentQuestion.correctAnswer && document.getElementById('switch').checked) {
-            optionElement.classList.add('green-background');
+    function displayQuestion() {
+        if (backButtonClicked) {
+            currentQuestionIndex = (currentQuestionIndex - 1 + totalQuestions) % totalQuestions;
+        } else {
+            currentQuestionIndex = (currentQuestionIndex + 1) % totalQuestions;  // ใช้ totalQuestions แทน questions.length
         }
-    });
+        const currentQuestion = questions[currentQuestionIndex];     
+        backButtonClicked = false; // Reset the flag
+
+        document.getElementById('options-container').innerHTML = '';
+        document.getElementById('question-title').innerHTML = currentQuestion.question;
+        document.getElementById('current-question-number').textContent = currentQuestionIndex + 1;
+            document.getElementById('total-questions').textContent = totalQuestions;  // อัปเดตจำนวนข้อทั้งหมด
+
+        currentQuestion.options = shuffleArray(currentQuestion.options);
+
+        document.getElementById('back-button').style.display = (currentQuestionIndex > 0) ? 'block' : 'none';
+
+        currentQuestion.options.forEach((option, index) => {
+            const optionElement = document.createElement('div');
+            optionElement.classList.add('option');
+            optionElement.textContent = option;
+            optionElement.addEventListener('click', () => checkAnswer(index));
+            document.getElementById('options-container').appendChild(optionElement);
+
+            // ตรวจสอบถ้าเป็น correctAnswer ให้เพิ่ม class สีเขียวตรงนี้
+            if (option === currentQuestion.correctAnswer && document.getElementById('switch').checked) {
+                optionElement.classList.add('green-background');
+            }
+        });
 
 
-    document.getElementById('result').textContent = '';
-}
+        document.getElementById('result').textContent = '';
+    }
+
+
 
     function checkAnswer(selectedIndex) {
         const currentQuestion = questions[currentQuestionIndex];
@@ -188,10 +200,13 @@ function displayQuestion() {
             resultElement.classList.add('incorrect');
         }
     }
-
     // Display the first question
     displayQuestion();
 
+    function goBack() {
+        backButtonClicked = true;
+            displayQuestion();
+    }
 
 
     // ตรวจสอบการเปิด Developer Tools
