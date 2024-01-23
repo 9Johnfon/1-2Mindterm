@@ -63,7 +63,39 @@
             navList.classList.toggle('show');
         }
         const questions = [
-        { question: '<B>บุคคลใดต่อไปนี้ ในระยะเวลาอันใกล้จะมีพยาธิสภาพ "ก้นขี้ถั่ง" วูป ตกจากเก้าอี้ หรือ เดินๆอยู่ วูป</B>',options: ["บักซัน (อาจจะเป็นคนนี้)","เกม","บอส","เทพลี่ชอบสี","โจโฉ","โจเซฟ","ดิว"], correctAnswer: "บักซัน (อาจจะเป็นคนนี้)" }
+            { question: '<B>ข้อใดถูกต้องเกี่ยวกับ ATP ของกล้ามเนื้อลาย</B>',options: ["ถูกใช้ทั้งระยะที่ทำให้หดตัวและเกิดการการคลายตัว"], correctAnswer: "ถูกใช้ทั้งระยะที่ทำให้หดตัวและเกิดการการคลายตัว" },
+            { question: '<B>หน้าที่ของ plasma membrane</B>',options: ["รักษาสมดุลของสาร โดยควบคุมผ่านการเข้าออก"], correctAnswer: "รักษาสมดุลของสาร โดยควบคุมผ่านการเข้าออก" },
+            { question: '<B>ข้อใดไม่ใช่อาการของ Heat stroke</B>',options: ["รูมานตาคลายตัว"], correctAnswer: "รูมานตาคลายตัว" },
+            { question: '<B>ข้อใดจัดเป็น non-specific</B>',options: ["Temp"], correctAnswer: "Temp" },
+            { question: '<B>องค์ประกอบย่อยที่ทำงานร่วมกันของระบบควบคุมร่างกาย Hemeostesis</B>',options: ["positive feedback , negative feedback"], correctAnswer: "positive feedback , negative feedback" },
+            { question: '<B>ผู้ป่วยเป็นโรคความดันโลหิตสูง ให้ยา prazosin ออกฤทธิ์จับกับ prazosin ออกฤทธิ์จับกับ receptor</B>',options: [" bata2 adrenergic receptor"], correctAnswer: " bata2 adrenergic receptor" },
+            { question: '<B>แพทย์ตรวจผู้ป่วยรายหนึ่งพบ clonus เป็น positive มีความผิดปกติที่ส่วนใด</B>',options: ["UMN"], correctAnswer: "UMN" },
+            { question: '<B>การตรวจ deep tendon reflex ที่ kneejerk</B>',options: ["L2 - L4"], correctAnswer: "L2 - L4" },
+            { question: '<B>ผู้ป่วยชายไทยอายุ 35 ปี มาพบแพทย์ด้วยอาการไม่สามาฤยืนหลับตาขนาดล้างหน้าได้ ยืนขาถ่าง ถามว่ามีความผิดปกติที่ใด</B>',options: ["แพทย์วินิจฉัยเป็น tabesdorsolis ความผิดปกติอยู่ที่ posterior column in the spinalcord หรือ dorsal column"], correctAnswer: "แพทย์วินิจฉัยเป็น tabesdorsolis ความผิดปกติอยู่ที่ posterior column in the spinalcord หรือ dorsal column" },
+            { question: '<B>นิสิตออกไป presents งานหน้าห้อง มีอาการเหงื่อออก หลั่งสารอะไร ระบบไหนทำงาน</B>',options: ["ระบบกล้ามเนื้อ หลั่ง approx. 2"], correctAnswer: "ระบบกล้ามเนื้อ หลั่ง approx. 2" },
+            { question: '<B>ในภาวะที่เซลล์กล้ามเนื้อหัวใจตาย cardiac marker ที่สามารถอยู่ได้นานที่สุด</B>',options: ["Troponin"], correctAnswer: "Troponin" },
+            { question: '<B>การเพิ่มขึ้นของอะไรที่ทำให้เซลล์กล้ามเนื้อลายหดตัวได้ดี</B>',options: ["atp"], correctAnswer: "atp" },
+            { question: '<B>ข้อใดไม่ใช่อาการ heat stork</B>',options: ["ปีรูม่านตาขยาย"], correctAnswer: "ปีรูม่านตาขยาย" },
+            { question: '<B>ข้อใดคือหน้าที่ของ คาร์โบไฮเดรตเซน ที่เยื่อหุ้ม cell carbohydrate chain</B>',options: ["cell-cell"], correctAnswer: "cell-cell" },
+            { question: '<B>ข้อใดควบคุมแบบ Positive feedback control</B>',options: ["การตกไข่ การคลอด การรวมกลุ่มของเลือด"], correctAnswer: "การตกไข่ การคลอด การรวมกลุ่มของเลือด" },
+            { question: '<B>narcrolepsy เกิดจากสาเหตุอะไร</B>',options: ["orexine ลด"], correctAnswer: "orexine ลด" },
+            { question: '<B>ถ้าตัด occulomoter ขวาจะส่งผลต่อ pupil light reflex อย่างไร</B>',options: ["ซ้ายหด ขวาไม่หด"], correctAnswer: "ซ้ายหด ขวาไม่หด" },
+            { question: '<B>ข้อใดผิดเกี่ยวกับ frost bite</B>',options: ["สามารถเซ็ตเอาcellตายออกได้"], correctAnswer: "สามารถเซ็ตเอาcellตายออกได้" },
+            { question: '<B>ตรวจความผิดปกติ</B>',options: ["- Clonus อะไร ข้อเท้า umn<br/>- Babinski's sien อะไร มีการอักเสบของเยื้อหุ้มสมอง"], correctAnswer: "- Clonus อะไร ข้อเท้า umn<br/>- Babinski's sien อะไร มีการอักเสบของเยื้อหุ้มสมอง" },
+            { question: '<B>ข้อใดกล่าวถึงหน้าที่โครงสร้างการทำงานของเซลล์กล้ามเนื้อไม่ถูกต้อง</B>',options: ["พอละเหนื่อ"], correctAnswer: "" },
+            { question: '<B></B>',options: [""], correctAnswer: "" },
+            { question: '<B></B>',options: [""], correctAnswer: "" },
+            { question: '<B></B>',options: [""], correctAnswer: "" },
+            { question: '<B></B>',options: [""], correctAnswer: "" },
+            { question: '<B></B>',options: [""], correctAnswer: "" },
+            { question: '<B></B>',options: [""], correctAnswer: "" },
+            { question: '<B></B>',options: [""], correctAnswer: "" },
+            { question: '<B></B>',options: [""], correctAnswer: "" },
+            { question: '<B></B>',options: [""], correctAnswer: "" },
+            { question: '<B></B>',options: [""], correctAnswer: "" },
+            { question: '<B></B>',options: [""], correctAnswer: "" },
+            { question: '<B></B>',options: [""], correctAnswer: "" },
+            { question: '<B></B>',options: [""], correctAnswer: "" },
         ];
 
         let currentQuestionIndex = -1;
@@ -227,7 +259,7 @@
             // เพิ่ม effect แสดงประกาศยินดี
             const congratsEffect = document.createElement('div');
             congratsEffect.id = 'congratulation-effect';
-            congratsEffect.textContent = 'มึงเก่งมากที่มึงทำได้ วูปๆไปเหอะมึงอะกูไม่ CPR ด้วยอะดิ';  // ข้อความประกาศยินดี
+            congratsEffect.textContent = 'Congratulations!';  // ข้อความประกาศยินดี
             congratsEffect.style.position = 'absolute';
             congratsEffect.style.top = '100px';
             congratsEffect.style.font = 'Prompt';
