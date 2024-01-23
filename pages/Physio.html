@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../core/style.css">
+    <title>Midterm Physio</title>
+</head>
+
+<body>
+    <h4 style="font-family: 'Prompt'; position: absolute; bottom: 0; right: 0; margin: 10px;">เรียบเรียงโดยชายฉกรรณ์ | Dev By
+        TanaTherd</h4>
+    <h4 style="font-family: 'Prompt';position: absolute; bottom: 0; left: 0; margin: 10px;"><a
+            href="https://tipme.in.th/hyorick" target="_blank"><img src='../images/coffee.PNG' width="40"
+                height="40"></a></h4>
+    <div id="question-container" class="switch-container">
+        <div style="position: absolute; top: 10px; right: 10px;">
+            <label class="switch">
+                <input type="checkbox" id="switch" onclick="toggleBackground()">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div style="font-family: 'Prompt'; position: absolute; bottom: 0; right: 0; margin: 10px; color: rgb(0, 0, 0);">
+            <span id="current-question-number">0</span> / <span id="total-questions">0</span>
+        </div>
+
+        <p id="question-title">TEST</p>
+        <div id="options-container" class="options-container"></div>
+        <div id="result" class="result"></div>
+        <button id="back-button"
+            style="font-family: 'Prompt'; position: absolute; bottom: 0; left: 10px; margin: 10px; display: none; font-size: 17.25px;"
+            onclick="goBack()">Back</button>
+
+
+    </div>
+
+
+
+    <div class="nav-menu">
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <ul class="nav-list">
+            <li><a href="../index.html">Midterm</a></li>
+            <li><a href="LabPing.html">Lab Ping</a></li>
+            <li><a href="EMR.html">EMR</a></li>
+            <li><a href="Physio.html">physio</a></li>
+        </ul>
+    </div>
+
+    <script src="./core/script.js"></script>
+    <script>
+
+        let backButtonClicked = false;
+        let correctAnswersCount = 0;
+        let IncorrectAnswersCount = 0;
+        let confettiDisplayed = false;
+        function toggleMenu() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navList = document.querySelector('.nav-list');
+            menuToggle.classList.toggle('active');
+            navList.classList.toggle('show');
+        }
+        const questions = [
+//////////////////// โจโฉ 1 - 12
+//////////////////// เกม 13 - 24
+            { question: "<B>ข้อใดต่อไปนี้มีกลไกการควบคุมแบบ Positive feedback control</B>",options: ["Sugar metabolism", "Body temperature", "Lactation", "Blood gas", "Blood osmolality"], correctAnswer: "Lactation" },
+            { question: "<B>เหตุการณ์ใดมีผลกับการเปลี่ยนแปลงสักย์ไฟฟ้าของเยื่อหุ้มเซลล์ที่เกิดขึ้นในระหว่างระยะที่ I และระยะที่ 3 <br/><img src='../images/Physio/14.PNG'></B>",options: ["การเคลื่อนที่ของ K+ ออกจากเซลล์", "การกระตุ้นกระบวนการ Na+- K+ pump", "การเคลื่อนที่ของ Na+ เข้าเซลล์", "การเคลื่อนที่ของ Na+ ออกจากเซลล์", "การเคลื่อนที่ของ K+ เข้าเซลล์"], correctAnswer: "การเคลื่อนที่ของ K+ ออกจากเซลล์" },
+            { question: "<B>ข้อใดต่อไปนี้หมายถึงสภาวะแวดล้อมภายในร่างกาย (Internal environment)</B>",options: ["Plasma Membrane", "Cytoplasm", "Extracellular fluid", "Intracellular fluid", "Transcellular fluid"], correctAnswer: "Extracellular fluid" },
+            { question: "<B>ข้อใคคือหน้าที่ของ carbohydrate chain ที่อยู่บนเยื่อหุ้มเซลล์</B>",options: ["Enzymes", "Membrane channel", "Signal transduction", "Gap junction", "Cell-cell recognition"], correctAnswer: "Cell-cell recognition" },
+            { question: "<B>มีไข้และออกกำลังกายจะส่งผลให้อุณหภูมิแกนสูงขึ้นเช่นกัน ข้อใดต่อไปนี้ใช้แยกการสูงขึ้นของอุณหภูมิแกนระหว่างมีใข้และออกกำลังกาย</B>",options: ["ลดการหลั่งเหงื่อ", "เพิ่ม basal metabolic rate", "ลติ skin blood flow", "เพิ่ม thermal set-point", "Nonshivering thermogenesis"], correctAnswer: "ลดการหลั่งเหงื่อ" },
+            { question: "<B>อากาศเย็นกระตุ้น ...... ที่ผิวหนังแล้วส่งสัญญาณไปที่ ...... ทำให้ร่างกายเกิดการตอบสนองโดย ...... จงเติมคำตอบตามลำดับให้สมบูรณ์</B>",options: ["Bulb of Krause, Posterior hypothalamus, Cutancous vasoconstriction", "Ruffini end organ, Anterior hypothalamus, Cutancous vasodilation", "Bulb of Krause, Anterior hypothalamus. Cutaneous vasoconstriction", "Skin receptor, Hypothalamus, Cutancous vasoconstriction", "Ruffini end organ, Posterior hypothalamus, Cutaneous vasodilation"], correctAnswer: "Bulb of Krause, Posterior hypothalamus, Cutancous vasoconstriction" },
+            { question: "<B>ข้อใดผิดเกี่ยวกับ frostbite</B>",options: ["มักเกิดกับอวัยระส่วนปลาย เช่น ปลายมือ ปลายเท้า", "1st degree และ 2nd degree ของ frostbite สามารถรักษาให้หายได้", "สามารถเช็ดถูบริเวณที่เกิด fostbite เพื่อเอาเนื้อเชื่อที่ตายออกก่อนได้", "ไม่ควรใช้ความร้อนแห้งในการปฐมพยาบาล", "การเกิด blood low ไปที่อวัยวะส่วนปลายสามารถป้องกัน frostbite ได้"], correctAnswer: "สามารถเช็ดถูบริเวณที่เกิด fostbite เพื่อเอาเนื้อเชื่อที่ตายออกก่อนได้" },
+            { question: "<B>ข้อใดถูกต้องเกี่ยวกับ Body temperature<br/><br/><p style='text-align:left';>a.อุณหภูมิกายมีค่าต่ำในตอนกลางคืน<br/>b.Estrogen ทำให้อุณหภูมิกาย สูงขึ้น progesterone ทำให้อุณหภูมิกาย ต่ำลง<br/>c.อายุมากขึ้น metabolism ลดลง และ อุณหภูมิกายต่ำลง<br/>d.Catecholamine เพิ่ม metabolism ทำให้อุณหภูมิกายสูงขึ้น<br/>e.Thyroxin ลด metabdlism ทำให้อุณหภูมิกายสูงขึ้น</p></B>",options: ["ถูกทุกข้อ", "a และ e", "a, c, d", "b, c, d", "a, b, c"], correctAnswer: "a, c, d" },
+            { question: "<B> ข้อใดต่อไปนี้ทำหน้าที่แปลผลการรับความรู้สึกจาก Somatic sense จากแขนข้างซ้าย </B>",options: ["Medial lemniscus ข้างขวา", "Dorsal root ganglia ข้างซ้าย", "BA 3 12 ข้างขวา", "Spinal cord ข้างซ้าย", "VPL nucleus of thalamus ข้างซ้าย"], correctAnswer: "BA 3 12 ข้างขวา" },
+            { question: "<B> ข้อใดต่อไปนี้ทำหน้าที่นำความรู้สึกเกี่ยวกับการสัมผัสหยาบ (crude or light touch) ที่แขนข้างซ้าย </B>",options: ["นำความรู้สึกผ่าน anterior spinothalamic tract", "นำความรู้สึกผ่านมายัง fasciculus cuncatus", "ความรู้สึกแปลผลที่ somatosensory cortex ข้างซ้าย", "นำความรู้สึกโดย dorsal column medial lemiscus", "นำความรู้สึกผ่านมายัง fasciculus gracilis"], correctAnswer: "ความรู้สึกแปลผลที่ somatosensory cortex ข้างซ้าย" },
+            { question: "<B> ผู้ป่วยมีอาการท้องร่วงอย่างรุนแรงชนิด secretory diarrhea แล้วเกิดภาวะขาดน้ำ (dehydration) ร่วมกับกวามดันเลือดต่ำลง การรักษาผู้ป่วยรายนี้จะใช้สารน้ำชนิดใด </B>",options: ["Hypotonic solution", "5% NaCl", "Hypertonic solution", "25% mannitol", "Isotonic solution"], correctAnswer: "Isotonic solution" },
+            { question: "<B> เด็กชายอายุ 2 ขวบ กลืนสารพิษที่ประกอบไปด้วย neurotoxin เข้าไป ส่งผลให้เกิด neuromuscular blockade แขน-ขาอ่อนแรง และมี partial respiratoryfailure จากผลดังกล่าวนิสิตจงวิเคราะห์ว่าสารพิษชนิดนี้จะไปจับกับตัวรับ (receptor) ใด </B>",options: ["Gamma aminobutyric acid-A (GABAA) receptor", "Beta receptor", "NMDA receptor", "Nicotinic receptor", "Muscarinic receptor"], correctAnswer: "Nicotinic receptor" },
+/////////////////// ดิว 25 - 36
+            { question: "<B> เด็กอายุ 3 เดือน ถูกนำส่งห้องฉุกเฉินของโรงพยาบาลแห่งหนึ่งด้วยอาการ อาเจียน ซึม ไม่ดูดนม หยุดหายใจเป็นช่วง ๆ และเสียชีวิตในเวลาต่อมา แพทย์ได้ทำการผ่าชันสูตรสาเหตุการเสียชีวิต พบมีเลือดออกในสมองปริมาณมาก จากการสอบถามผู้เลี้ยงดูพบว่าเด็กได้รับการเขย่าอย่างรุนแรง อยากทราบว่าผู้ป่วยรายนี้มีเลือดออกในช่องว่างใดระหว่างเยื่อหุ้มสมอง </B>",options: ["Subarachnoid space", "Interventricular foramen", "Epiarachnoid space", "Subdural space", "Epidural space"], correctAnswer: "Subdural space" },
+            { question: "<B> Middle cerebral artery เป็นแขนงที่ใหญ่ที่สุดของ internal carotid artery เลี้ยงบริเวณใดของสมอง </B>",options: ["ด้านบนของ cerebellum", "บริเวณ occipital lobe", "บริเวณ occipital lobe", "2/3 ทางด้านนอกของสมอง", "1/3 ทางด้านหน้าของสมอง"], correctAnswer: "1/3 ทางด้านหน้าของสมอง" },
+            { question: "<B> ข้อใดต่อไปนี้ไม่ส่งผลให้เกิดการสร้างความร้อน Heat production (Heat gain) ขึ้นในร่างกาย </B>",options: ["เพิ่ม Dietary intake", "เพิ่ม Sweating", "เพิ่ม Exercise", "เพิ่มBasal metabolic rate", "เพิ่ม Muscular activity"], correctAnswer: "เพิ่มBasal metabolic rate" },
+            { question: "<B> ระดับของ motor control ในข้อใดต่อไปนี้เป็นระดับ projection area </B>",options: ["Spinal cord", "Cerebellum", "Basal ganglia", "Primary motor cortex", "Premotor cortex"], correctAnswer: "Primary motor cortex" },
+            { question: "<B> Motor pathway ใดต่อไปนี้เกี่ยวข้องกับการควบคุมกล้ามเนื้อ flexor ของแขน </B>",options: ["Vestibulospinal tract", "Tectospinal tract", "Rubrospinal tract", "Medial reticulospinal tract", "Anterior corticospinal tract"], correctAnswer: "Rubrospinal tract" },
+            { question: "<B> หญิงอายุ 16 ปี ถูกนำตัวส่งโรงพยาบาลเนื่องจากอุบัติเหตุรถจักรยานยนต์ล้ม หลังจากการตรวจด้วยเครื่อง CT scan พบว่าบริเวณ dorsal column ระดับ T8ข้างขวาได้รับบาดเจ็บ ผู้ป่วยน่าจะสูญเสียระบบประสาทรับสัมผัสในข้อใดต่อไปนี้ </B>",options: ["Conscious proprioception in the left leg และ pain sensation in the right leg", "Pain sensation in the right leg", "Conscious proprioception in the right leg", "Pain sensation in the left leg", "Conscious proprioception in the left leg"], correctAnswer: "Pain sensation in the left leg" },
+            { question: "<B> ข้อใดคือองค์ประกอบย่อยที่ทำงานเชื่อมโยงกันในระบบควบคุมสมดุลร่างกาย (homeostasis control system) </B>",options: ["Stimulator, Receptor และ Control center", "Receptor, Control center และ Effector", "Receptor, Control center และ Set point", "Stimulator, Receptor และ Set point", "Stimulator, Receptor และ Effector"], correctAnswer: "Receptor, Control center และ Effector" },
+            { question: "<B> เซลล์เมมเบรนมี permeable ต่อสาร A หมายความว่าอย่างไร </B>",options: ["เซลล์เมมเบรนละลายได้ในสาร A", "สาร A ควบคุมการขนส่งสารผ่านเข้า-ออกเซลล์", "สาร A มีคุณสมบัติละลายในไขมันได้ดี", "เซลล์เมมเบรนไม่ยอมให้สาร A ผ่านเข้า-ออกเซลล์", "เซลล์เมมเบรนยอมให้สาร A ผ่านเข้า-ออกเซลล์"], correctAnswer: "เซลล์เมมเบรนยอมให้สาร A ผ่านเข้า-ออกเซลล์" },
+            { question: "<B> ขณะที่นิสิตออกไปนำเสนอกรณีศึกษาหน้าชั้น มีเหงื่อออกที่ฝ่ามือเป็นการกระตุ้นการทำงานของระบบประสาทใด และต่อมเหงื่อมีการหลั่งสารสื่อประสาทชนิดใด </B>",options: ["ระบบประสาทพาราซิมพาเทติก สารสื่อประสาทอะซีติลโคลีน", "ระบบประสาทโซมาติก สารสื่อประสาทอะซีติลโคลีน", "ระบบประสาทซิมพาเทติก สารสื่อประสาทอะซีติลโคลีน", "ระบบประสาทซิมพาเทติก สารสื่อประสาทนอร์เอพิเนฟริน", "ระบบประสาทพาราซิมพาเทติก สารสื่อประสาทนอร์เอพิเนฟริน"], correctAnswer: "ระบบประสาทซิมพาเทติก สารสื่อประสาทอะซีติลโคลีน" },
+            { question: "<B> ถ้านิสิตมีโอกาสไปฝึกงานในห้องฉุกเฉิน และมีผู้ป่วยที่เป็นโรคหอบหืดถูกนำส่งโรงพยาบาล นิสิตคิดว่าจะให้ยาในกลุ่มใดในผู้ป่วยรายนี้ </B>",options: ["β1 agonist", "β2 antagonist", "β2 agonist", "β1 antagonist", "β3 agonist"], correctAnswer: "β2 agonist" },
+            { question: "<B> ปัจจัยใดไม่มีผลต่ออัตราเร็วของการแพร่แบบ simple diffusion </B>",options: ["Temperature", "ความหนาของ cell membrane", "Protein channel", "Surface area ของ cell membrane", "Concentration gradient"], correctAnswer: "Surface area ของ cell membrane" },
+            { question: "<B>ในกระบวนการหลั่งสารสื่อประสาท เหตุการณ์ใดต่อไปนี้เกิดขึ้นในทันทีหลังจากมีการเคลื่อนที่ของแคลเซียมไอออนจากภายนอกเซลล์เข้ามาภายในเซลล์บริเวณปลายประสาท</B>",options: ["สารสื่อประสาทข้าม synaptic clet ไปจับกับ receptor ที่ postsynaptic membrane", "Voltage-gated calcium channels เปิด", "เกิดการจับกันของ SNARE proteins", "เกิดการเปลี่ยนแปลงของศักข์ไฟฟ้ของเยื่อหุ้มเซลล์ เกิด action potential", "สารสื่อประสาทหลั่งออกมาบริเวณ synaptic cleft"], correctAnswer: "Voltage-gated calcium channels เปิด" },
+/////////////////// โจเซฟ 37 - 48
+            { question: "<B>Motor pathway ในต่อไปนี้เกี่ยวข้องกับการควบคุมกล้ามเนื้อ flexor</B>",options: ["Anterior corticospinal tract", "Medial reticulospinal tract", "Vestibulospinal tract", "Tectospinal tract", "Rubrospinal tract "], correctAnswer: "Rubrospinal tract" },
+            { question: "<B> ข้อใดต่อไปนี้ผิดเกี่ยวกับ  Nonshivering thermogenesis</B>",options: ["เป็นการสร้างความร้อนจาก Brown fat metabolism", "Adipocyte ใน Brown fat tissue มี Symptomatic nerve มาเลี้ยง", "ใช้แล้วหมดไปไม่สามารถสร้างใหม่ได้", "พบในเด็กแรกเกิดจนถึงอายุ 2 ขวบ", "Brown fat พบมากที่บริเวณ สะบัก ต้นคอ หัวไหล่ "], correctAnswer: "พบในเด็กแรกเกิดจนถึงอายุ 2 ขวบ" },
+            { question: "<B> Motor pathway ใดต่อไปนี้ cross midline ของร่างกายที่ระดับ medulla ตรง pyramids</B>",options: ["Ventral corticospinal tract", "Rubrospinal tract ", "Lateral corticospinal tract ", "Vestibulospinal tract", "Tectospinal tract "], correctAnswer: "Lateral corticospinal tract" },
+            { question: "<B> ผู้ป่วยหญิงอายุ 35 ปีมาพบแพทย์เนื่องจากยา antihistamine ที่เธอกินอยู่เพื่อรักษาอาการแพ้อากาศทำให้เธอง่วงมาก แพทย์จึงแนะนำให้ใช้ยาตัวใหม่ที่จะมีฤทธิ์ทำให้ง่วงน้อยลงเนื่องจากไม่สามารถผ่าน blood brain barrier ได้อยากทราบว่าเซลล์ชนิดใดที่เป็นส่วนหนึ่งในการสร้าง blood brain barrier</B>",options: ["Oligodendrocyte", "Schwann cell", "Microglia", "Satellite cell", "Astrocyte"], correctAnswer: "Astrocyte" },
+            { question: "<B> ข้อใดต่อไปนี้ทำหน้าที่นำความรู้สึกเกี่ยวกับการสัมผัสหยาบ (crude or light touch) ที่แขนข้างซ้าย</B>",options: ["นำความรู้สึกโดย dorsal colmn medial lemiscus", "นำความรู้สึกผ่าน anterior spinothalamic tract ", "ความรู้สึกแปลผลที่ somatosensory cortex ข้างซ้าย", "นำความรู้สึกผ่านมายัง fasciculus cuneatus", "นำความรู้สึกผ่านมายัง fasciculus gracilis"], correctAnswer: "นำความรู้สึกผ่าน anterior spinothalamic tract" },
+            { question: "<B> หญิงอายุ 16 ปี ถูกนำตัวส่งโรงพยาบาลเนื่องจากอุบัติเหตุรถจักรยานยนต์ล้มหลังจากการตรวจด้วยเครื่อง CT scan สแกนพบว่าบริเวณ dorsal column ระดับ T8 ข้างขวาได้รับบาดเจ็บผู้ป่วยน่าจะสูญเสียระบบประสาทรับสัมผัสในข้อใดต่อไปนี้</B>",options: ["Pain sensation in the left leg", "Pain sensation in the right leg", "Conscious proprioception in the left leg และ Pain sensation in the right leg", "Conscious proprioception in the right leg ", "Conscious proprioception in the left leg "], correctAnswer: "Conscious proprioception in the left leg " },
+            { question: "<B> ข้อใดต่อไปนี้เป็นอาการที่แสดงถึงภาวะ lower motor neuron lesion </B>",options: ["Rigidity", "Spasticity ", "Hyperreflexsia", "Decorticate rigidity ", "Hyporeflexsia"], correctAnswer: "Hyporeflexsia" },
+            { question: "<B> ข้อใดคือหน้าที่ของ carbohydrate chain ที่อยู่บนเยื่อหุ้มเซลล์ </B>",options: ["Enzymes", "Membrane channel", "Gap junction", "Cell-cell recognition", "Signal transduction "], correctAnswer: "Cell-cell recognition" },
+            { question: "<B> ปัจจัยใดไม่ใช่คุณลักษณะของการแพร่แบบ facilitated diffusion </B>",options: ["อัตราการขนส่งเร็วกว่าการแพทย์แบบธรรมดามาก", "จะมีจุดอิ่มตัว (saturation) ของการเคลื่อนที่ของโมเลกุล", "สามารถถูกยับยั้งแบบแก่งแย่ง (competitive inhibition) ตัวสารเคมีที่มีโครงสร้างทางเคมีที่คล้ายคลึงกัน", "การขนส่งเกิดขึ้นด้าน concentration gradient", "มีความจำเพาะ (specificity) ในการขนส่งสารเคมีที่มีโครงสร้างทางเคมีแบบใดแบบหนึ่งเท่านั้น"], correctAnswer: "การขนส่งเกิดขึ้นด้าน concentration gradient" },
+            { question: "<B> เด็กชายอายุ 2 ขวบเกินสารพิษที่ประกอบไปด้วย neurotoxin เข้าไป ส่งผลให้เกิด neuromuscular blockade แขน-ขาอ่อนแรง และมี partial respiratory failure จากผลดังกล่าวนิสิตจงวิเคราะห์ว่าสารพิษชนิดนี้จะจับกับตัวรับ (receptor) ใด </B>",options: ["Nicotinic receptor", "Muscarinic receptor", "Gamma aminobutyric acid-A (GABAA) receptor", "NMDA receptor", "Beta receptor"], correctAnswer: "Beta receptor" },
+            { question: "<B> ปัจจัยใดมีผลต่ออัตราเร็วของการแพร่แบบ simple diffusion </B>",options: ["Surface area ของ cell membrane", "Temperature", "Concentration gradient", "ความหนาของ cell membrane", "Protein channel"], correctAnswer: "Temperature"}, 
+            { question: "<B>ในกระบวนการหลั่งสารสื่อประสาท เหตุการณ์ใดต่อไปนี้เกิดขึ้นในทันทีหลังจากมีการเคลื่อนที่ของแคลเซียมไอออนจากภายนอกเซลล์เข้ามาภายในเซลล์บริเวณปลายประสาท</B>",options: ["เกิดการจับกันของ SNARE proteins", "สารสื่อประสาทหลั่งออกมาบริเวณ synaptic cleft", "สารสื่อประสาทข้าม synaptic cleft ไปจับกับ receptor ที่ post synaptic membrane", "Voltage-gated calcium channels เปิด", "Protein channel"], correctAnswer: "สารสื่อประสาทข้าม synaptic cleft ไปจับกับ receptor ที่ post synaptic membrane"},
+/////////////////// บอส 49 - 60
+            { question: "<B>ระดับของ motor contro ในข้อใดต่อไปนี้เป็นระดับ projection area</B>", options: ["Cerebellum", "Primary motor cortex", "Basal ganglia", "Premotor cortex", "Spinal cord"], correctAnswer: "Spinal cord" },
+            { question: "<B>ข้อใดต่อไปนี้ไม่ใช่อาการของ hypothermia</B>", options: ["Muscle stiffness", "Vasoconstriction", "Sweating", "Slow heart rate and breath", "Shivering"], correctAnswer: "Sweating" },
+            { question: "<B>ผู้ป่วยอายุ 40 ปี มาพบแพทข์ด้วยอาการอ่อนแรงและมีปัญหาทางการรับความรู้สึกของทั้งแขนและขา แพทข์ตรวจพบว่ามีการเสื่อมสลายของปลอกไมอีลิน (demyelinating) ของ axon ในระบบประสาทส่วนกลาง ข้อใคต่อไปนี้ถูกต้องเกี่ยวกับ supporting cel! ที่เกี่ยวข้องกับผู้ป่วยรายนี้</B>", options: [" Microglia เก็บกินสิ่งแปลกปลอมที่เข้ามาจับบนปลอกไมอีลินของเส้นประสาทส่วนปลาย", "Schwann cell มีหน้าที่สร้าง myelin sheath ให้ axon ของเซลล์ใu peripheral nervous system", "Oligodendrocytes มีหน้าที่สร้าง myelin sheath 1ห้ axon กับเซลล์ประศาทใน central nervous system", "Oligodendrocytes มีหน้าที่สร้าง myelin sheath ให้ axon ของเซลล์ไน peripheral nervous system", "ข้อ B และ C ถูก"], correctAnswer: "ข้อ B และ C ถูก" },
+            { question: "<B>ข้อใดต่อไปนี้ผิดเกี่ยวกับ Nonshivering thermogenesis</B>",options: ["พบในเด็กแรกเกิดจนถึงอายุ 2 ขวบ", "Adipocyte ใน Brown fat tissue มี Sympathetic nerve มาเลี้ยง", "เป็นการสร้างความร้อนจาก Brown fat metabolism", "Brown fat พบมากที่บริเวณ สะบัก ต้นคอ หัวไหล่", "ใช้แล้วหมดไปไม่สามารถสร้างใหม่ได้"], correctAnswer: "พบในเด็กแรกเกิดจนถึงอายุ 2 ขวบ" },
+            { question: "<B>ในขณะพักรางกายเกิด heat loss วิธีใดมากที่สุด</B>",options: ["Conduction", "Radiation", "Evaporation", "Convections", "Respiration"], correctAnswer: "Radiation" },
+            { question: "<B>จากรูปด้านล่าง อยากทราบว่าเราจะพบคลื่น EEG ดังกล่าว ในช่วงใดของการนอนหลับ<BR/><img src='../images/Physio/54.PNG'></B>",options: ["Stage 2 ของ non-REM sleep", "Stage 1 ของ non-REM sleep", "Stage 4 ของ non-REM sleep", "Stage 5 REM sleep", "Stage 3 ของ non-REM sleep"], correctAnswer: "Stage 2 ของ non-REM sleep" },
+            { question: "<B> กระบวนการทำงานของซลล์กล้ามเนื้อเรียบ ข้อใดที่เหมือนกัน กับเซลล์กล้ามเนื้อหัวใจ </B>",options: ["A. Ca2+ จับกับ calmodulin", "B. Ca2+ induced Ca2t release", "C. การทำงานของ SERCA activity", "D. การทำงานของ ATPase activity", "E. กระบวนการ cross-bridge cycling"], correctAnswer: "C. การทำงานของ SERCA activity" },
+            { question: "<B> การวัดคลื่นไฟฟ้าหัวใจ ได้ ช่วง ST interval บ่งบอกการทำงานของหัวใจอย่างไร </B>",options: ["Ventricle depolarization and repolarization", "Complete ventricle repolarization", "Complete ventricle depolarization", "Complete atrial depolarization", "Complete atrial repolarization"], correctAnswer: "Ventricle depolarization and repolarization" },
+            { question: "<B> Orexin ถูกสร้างและหลั่งออกมาจากสมองบริเวณใด </B>",options: ["Lateral hypopreoptic area", "Lateral preoptic area", "Ventrolateral preoptic area", "Lateral hypothalamic area", "Suprachiasmatic nucleus"], correctAnswer: "Lateral hypothalamic area" },
+            { question: "<B> ผู้ป่วยโรคหัวใจมีแรงในการหดตัวลดลง กลไกของยาในข้อใดต่อไปนี้ เพิ่มแรงในการหดตัวของหัวใจ </B>",options: ["A. ยับยั้ง ryanodine receptor", "B. กระตุ้น muscarinic 2 receptor", "C. กระตุ้น Na*/Kt ATPase pump", "D. กระตูน dihydropyridine receptor", "E. กระตุ้น Ca2+ ATPase (SERCA2) receptor"], correctAnswer: "E. กระตุ้น Ca2+ ATPase (SERCA2) receptor" },
+            { question: "<B> ข้อใดต่อไปนี้มีผลลด stroke volume </B>",options: ["Hypercalcemia", "Antimuscarinic drugs", "⬆️venous return", "Calcium channel blocker", "⬆️ Heart rate"], correctAnswer: "⬆️THeart rate" },
+            { question: "<B> ข้อใดต่อไปนี้กล่าวถึงการทำงานของกล้ามเนื้อหัวใจไม่ถูกต้อง </B>",options: ["A. จุดเริ่มต้นศักย์ไฟฟ้าทำงานมาจาก sinoatrial node", "B. การกระตุ้นตัวรับ beta1 adrenergic มีผลเพิ่มระดับ Ca2+ ใน cytoplasm", "C. การเพิ่มขึ้นของระดับของ Ca2+ ใน cytoplasm ผ่านช่องทาง DHP และ RYR", "C. การเพิ่มขึ้นของระดับของ Ca2+ ใน cytoplasm ผ่านช่องทาง DHP และ RYR", "E. การคลายตัวเกิดเมื่อระดับ Ca2+ ในcytoplasm ลดลง โดยกระตุ้น Ca2+ ATPase pump เก็บเข้า"], correctAnswer: "D. ความยาวของ sarcomere ของเซลล์กล้ามเนื้อ 2.2 ไมครอน สร้างแรงตึงได้มาก" },
+            { question: "<B> ข้อใดต่อไปนี้มีความสำคัญต่อการเกิด cross-bridge cycling ของเซลล์กล้ามเนื้อทุกชนิด </B>",options: ["Calcium ions in cytoplasm", "membrane action potential", "Acetylcholine", "Troponin C", "Calmodulin"], correctAnswer: "Troponin C" },
+/////////////////// ลี่ 61 - 72
+            { question: "<B>ผู้ป่วยรายหนึ่งมีการทำงานของหัวใจเต้นเร็วและบีบตัวแรงการใช้ยายับยั้งการทำงานของ Beta1 adrenergicreceptorเพื่อลดอาการทำงานของหัวใจข้อใดผิด</B>",options: ["ลดอัตราการสร้างศักย์ไฟฟ้าจาก SA node —>ลดอัตราการเต้นของหัวใจ", "ลดอัตราความเร็วในการนำศักย์ไฟฟ้า ที่AV node—>ลดอัตราการเต้นของหัวใจ", "ลดปริมาณเลือดกลับเข้าสู่หัวใจ ลด EDV", "ลดการนำCa2+ เข้าเซลล์ ลดแรงในการบีบตัวของหัวใจ", "ทำให้ความดันเลือดลดลงลด aferload"], correctAnswer: "ลดปริมาณเลือดกลับเข้าสู่หัวใจ ลด EDV" },
+            { question: "<B>เมื่อระดับ Ca2+ใน cytoplasm เพิ่มขึ้นเพียงพอจงเรียงลำดับขั้นตอนการทำงานของเซลล์กล้ามเนื้อเรียบ1.Ca2+จับกับCAM 2.เกิด Phosphorylationของmyosin light chain 3.Myosin-Pจับกับactin 4.เพิ่ม activity ของ ATPpase enzyme 5.เพิ่ม muscle tone</B>",options: ["21435", "12435", "12345", "24135", "12453"], correctAnswer: "12435" },
+            { question: "<B>ปัจจัยข้อใดต่อไปนี้มีผล เพิ่ม afterload</B>",options: ["Beta 1 adrenergic", "เพิ่ม venous return", "ลด end systolic volume", "เพิ่ม end diastolic volume", "ถูกต้องข้อ"], correctAnswer: "เพิ่ม end diastolic volume" },
+        ];
+
+        let currentQuestionIndex = -1;
+
+        function shuffleArray(array) {
+            return array.sort(() => Math.random() - 0.5);
+        }
+
+
+        function toggleBackground() {
+            const switchElement = document.getElementById('switch');
+            const options = document.getElementsByClassName('option');
+
+            if (switchElement.checked) {
+                // ถ้า switch ถูกเปิด
+                for (let i = 0; i < options.length; i++) {
+                    const option = options[i];
+                    if (option.textContent === questions[currentQuestionIndex].correctAnswer) {
+                        option.classList.add('green-background');
+                    }
+                }
+            } else {
+                // ถ้า switch ถูกปิด
+                for (let i = 0; i < options.length; i++) {
+                    const option = options[i];
+                    option.classList.remove('green-background');
+                }
+            }
+        }
+
+        const totalQuestions = questions.length;
+
+        function displayQuestion() {
+            if (backButtonClicked) {
+                currentQuestionIndex = (currentQuestionIndex - 1 + totalQuestions) % totalQuestions;
+                correctAnswersCount--;
+            } else {
+                currentQuestionIndex = (currentQuestionIndex + 1) % totalQuestions;  // ใช้ totalQuestions แทน questions.length
+                correctAnswersCount++;
+            }
+            const currentQuestion = questions[currentQuestionIndex];
+            backButtonClicked = false; // Reset the flag
+
+            document.getElementById('options-container').innerHTML = '';
+            document.getElementById('question-title').innerHTML = currentQuestion.question;
+            document.getElementById('current-question-number').textContent = currentQuestionIndex + 1;
+            document.getElementById('total-questions').textContent = totalQuestions;  // อัปเดตจำนวนข้อทั้งหมด
+
+            currentQuestion.options = shuffleArray(currentQuestion.options);
+
+            document.getElementById('back-button').style.display = (currentQuestionIndex > 0) ? 'block' : 'none';
+
+            currentQuestion.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.classList.add('option');
+                optionElement.textContent = option;
+                optionElement.addEventListener('click', () => checkAnswer(index));
+                document.getElementById('options-container').appendChild(optionElement);
+
+                // ตรวจสอบถ้าเป็น correctAnswer ให้เพิ่ม class สีเขียวตรงนี้
+                if (option === currentQuestion.correctAnswer && document.getElementById('switch').checked) {
+                    optionElement.classList.add('green-background');
+                }
+            });
+
+
+            document.getElementById('result').textContent = '';
+        }
+
+
+
+        function checkAnswer(selectedIndex) {
+            const currentQuestion = questions[currentQuestionIndex];
+            const correctIndex = currentQuestion.options.findIndex(option => option === currentQuestion.correctAnswer);
+            document.getElementById('question-title').innerHTML = currentQuestion.question;
+
+            const resultElement = document.getElementById('result');
+            if (selectedIndex === correctIndex) {
+                resultElement.textContent = 'Correct!';
+                resultElement.classList.remove('incorrect');
+
+                if (correctAnswersCount === totalQuestions & IncorrectAnswersCount === 0) {
+                    displayCelebration();  // Trigger celebration effect
+                } else {
+                    setTimeout(displayQuestion, 1000);
+                }
+            } else {
+                resultElement.textContent = 'Incorrect! Try again.';
+                resultElement.classList.add('incorrect');
+                IncorrectAnswersCount = IncorrectAnswersCount + 1;
+            }
+        }
+
+        // Display the first question
+        displayQuestion();
+
+        function goBack() {
+            backButtonClicked = true;
+            displayQuestion();
+        }
+
+
+        // ตรวจสอบการเปิด Developer Tools
+        function checkDevTools() {
+            const isOpen = () => {
+                const element = new Image();
+                element.__defineGetter__('id', () => {
+                    console.log('Developer Tools is open!');
+                    // ทำบางสิ่งที่คุณต้องการทำเมื่อ Developer Tools ถูกเปิด
+                });
+                console.clear();
+                console.log('%c', element);
+            };
+
+            setInterval(isOpen, 1000);
+        }
+
+        // เรียกใช้งานฟังก์ชัน checkDevTools
+        checkDevTools();
+
+
+
+
+        // Function เพิ่ม effect Confetti
+        function addConfetti() {
+            const confettiContainer = document.createElement('div');
+            confettiContainer.id = 'confetti-container';
+            document.body.appendChild(confettiContainer);
+
+            // สร้าง Confetti
+            for (let i = 0; i < 200; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.backgroundColor = getRandomColor();
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.animationDuration = Math.random() * 2 + 1 + 's';
+                confetti.style.opacity = Math.random();
+                confettiContainer.appendChild(confetti);
+            }
+
+            // ลบ Confetti หลังจาก animation เสร็จสิ้น
+            setTimeout(() => {
+                document.body.removeChild(confettiContainer);
+                congratsEffect.style.transition = 'opacity 1s ease-in-out';
+                congratsEffect.style.opacity = '0';  // ทำให้ opacity เป็น 0 เพื่อให้หายไป
+            }, 15000);
+        }
+
+        // Function สุ่มสี
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        // Function แสดงประกาศยินดีพร้อม Effect Confetti
+        function displayCelebration() {
+            // เพิ่ม effect แสดงประกาศยินดี
+            const congratsEffect = document.createElement('div');
+            congratsEffect.id = 'congratulation-effect';
+            congratsEffect.textContent = 'Congratulations!';  // ข้อความประกาศยินดี
+            congratsEffect.style.position = 'absolute';
+            congratsEffect.style.top = '100px';
+            congratsEffect.style.font = 'Prompt';
+            document.body.appendChild(congratsEffect);
+
+            // เพิ่ม effect Confetti
+            addConfetti();
+
+            setTimeout(() => {
+                window.open("https://youtu.be/jSG1hwdST7I?si=xVP3SnqtFz1RfZaE&t=108", '_blank');
+            }, 2000);
+
+            // รีเซ็ต correctAnswersCount และ แสดง effect ลงทะเบียน
+            setTimeout(() => {
+                document.body.removeChild(congratsEffect);
+                correctAnswersCount = 0;  // รีเซ็ต correctAnswersCount สำหรับการทดลองในอนาคต
+                IncorrectAnswersCount = 0;
+                displayQuestion();  // ดำเนินการไปที่คำถามถัดไป
+            }, 6000);
+        }
+
+
+    </script>
+
+
+
+</body>
+
+</html>
