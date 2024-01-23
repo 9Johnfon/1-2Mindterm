@@ -85,7 +85,6 @@
             { question: "<B>แพทย์ให้การรักษาผู้ป่วยโรคลมชักโดยให้ยาที่ทำให้เซลล์ประสาทเกิดไฮเปอร์โพลาไรเซชั่น อยากทราบว่ายานี้มีผลเกี่ยวข้องกับไอออนใดต่อไปนี้</B>",options: ["โซเดียมเท่านั้น", "คลอไรด์และโพแทสเซียม", "คลอไรด์และโซเดียม", "แคลเซียมและโซเดียม", "โพแทสเซียมและโซเดียม"], correctAnswer: "โพแทสเซียมและโซเดียม"},
             { question: "<B>ผู้ป่วยหญิงอายุ 35 ปี มาพบแพทย์เนื่องจากยา antihistamine ที่เธอกินอยู่เพื่อรักษาอาการแพ้อากาศทำให้เธอง่วงมาก แพทย์จึงแนะนำให้ใช้ยาตัวใหม่ที่จะมีฤทธิ์ ทำให้ง่วงน้อยลงเนื่องจากไม่สามารถผ่าน blood brain barrier ได้ อยากทราบว่าเซลล์ชนิดใดที่เป็นส่วนหนึ่งในการสร้าง blood brain barrier</B>",options: ["Oligodendrocyte", "Microglia", "Astrocyte", "Schwann cell", "Satellite cell"], correctAnswer: "Satellite cell"},
             { question: "<B> เมื่ออุณหภูมิแกนลดต่ำลง ร่างกายจะพยายามรักษาอุณ(ภูมิโดยเกิด cutaneousvasoconstriction และเพื่อป้องกันไม่ให้อวัยวะส่วนปลายเราขาดเลือดจึงเกิด......ตามมา*** </B>",options: ["Fever", "Cold-induced-vasoconstriction", "Shivering", "Hunting reaction", "Sweating"], correctAnswer: "Cold-induced-vasoconstriction"},
-            { question: "<B> มีไข้และออกกำลังกายจะส่งผลให้อุณหภูมิแกนสูงขึ้นเช่นกัน ข้อใดต่อไปนี้ใช้แยกการสูงขึ้นของอุณหภูมิแกนระหว่างมีไข้และออกกำลังกาย** </B>",options: ["Nonshivering thermogenesis", "เพิ่ม thermal set-point", "ลด skin blood flow", "เพิ่ม basal metabolic rate", "ลดการหลั่งเหงื่อ"], correctAnswer: "เพิ่ม basal metabolic rate"},
             { question: "<B> ผู้ป่วยเกิดภาวะโซเดียมในเลือดต่ำ (hyponatremai) เนื่องมาจากการหลั่งฮอร์โมน ADHมากกว่าปกติ ทำให้ osmolarity ในเลือดต่ำลง น้ำแพร่เข้าเซลล์ทำให้ปริมาตรของเชลล์เพิ่มขึ้น จะมีผลให้เกิดภาวะที่เรียกว่า สมองบวม (cerebral edema) มีอาการมึนงง สับสนหมดสติ การรักษาผู้ป่วยรายนี้จะใช้สารน้ำชนิดใด * </B>",options: ["lsotonic solution", "0.45%NaCl", "Hypertonic solution ", "0.9%NaC", "Hypotonic solution "], correctAnswer: "Hypertonic solution "},
             { question: "<B> ข้อใดถูกต้องเกี่ยวกับ Body temperature<br/><br/><p style='text-align:left';>a.อุณหภูมิกายมีค่าต่ำในตอนกลางคืน<br/>b.Estrogen ทำให้อุณหภูมิกาย สูงขึ้น progesterone ทำให้อุณหภูมิกาย ต่ำลง<br/>c.อายุมากขึ้น metabolism ลดล้ง และ อุณหภูมิกายต่ำลง<br/>d.Catecholamine เพิ่ม metaboism ทำให้อุณหภูมิกายสูงขึ้น<br/>e.Thyroxin ลด metabolism ทำให้อุณหภูมิกายสูงขึ้น* </p></B>",options: ["a,b,c", "b,c,d", "a,c,d", "aและe", "ถูกทุกข้อ"], correctAnswer: "a,c,d"},
             { question: "<B> การตรวจ......ใช้ต้ามค้อนยางขีดที่ฝ้าเท้าจากบริเวณสันเท้าไปถึงปลายเท้า ถ้าการตอบสนอง ของผู้ป่วยเกิด จาก dorsiflexion และ abduction ของนิ้วเท้าจะเกิดความผิดปกติที่...... </B>",options: ["Babinski's sign, lower motor neuron", "Babinski's sign, lower motor neuron", "Babinski's sign, meninges", "clonus, upper motor neuron", "Babinski's sign, upper motor neuron"], correctAnswer: "Babinski's sign, upper motor neuron"},
@@ -257,6 +256,7 @@
 
                 if (correctAnswersCount === totalQuestions & IncorrectAnswersCount === 0) {
                     displayCelebration();  // Trigger celebration effect
+                    currentQuestionIndex = -1;
                 } else {
                     setTimeout(displayQuestion, 1000);
                 }
