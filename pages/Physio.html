@@ -235,6 +235,7 @@
                 // ตรวจสอบถ้าเป็น correctAnswer ให้เพิ่ม class สีเขียวตรงนี้
                 if (option === currentQuestion.correctAnswer && document.getElementById('switch').checked) {
                     optionElement.classList.add('green-background');
+                    IncorrectAnswersCount = IncorrectAnswersCount + 1;
                 }
             });
 
