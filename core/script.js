@@ -1,7 +1,12 @@
 let passwordsAndOwners = [
-    { password: 'a', ip: '' },
-    { password: 'b', ip: '' },
-    { password: 'c', ip: '' }
+    { password: '253612', ip: '' },
+    { password: '746723', ip: '' },
+    { password: '842372', ip: '' },
+    { password: '213122', ip: '' },
+    { password: '123322', ip: '' },
+    { password: '123445', ip: '' },
+    { password: '567544', ip: '' },
+    { password: '131123', ip: '' }
 ];
 
 let adminIP = ['192.168.0.100'];  // IP ของ Admin ที่สามารถเข้าถึงทุกเครื่องได้
