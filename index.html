@@ -26,10 +26,12 @@
         <div id="result" class="result"></div>
         <button id="back-button" style="font-family: 'Prompt'; position: absolute; bottom: 0; left: 10px; margin: 10px; display: none; font-size: 17.25px;" onclick="goBack()">Back</button>
 
+       
+        
         
     </div>
 
-
+    <button id="login-button">Login</button>
 
     <div class="nav-menu">
         <div class="menu-toggle" onclick="toggleMenu()">
@@ -43,35 +45,28 @@
     </div>
 
 <!-- ... (HTML และ CSS เดิม) ... -->
-
-<script src="./core/script.js"></script>
-
 <script>
-
-let passwords = ["password1", "password2", "password3"];
-let ipAddresses = {};
-
-
-
-
-
-
-let backButtonClicked = false;
-let correctAnswersCount = 0;  // เพิ่มตัวแปรเก็บจำนวนข้อที่ตอบถูก
-let IncorrectAnswersCount = 0;
-let confettiDisplayed = false;  // เพิ่มตัวแปรเพื่อตรวจสอบว่า Confetti ถูกแสดงหรือไม่
-function toggleMenu() {
-            const menuToggle = document.querySelector('.menu-toggle');
-            const navList = document.querySelector('.nav-list');
-            menuToggle.classList.toggle('active');
-            navList.classList.toggle('show');
-        }
     const questions = [
 //////////////////// ซัน 1-8
+            { question: "<b>สารใดต่อไปนี้ไม่พบในกัญชา</b>", options: ["TCA","THC","THCA","CBD","CBN"], correctAnswer: "TCA" },
+            { question: "<b>การปลูกและดูแลต้นกัญชาในระยะใดที่ใช้ระยะเวลาสั้นที่สุดเพาะเมล็ด</b>", options: ["อนุบาลต้นกล้า","เลี้ยงใบ","ออกดอก","ไม่มีข้อใดถูก","ส่วนใดของกัญชาที่นำมาทำ"], correctAnswer: "อนุบาลต้นกล้า" },
+            { question: "<b>ส่วนใดของกัญชาที่นำมาทำน้ำมันพืชและใช้เป็นอาหารในประเทศจีน</b>", options: ["ดอกกัญชา","ใบ","ลำต้น","เมล็ด","ถูกทุกข้อ"], correctAnswer: "เมล็ด" },
+            { question: "<b>Victoria Dayป็นการนำกัญชามาใช้เพื่อวัตถุประสงค์ในข้อใด</b>", options: ["เครื่องสำอาง","เครื่องดื่ม","อาหาร","เส้นใย","ยารักษาโรค"], correctAnswer: "ยารักษาโรค" },
+            { question: "<b>การผลิต นำเข้า หรือส่งออกกัญชาเพื่อจำหน่าย กฎหมายกำหนดปริมาณน้ำหนักเท่าใด</b>", options: ["2 กิโลกรัม","4 กิโลกรัม","6 กิโลกรัม","8 กิโลกรัม","10 กิโลกรัม"], correctAnswer: "10 กิโลกรัม" },
+            { question: "<b>กัญชาถูกจัดให้เป็นยาเสพติดให้โทษตามกฎหมายทั่วโลกเมื่อใด</b>", options: ["สิงหาคม พ.ศ. 2518","สิงหาคม พ.ศ. 2520","สิงหาคม พ.ศ. 2522","สิงหาคม พ.ศ. 2524","สิงหาคม พ.ศ. 2526"], correctAnswer: "สิงหาคม พ.ศ. 2518" },
+            { question: "<b>ข้อใดเป็นวิธีการกระตุ้นการงอกของเมล็ดกัญชา</b>", options: ["ใช้กระดาษทรายขัดเมล็ด","นำเมล็ดมาแช่น้ำ","นำเมล็ดมาอบ","นำเมล็ดมาคลิปเปลือกออก","นำเมล็ดมาตากแดด"], correctAnswer: "นำเมล็ดมาแช่น้ำ" },
+            { question: "<b>15 ธันวาคม 2563 ระบุให้ส่วนของกัญชาส่วนใดยังคงจัดให้เป็นยาเสพติดให้โทษ</b>", options: ["ลำต้น","เส้นใย","กิ่งก้าน","ราก","เมล็ด"], correctAnswer: "เมล็ด" },
 //////////////////// บอส 9-17
             { question: "<b> นิยมนำต้นกัญชาอนุบาลในวัสดุปลูกชนิดใด </b>", options: ["พีทมอส","เพอร์ไลต์","เวอร์มิคูไลต์","ขุยมะพร้าว","หินพัมมิช"], correctAnswer: "พีทมอส" },
             { question: "<b> ประเทศที่ปลูกกัญชามากที่สุดคือ </b>", options: ["จีน","อินเดีย","ญี่ปุ่น","อังกฤษ","อเมริกา"], correctAnswer: "อเมริกา" },
             { question: "<b> พระราชบัญญัติยาเสพติดให้โทษพ.ศ. 2522 นี้กำหนดให้ยาเสพติดให้โทษแบ่งออกเป็น 5ประเภท ข้อใดกล่าวถูกต้อง </b>", options: ["ยาเสพติดประเภท 1 เช่น มอร์ฟิน","ยาเสพติดประเภท 2 เช่น เฮโรอีน โคคาอีน","ยาเสพติดประเภท 3 เช่น ยาแก้ไอผสมฝิ่น","ยาเสพติดประเภท 4 เช่น พืชกระท่อม","ยาเสพติดประเภท 5 เช่น กัญชา"], correctAnswer: "ยาเสพติดประเภท 5 เช่น กัญชา" },
+            { question: "<b> Marijuana มาจากภาษาใด </b>", options: ["อังกฤษ","เม็กซิกัน","ฝรั่งเศส","บาลี","อเมริกัน"], correctAnswer: "เม็กซิกัน" },
+            { question: "<b> หากนิสิตเสพกัญชา จะได้รับโทษตามกฎหมายในข้อใด </b>", options: ["จำคุกไม่เกิน 6 เดือน ปรับไม่เกิน 10,000  ","จำคุกไม่เกิน 6 เดือน ปรับไม่เกิน 20,000 ","จำคุกไม่เกิน 1 ปี ปรับไม่เกิน 10,000 บาท","จำคุกไม่เกิน 1 ปี ปรับไม่เกิน 20,000 บาท","จำคุกไม่เกิน 5 ปี ปรับไม่เกิน 10,000 บาท"], correctAnswer: "จำคุกไม่เกิน 1 ปี ปรับไม่เกิน 20,000 บาท" },
+            { question: "<b> สภาพอากาศร้อนในประเทศไทย ควรปลูกกัญชาใส่ภาชนะในข้อใด </b>", options: ["กระถางดินเผา","กระถางพลาสติก","กระถางเชรามิก","กระถางผ้า","กระถางคอนกรีต"], correctAnswer: "กระถางผ้า" },
+            { question: "<b> ปัญหาดอกกัญชายืดตัวหรือ Fox tail เกิดจากสาเหตุในข้อใด </b>", options: ["การให้น้ำมากเกินไป","การได้รับแสงมากเกินไป","การถูกศัตรูพืชเข้าทำลาย","การได้รับอุณหภูมิสูง","การได้รับปุ้ยไนโตรเจนมากเกินไป"], correctAnswer: "การได้รับอุณหภูมิสูง" },
+            { question: "<b> ข้อใดกล้าวถูกต้อาเกี่ยวกับพระราชบัญญัติยาเสพติดให้โทษ พ.ศ. 2522 </b>", options: ["เฮโรอีนเป็นยาเสพติดให้โทษทั่วไป","อาเชติคแอนไฮไดรด์เป็นยาเสพติดให้โทษประเภทที่ 1","กัญชาและกระท่อมเป็นยาเสพติดให้โทษประเภททั่วไป","ยาแก้ไอผสม โคเดอีนไม่จัดว่าเป็นยาเสพติด","มอร์ฟินเป็นยาเสพติดให้โทษประเภทที่ 2"], correctAnswer: "มอร์ฟินเป็นยาเสพติดให้โทษประเภทที่ 2" },
+            { question: "<b> การปลูกกัญชาในข้อใดที่ทำให้เก็บเกี่ยวผลผลิตได้ปีละ 1 ครั้ง </b>", options: ["ปลูกกลางแจ้ง","ปลูกในโรงเรือนปิด","ปลูกในโรงเรือนกลางแจ้ง","ปลูกในโรงเรือนพลาสติก","ปลูกในโรงเรือนอุโมงค์"], correctAnswer: "ปลูกในโรงเรือนกลางแจ้ง" },
+
 /////////////////// จอน 18-26
             { question: '<B>การปลูกกัญชาในข้อใดที่ทำให้ได้ผลผลิตกัญชาที่มีคุณภาพและสม่ำเสมอ</B>',options: ["ปลูกกลางแจ้ง","ปลูกในโรงเรือนอุโมงค์","ปลูกในโรงเรือนพลาสติก","ปลูกในโรงเรือนกลางแจ้ง","ปลูกในโรงเรือนปิด"], correctAnswer: "ปลูกในโรงเรือนปิด" },
             { question: '<B>ตามพระราชบัญญัติยาเสพติดให้โทษ พ.ศ. 2562 การครอบครอง กัญชา ปริมาณเท่าใดจัดว่าเป็นการผลิต นำเข้า หรือส่งออกเพื่อการจำหน่าย</B>',options: ["ตั้งแต่ 10 กิโลกรัมขึ้นไป","ตั้งแต่ 15 กิโลกรัมขึ้นไป","ตั้งแต่ 20 กิโลกรัมขึ้นไป","ตั้งแต่ 25 กิโลกรัมขึ้นไป","ตั้งแต่ 30 กิโลกรัมขึ้นไป"], correctAnswer: "ตั้งแต่ 10 กิโลกรัมขึ้นไป" },
@@ -85,229 +80,21 @@ function toggleMenu() {
 /////////////////// ดิว 27-35
 /////////////////// ลี่ 36-44
 /////////////////// เซฟ 45-53
+            { question: "<b> ชื่อใดเป็นชื่อวิทยาศาสตร์ระดับชนิดของพืชกัญชาที่ถูกต้อง </b>", options: ["Cannabaceae","Cannabis","Cannabis marijuana","Cannabis sativa","Cannabis indica"], correctAnswer: "Cannabis indica" },
+            { question: "<b> ในการสกัดสารสำคัญจากกัญชาเริ่มครั้งแรกในปี ค.ศ. ใดที่สามารถวิเคราะห์ได้และใช้เครื่องมือใดในการวิเคราะห์ </b>", options: ["ค.ศ. 1899 วิเคราะห์ด้วยเครื่องมือ UPLC","ค.ศ. 1899 วิเคราะห์ด้วยเครื่องมือ NPLC","ค.ศ. 1964 วิเคราะห์ด้วยเครื่องมือ UPLC","ค.ศ. 1964 วิเคราะห์ด้วยเครื่องมือ HPLC","ค.ศ. 1964 วิเคราะห์ด้วยเครื่องมือ GC-MS"], correctAnswer: "ค.ศ. 1964 วิเคราะห์ด้วยเครื่องมือ HPLC" },
+            { question: "<b>“Hemp” หมายถึงข้อใด </b>", options: ["พืชกัญชาที่ใช้เพื่อการนันทนาการ","พืชกัญชาที่ใช้ประโยชน์จากเส้นใยเป็นหลัก","พืชกัญชาที่ใช้ในทางการแพทย์อย่างเดียว","พืชกัญชาที่ใช้ในพิธีทางศาสนา","พืชกัญชาที่ใช้เป็นไม้ประดับ"], correctAnswer: "พืชกัญชาที่ใช้ประโยชน์จากเส้นใยเป็นหลัก" },
+            { question: "<b> พืชในข้อใดที่จัดอยู่ในกลุ่มยาเสพติดให้โทษประเภทเดียวกันกับกัญชา </b>", options: ["ฮอป","เฮโรอีน","มอร์ฟีน","ฝิ่น","กระท่อม"], correctAnswer: "กระท่อม" },
+            { question: "<b> กลุ่มที่เป็นยาเสพติดออกฤทธิ์ต่อจิตประสาท (Drug Type) มีปริมาณ THC ร้อยละเท่าใด </b>", options: ["น้อยกว่าร้อยละ 0.2 -(ก)","อยู่ระหว่างร้อยละ 0.2-1 -(ข)","มากกว่าร้อยละ 1 -(ค)","น้อยกว่าร้อยละ 1 -(ง)","ข้อ ข,ง ถูก"], correctAnswer: "มากกว่าร้อยละ 1 -(ค)" },
+            { question: "<b>ในทางกฎหมายกัญชาหมายความถึงส่วนใด</b>", options: ["ใบ","ยอด","ดอกเพศเมีย","ผล","ถูกทุกข้อ"], correctAnswer: "ถูกทุกข้อ" },
+            { question: "<b> ผู้ป่วยโรคมะเร็งที่มีอาการคลื่นไส้อาเจียนภายหลังได้รับเคมีบำบัด (คีโม) นิสิตจะเลือกให้สารสำคัญจากกัญชาในข้อใด </b>", options: ["THC","CBD","Terpene","CBN","CBC"], correctAnswer: "THC" },
+            { question: "<b> การปลูกกัญชาในข้อใดที่ทำให้ได้ผลผลิตกัญชาตลอดปี </b>", options: ["ปลูกกลางแจ้ง","ปลูกในโรงเรือนปิด","ปลูกในโรงเรือนกลางแจ้ง","ปลูกในโรงเรือนพลาสติก","ปลูกในโรงเรือนอุโมงค์"], correctAnswer: "ปลูกในโรงเรือนปิด" },
+            { question: "<b> จากหลักฐานทางประวัติศาสตร์คาดว่าการใช้ประโยชน์จากพืชกัญชาเริ่มต้นจากที่ใด </b>", options: ["ยุโรป","อเมริกาใต้","แอฟริกา","เอเชีย","อเมริกาเหนือ"], correctAnswer: "เอเชีย" },
 /////////////////// โฉ 53-60
 
     ];
-      
-    let currentQuestionIndex = -1;
-
-    function shuffleArray(array) {
-        return array.sort(() => Math.random() - 0.5);
-    }
-
-
-    function toggleBackground() {
-        const switchElement = document.getElementById('switch');
-        const options = document.getElementsByClassName('option');
-
-        if (switchElement.checked) {
-            // ถ้า switch ถูกเปิด
-            for (let i = 0; i < options.length; i++) {
-                const option = options[i];
-                if (option.textContent === questions[currentQuestionIndex].correctAnswer) {
-                    option.classList.add('green-background');
-                }
-            }
-        } else {
-            // ถ้า switch ถูกปิด
-            for (let i = 0; i < options.length; i++) {
-                const option = options[i];
-                option.classList.remove('green-background');
-            }
-        }
-    }
-
-    const totalQuestions = questions.length;
-
-    function displayQuestion() {
-        if (backButtonClicked) {
-            currentQuestionIndex = (currentQuestionIndex - 1 + totalQuestions) % totalQuestions;
-            correctAnswersCount--;
-        } else {
-            currentQuestionIndex = (currentQuestionIndex + 1) % totalQuestions;  // ใช้ totalQuestions แทน questions.length
-            correctAnswersCount++;
-        }
-        const currentQuestion = questions[currentQuestionIndex];     
-        backButtonClicked = false; // Reset the flag
-
-        document.getElementById('options-container').innerHTML = '';
-        document.getElementById('question-title').innerHTML = currentQuestion.question;
-        document.getElementById('current-question-number').textContent = currentQuestionIndex + 1;
-            document.getElementById('total-questions').textContent = totalQuestions;  // อัปเดตจำนวนข้อทั้งหมด
-
-        currentQuestion.options = shuffleArray(currentQuestion.options);
-
-        document.getElementById('back-button').style.display = (currentQuestionIndex > 0) ? 'block' : 'none';
-
-        currentQuestion.options.forEach((option, index) => {
-            const optionElement = document.createElement('div');
-            optionElement.classList.add('option');
-            optionElement.textContent = option;
-            optionElement.addEventListener('click', () => checkAnswer(index));
-            document.getElementById('options-container').appendChild(optionElement);
-
-            // ตรวจสอบถ้าเป็น correctAnswer ให้เพิ่ม class สีเขียวตรงนี้
-            if (option === currentQuestion.correctAnswer && document.getElementById('switch').checked) {
-                optionElement.classList.add('green-background');
-            }
-        });
-
-
-        document.getElementById('result').textContent = '';
-    }
-
-
-
-    function checkAnswer(selectedIndex) {
-    const currentQuestion = questions[currentQuestionIndex];
-    const correctIndex = currentQuestion.options.findIndex(option => option === currentQuestion.correctAnswer);
-    document.getElementById('question-title').innerHTML = currentQuestion.question;
-
-    const resultElement = document.getElementById('result');
-    if (selectedIndex === correctIndex) {
-        resultElement.textContent = 'Correct!';
-        resultElement.classList.remove('incorrect');
-
-        if (correctAnswersCount === totalQuestions & IncorrectAnswersCount === 0) {
-            displayCelebration();  // Trigger celebration effect
-        } else {
-            setTimeout(displayQuestion, 1000);
-        }
-    } else {
-        resultElement.textContent = 'Incorrect! Try again.';
-        resultElement.classList.add('incorrect');
-        IncorrectAnswersCount = IncorrectAnswersCount + 1;
-    }
-}
-
-    // Display the first question
-    displayQuestion();
-
-    function goBack() {
-        backButtonClicked = true;
-            displayQuestion();
-    }
-
-
-    // ตรวจสอบการเปิด Developer Tools
-    function checkDevTools() {
-        const isOpen = () => {
-            const element = new Image();
-            element.__defineGetter__('id', () => {
-                console.log('Developer Tools is open!');
-                // ทำบางสิ่งที่คุณต้องการทำเมื่อ Developer Tools ถูกเปิด
-            });
-            console.clear();
-            console.log('%c', element);
-        };
-
-        setInterval(isOpen, 1000);
-    }
-
-    // เรียกใช้งานฟังก์ชัน checkDevTools
-    checkDevTools();
-
-
-
-
-// Function เพิ่ม effect Confetti
-function addConfetti() {
-    const confettiContainer = document.createElement('div');
-    confettiContainer.id = 'confetti-container';
-    document.body.appendChild(confettiContainer);
-
-    // สร้าง Confetti
-    for (let i = 0; i < 200; i++) {
-        const confetti = document.createElement('div');
-        confetti.className = 'confetti';
-        confetti.style.backgroundColor = getRandomColor();
-        confetti.style.left = Math.random() * window.innerWidth + 'px';
-        confetti.style.animationDuration = Math.random() * 2 + 1 + 's';
-        confetti.style.opacity = Math.random();
-        confettiContainer.appendChild(confetti);
-    }
-
-    // ลบ Confetti หลังจาก animation เสร็จสิ้น
-    setTimeout(() => {
-        document.body.removeChild(confettiContainer);
-        congratsEffect.style.transition = 'opacity 1s ease-in-out';
-        congratsEffect.style.opacity = '0';  // ทำให้ opacity เป็น 0 เพื่อให้หายไป
-    }, 15000);
-}
-
-// Function สุ่มสี
-function getRandomColor() {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
-
-// Function แสดงประกาศยินดีพร้อม Effect Confetti
-function displayCelebration() {
-    // เพิ่ม effect แสดงประกาศยินดี
-    const congratsEffect = document.createElement('div');
-    congratsEffect.id = 'congratulation-effect';
-    congratsEffect.textContent = 'Congratulations!';  // ข้อความประกาศยินดี
-    congratsEffect.style.position = 'absolute';
-    congratsEffect.style.top = '100px';
-    congratsEffect.style.font = 'Prompt';
-    document.body.appendChild(congratsEffect);
-
-    // เพิ่ม effect Confetti
-    addConfetti();
-
-    setTimeout(() => {
-        window.open("https://youtu.be/jSG1hwdST7I?si=xVP3SnqtFz1RfZaE&t=108", '_blank');
-    },2000);
-
-    // รีเซ็ต correctAnswersCount และ แสดง effect ลงทะเบียน
-    setTimeout(() => {
-        document.body.removeChild(congratsEffect);
-        correctAnswersCount = 0;  // รีเซ็ต correctAnswersCount สำหรับการทดลองในอนาคต
-        IncorrectAnswersCount = 0;
-        displayQuestion();  // ดำเนินการไปที่คำถามถัดไป
-    },6000);
-}
-
-
-
-function authenticate() {
-    const passwordInput = prompt("Enter password:");
-    const ipAddress = getIpAddress();
-
-    if (passwords.includes(passwordInput)) {
-        if (!ipAddresses.hasOwnProperty(passwordInput)) {
-            ipAddresses[passwordInput] = ipAddress;
-            alert("Authentication successful!");
-        } else if (ipAddresses[passwordInput] === ipAddress) {
-            alert("Authentication successful!");
-        } else {
-            alert("Password is already used by another IP address.");
-        }
-    } else {
-        alert("Authentication failed. Invalid password.");
-    }
-}
-
-
-
-function getIpAddress() {
-    // ตรวจสอบ IP address ของเครื่องที่ใช้งาน
-    // โปรดทราบว่านี้เป็นตัวอย่างเท่านั้น และอาจไม่ทำงานบนทุกๆ เครื่อง
-    // ในบางกรณีคุณอาจต้องใช้บริการภายนอกเพื่อดึงข้อมูล IP address
-    // เช่น https://api.ipify.org/?format=json
-    const ipAddress = "https://9johnfon.github.io/9John.github.io/"; // ให้เปลี่ยนเป็นการดึงจากบริการจริงในการใช้งานจริง
-    return ipAddress;
-}
-
-// เพิ่ม event listener ที่เรียกใช้ authenticate เมื่อมีคนคลิกที่ลิงก์หรือปุ่มที่เหมาะสม
-document.getElementById('login-button').addEventListener('click', authenticate);
- 
 </script>
 
+<script src="./core/script.js"></script>
 
 
 </body>
