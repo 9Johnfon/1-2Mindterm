@@ -1,6 +1,13 @@
 let passwords = ["253612", "746723", "842372","213122","123322","123445","567544"];
 let ipAddresses = {};
 
+// ตรวจสอบว่ามีการบันทึก IP และรหัสผ่านหรือไม่
+let savedData = localStorage.getItem('savedData');
+if (!savedData) {
+    savedData = {};
+} else {
+    savedData = JSON.parse(savedData);
+}
 
 
 
@@ -201,7 +208,7 @@ function displayCelebration() {
 }
 
 
-
+/*
 function authenticate() {
     const passwordInput = prompt("Enter password:");
     const ipAddress = getIpAddress();
@@ -227,17 +234,70 @@ function authenticate() {
         window.close();  // ใช้ window.close() เพื่อปิดหน้าต่างเว็บ
     }
 }
+*/
 
+function authenticate() {
+    const passwordInput = prompt("Enter password:");
+    const ipAddress = getIPAddress();
 
+    // ตรวจสอบว่ารหัสผ่านถูกต้องหรือไม่
+    if (passwords.includes(passwordInput)) {
+        // ตรวจสอบว่า IP นี้เคยใช้รหัสหรือไม่
+        if (savedData[ipAddress] && savedData[ipAddress] === passwordInput) {
+            // IP นี้เคยใช้รหัส, ไม่ต้องทำอะไร
+            alert('Welcome back!');
+            document.getElementById('login-button').style.display = 'none';
+            document.getElementById('login-button').style.width = '0'; // ปรับขนาดเป็น 0 เพื่อซ่อนปุ่ม
+            document.getElementById('login-button').style.height = '0'; // ปรับขนาดเป็น 0 เพื่อซ่อนปุ่ม
+        } else {
+            // IP นี้ไม่เคยใช้รหัสหรือรหัสผ่านถูกเปลี่ยน
+            alert('Login successful!');
+            document.getElementById('login-button').style.display = 'none';
+            document.getElementById('login-button').style.width = '0'; // ปรับขนาดเป็น 0 เพื่อซ่อนปุ่ม
+            document.getElementById('login-button').style.height = '0'; // ปรับขนาดเป็น 0 เพื่อ
+            // บันทึก IP และรหัส
+            savedData[ipAddress] = passwordInput;
+            localStorage.setItem('savedData', JSON.stringify(savedData));
+        }
 
-function getIpAddress() {
-    // ตรวจสอบ IP address ของเครื่องที่ใช้งาน
-    // โปรดทราบว่านี้เป็นตัวอย่างเท่านั้น และอาจไม่ทำงานบนทุกๆ เครื่อง
-    // ในบางกรณีคุณอาจต้องใช้บริการภายนอกเพื่อดึงข้อมูล IP address
-    // เช่น https://api.ipify.org/?format=json
-    const ipAddress = "https://9johnfon.github.io/9John.github.io/"; // ให้เปลี่ยนเป็นการดึงจากบริการจริงในการใช้งานจริง
-    return ipAddress;
+        // ซ่อนปุ่ม login เพื่อไม่ให้ใช้ซ้ำ
+        document.getElementById('login-button').style.display = 'none';
+    } else {
+        alert('Authentication failed. Invalid password.');
+        window.close();
+    }
 }
+
+
+
+// ฟังก์ชันเพื่อดึง IP Address
+function getIPAddress() {
+    // ทดลองดึง IP จาก localStorage หากมีการบันทึกไว้
+    const storedIPAddress = localStorage.getItem('ipAddress');
+    if (storedIPAddress) {
+        return storedIPAddress;
+    }
+
+    // หากไม่มีการบันทึก IP ใน localStorage ให้ใช้ external service แบบไม่คำนึงถึง Same-Origin Policy (SOP)
+    // นี่เป็นตัวอย่างเท่านั้นและไม่ควรนำไปใช้ใน Production ในกรณีที่ต้องการใช้จริงควรใช้ server ที่เชื่อถือได้เพื่อป้องกันการโจมตีแบบ Man-in-the-middle (MITM)
+    // โดยที่เว็บไซต์สามารถทำ request ไปยัง server นี้ได้
+    // เช่น https://api64.ipify.org?format=json
+    const apiUrl = 'https://api64.ipify.org?format=json';
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            const ipAddress = data.ip;
+            // บันทึก IP Address ลงใน localStorage
+            localStorage.setItem('ipAddress', ipAddress);
+            return ipAddress;
+        })
+        .catch(error => {
+            console.error('Error fetching IP Address:', error);
+        });
+}
+
+// เรียกใช้ฟังก์ชัน getIPAddress เพื่อดึงหรือบันทึก IP Address
+getIPAddress();
 
 // เพิ่ม event listener ที่เรียกใช้ authenticate เมื่อมีคนคลิกที่ลิงก์หรือปุ่มที่เหมาะสม
 document.getElementById('login-button').addEventListener('click', authenticate);
