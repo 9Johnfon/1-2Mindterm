@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./core/style.css">
-    <title>Midterm Anatomy</title>
+    <title>Midterm Cannabis</title>
 </head>
 <body>
     <h4 style="font-family: 'Prompt'; position: absolute; bottom: 0; right: 0; margin: 10px;">สารจากรุ่นสู่รุ้น | Dev By TanaTherd</h4>
@@ -38,10 +38,7 @@
             <div class="bar"></div>
         </div>
         <ul class="nav-list">
-            <li><a href="./index.html">Midterm</a></li>
-            <li><a href="./pages/LabPing.html">Lab Ping</a></li>
-            <li><a href="./pages/EMR.html">EMR</a></li>
-            <li><a href="./pages/Physio.html">Physio</a></li>
+            <li><a href="./index.html">Cannabis</a></li>
         </ul>
     </div>
 
@@ -50,6 +47,14 @@
 <script src="./core/script.js"></script>
 
 <script>
+
+let passwords = ["password1", "password2", "password3"];
+let ipAddresses = {};
+
+
+
+
+
 
 let backButtonClicked = false;
 let correctAnswersCount = 0;  // เพิ่มตัวแปรเก็บจำนวนข้อที่ตอบถูก
@@ -62,88 +67,27 @@ function toggleMenu() {
             navList.classList.toggle('show');
         }
     const questions = [
-        { question: "<B>ขณะที่นั่งฟังเพลงใกล้ลำโพงมากเกินไป เกิดอาการหูอื้อ เนื่องจาก โครงสร้างใดถูกกระตุ้นมากเกินไป</B>",options: ["Spiral organ", "Macular utriculi", "Macula sacculi", "Crista ampullaris", "Bulbous corpuscle"], correctAnswer: "Spiral organ" },
-        { question: "<b>บริเวณใดของกระดูก humerus ที่มีการหักง่ายที่สุด</b>",options: ["Condyle","Greater tubercle","Head","Surgical neck","Shaft"], correctAnswer: "Surgical neck" },
-        { question: "<b>การมองเห็นจะแปลผลที่บริเวณใดของสมอง</b>", options: ["area 5","area 3,1,2","area 17","area 4","area 44,45"], correctAnswer: "area 17" },
-        { question: "<b>เนื้อเยื่อบุผิวที่เซลล์เรียงตัวคล้ายหลายชั้นแต่มีเพียงชั้นเดียว เซลล์บนมีรูปร่างเป็นทรงกระบอกและมีเซลล์ที่สร้างเมือกแทรกอยู่ เรียกเนื้อเยื่อบุผิวชนิดดังกล่าวว่าอะไร</b>", options: ["Pseudostratified columnar epithelium with goblet cell","Stratified columnar epithelium with goblet cells","Pseudostratified cuboidal epithelium with peg cells","Simple squamous epithelium with keratinocytes","Stratified cuboidal epithelium with Langerhan cells"], correctAnswer: "Pseudostratified columnar epithelium with goblet cell" },
-        { question: "<b>เซลล์ใดที่อยู่ที่เนื้อเยื่อเกี่ยวพันที่ทำหน้าที่เกี่ยวกับกำจัดสิ่งแปลกปลอมที่เข้ามาในร้างกาย</b>", options: ["Macrophage","Fibroblast","Adipose cells","Lymphocyte","Mast cells"], correctAnswer: "Macrophage" },
-        { question: "<b>โครงสร้างใดของเซลล์ประสาททำหน้าที่ นำสัญญาณประสาทเข้าสู่ cell body</b>", options: ["Dendrite","Nucleolus","Axon","Nucleus","Nissl substance"], correctAnswer: "Dendrite" },
-        { question: "<b>กล้ามเนื้อใดที่ใช้ในการกลอกตามองตรงลงด้านล่าง</b>", options: ["Medial rectus","Superior rectus","Inferior rectus","Superior oblique","Inferior oblique"], correctAnswer: "Inferior rectus" },
-        { question: "<b>ปุ่มลิ้น (lingual papillage) ในข้อใด ไม่พบต่อมรับรส</b>", options: ["Vallate","Fungiform","Filiform","Foliate"], correctAnswer: "Filiform" },
-        { question: "<b>การเดินจากที่สว่างไปที่มืด เช่น การเดินเข้าไปในโรงภาพยนต์ รูม่านตาจะมีการปรับตัวอย่างไรเพื่อให้ปริมาณแสงเข้าสู่ตาอย่างเหมาะสม</b>", options: ["ระบบประสาท parasympathetic ถูกกระตุ้น","กล้ามเนื้อ sphincter pupillae หดตัว","รูม่านตาลดขนาดลง","กล้ามเนื้อ dilator pupillae หดตัว","กล้ามเนื้อ ciliary หดตัว"], correctAnswer: "กล้ามเนื้อ dilator pupillae หดตัว" },
-        { question: "<b>แผลไฟไหม้ระดับใดต่อไปนี้ที่มีพยาธิสภาพทั้งในชั้นหนังกำพร้าและชั้นหนังแท้ระดับรุนแรงมาก ต้องรักษาโดยการทำการปลูกถ่ายผิวหนัง (skin autograft)</b>", options: ["ระดับที่ 2-3","ระดับที่ 3","ระดับที่ 1","ระดับที่ 1-2","ระดับที่ 2"], correctAnswer: "ระดับที่ 2-3" },
-        { question: "<b>กล้ามเนื้อใดมีการเกร็งกล้ามเนื้อแบบยึดตัว (Eccentric isotonic contraction) ดอกออกจากล่าตัวในท่า Anatomical position</b>", options: ["Coracobrachialis","Biceps brachii","Triceps brachii","Deltoid","Brachialis"], correctAnswer: "Biceps brachii" },
-        { question: "<b>กล้ามเนื้อมัดใดมีลักษณะเด่นชัดที่สุดในนักกีฬาว่ายน้ำ</b>", options: ["Rhomboid", "Latissimus dorsi", "Serratus anterior", "Levator scapulae", "Deltoid"], correctAnswer: "Latissimus dorsi" },
-        { question: "<b>ในเด็กเล็กเมื่อเป็นหวัด หูชั้นกลางมักจะมีการอักเสบเนื่องจากมีการติดเชื้อผ่านโครงสร้างใดๆ</b>", options: ["Oval window","Paranasal sinuses", "Tympanic cavity", "Auditory tube", "External auditory meatus"], correctAnswer: "Auditory tube" },
-        { question: "<b>ช่องว่างในร่างกายใดที่บรรจุสมองใหญ่ (brain) และสมองน้อย (cerebellum) เรียกช่องว่าง ดังกล่าวนี้ว่าอะไร</b>", options: ["Nasal cavity", "Orbital cavity", "Abdominal cavity", "Oral cavity", "Cranial cavity"], correctAnswer: "Cranial cavity" },
-        { question: "<b>Surfactant สร้างจากเชลล์ได</b>", options: ["Pseudostratified ciliated columnar epithelium","Simple cuboidal cell of visceral pleura","Type I alveolar cells","Type II alveolar cells","Alveolar macrophage"], correctAnswer: "Type II alveolar cells" },
-        { question: "<b>อาการเมารถหรือเมาเรือ (motion sickness) เกิดขึ้นเนื่องจาก receptor ใดถูกกระตุ้น</b>", options: ["Organ of Corti","Crista ampullaris","Meissner corpuscle","Cone cell","Maculae"], correctAnswer: "Maculae" },
-        { question: "<b>ในเด็ก กะโหลกส่วนใดปิดช้าที่สุด</b>", options: ["Posterior fontanelle","Lateral fontanelle","Antero - lateral fontanelle","Postero - lateral fontanelle","Anterior fontanelle"], correctAnswer: "Anterior fontanelle" },
-        { question: "<b>ภาวะกระดูกพรุนเกิดขึ้นเนื่องจากเซลล์ในข้อใดท่างานมากเกินไป</b>", options: ["Chondrocyte","Mesenchymal cells","Osteoclast","Chondrogenic cells","Osteoblast"], correctAnswer: "Osteoclast" },
-        { question: "<b>ศูนย์ควบคุมอุณหภูมิของร่างกายอยู่ที่ใด</b>", options: ["Midbrain","Cerebellum","Hypothalamus","Cerebrum","Pons"], correctAnswer: "Hypothalamus" },
-        { question: "<b>คุณสมบัติของกล้ามเนื้อที่สามารถทนต่อแรงยึดขยายได้ในระดับหนึ่งโดยเนื้อเยื่อไม่ได้รับ การบาดเจ็บคือข้อใด</b>", options: ["Contractility","Extensibility","Elasticity","Electrical excitability","Thermogenesis"], correctAnswer: "Extensibility" },
-        { question: "<b>เซลล์ใดต่อไปนี้ทำหน้าที่ในการสร้างเส้นใยโปรตีน collagen, elastic และ reticular ที่พบ ในชั้นเนื้อเยื่อเกี่ยวประสาน</b>", options: ["Macrophage","Plasma cells","Monocyte","Basophil","Fibroblast"], correctAnswer: "Fibroblast" },
-        { question: "<b>กระดูกชิ้นใดเป็นขอบเขตด้านบนสุดของโพรงจมูก</b>", options: ["Ethmoid","Nasal","Superior concha","Nasal septum","Vomer"], correctAnswer: "Ethmoid" },
-        { question: "<b>ผู้ป่วยมีรูปร่างแคระแกร็นไม่สมส่วน (Achondroplastic Dwarfism) เกิดจากความผิดปกติ ของการเจริญเติบโตในกระดูกชนิดใด</b>", options: ["Short bone","Irregular bone","Long bone","Flat bone","Pneumatized bone"], correctAnswer: "Long bone" },
-        { question: "<b>กล้ามเนื้อมัดใดอยู่ในกลุ่ม Rotator cuff muscles</b>", options: ["Trapezius","Teres major","Levator scapulae","Supraspinatus","Rhomboid minor"], correctAnswer: "Supraspinatus" },
-        { question: "<b>ผู้ป่วยมาด้วยอาการน้ำมูกขาวขุ่น บางครั้งมีสีเขียว เวียนศีรษะ มีใช้ เสียงเปลี่ยน การรับ กลิ่นลดลง เคาะเจ็บที่บริเวณหน้าผาก แพทย์วินิจฉัยว่าไซนัสอักเสบ จงบอกตำแหน่งของโรค ว่าเกิดขึ้นที่ใด</b>", options: ["Ethmoidal air sinus","Frontal air sinus","Sphenoidal air sinus","Maxillary air sinus","Mastoid air sinus"], correctAnswer: "Frontal air sinus" },
-        { question: "<b>โครงสร้างใดทาหน้าที่แลกเปลี่ยนก๊าช</b>", options: ["Respiratory bronchiole","Trachea","Carina","Main bronchus","Terminal bronchiole"], correctAnswer: "Respiratory bronchiole" },
-        { question: "<b>เส้นประสาทใดมี parasympathetic fiber ที่ไปเลี้ยงระบบทางเดินอาหาร</b>", options: ["Facial","Accessory","Trigeminal","Vagus","Phrenic"], correctAnswer: "Vagus" },
-        { question: "<b>ข้อใดเป็นตัวบ่งชี้ในการแบ่งแยกกระดูกเชิงกรานของเพศชายและเพศหญิง</b>", options: ["Body of ischium","Iliac crest","Ischial spine","Pelvic inlet","Anterior superior iliac spine"], correctAnswer: "Pelvic inlet" },
-        { question: "<b>เยื่อหุ้มสมองและไขสันหลัง ส่วนใดมีความหนาและเหนียวมากที่สุด</b>", options: ["Arachnoid mater","Dura mater","Dentate ligament","Filum terminale","Pia mater"], correctAnswer: "Dura mater" },
-        { question: "<b>กล้ามเนื้อมัดใดที่สำคัญที่สุดในการหายใจของเด็กแรกเกิด</b>", options: ["Sternocleidomastoid muscle","Internal intercostal muscle","External intercostal muscle","Diaphragm","Innermost muscle"], correctAnswer: "Sternocleidomastoid muscle" },
-        { question: "<b>ข้อใดคือ synovial joint</b>", options: ["Suture","Elbow"," Pubic symphysis","Sternocostal","Intervertebral"], correctAnswer: "Elbow" },
-        { question: "<b>โรคคอเอียงตั้งแต่กำเนิด (Congenital Muscular Torticollis) เด็กมีลักษณะคอเอียง โดยที่ ศีรษะเอียงจากแนวกึ่งกลางไปด้านใดด้านหนึ่ง เกิดจากกล้ามเนื้อด้านข้างคอมัดใดหดสั้นลง</b>", options: ["Platysma","Levator scapulae","Sternocleidomastoid","Sternohyoid","Scalene"], correctAnswer: "Sternocleidomastoid" },
-        { question: "<b>Intercalated disc พบได้ในโครงสร้างใด</b>", options: ["Neuroglia","Skeletal muscle","Neuron","Cardiac muscle","Smooth muscle"], correctAnswer: "Cardiac muscle" },
-        { question: "<b>ชั้นหนังกำพร้า (epidermis) ของผิวหนัง (skin) มีลักษณะของเยื่อบุผิวแบบใด</b>", options: ["Simple cuboidal epithelium","Simple squamous epithelium","Stratified squamous epithelium","Stratified squamous keratinized epithelium","Stratified cuboidal non-keratinized epithelium"], correctAnswer: "Stratified squamous keratinized epithelium" },
-        { question: "<b>เซลล์ค้ำจุนชนิดใดที่ทำหน้าที่สร้าง Myelin sheath ในระบบประสาทส่วนกลาง</b>", options: ["Astrocyte","Ependymal cell","Oligodendrocyte","Satellite cell","Microglia"], correctAnswer: "Oligodendrocyte" },
-        { question: "<b>โครงสร้างใดทำหน้าที่เกี่ยวกับ Accommodation เมื่อมองนาฬิกาที่อยู่ใกล้</b>", options: ["Sclera","Retina","Fovea centralis","Ciliary muscle","Cornea"], correctAnswer: "Ciliary muscle" },
-        { question: "<b>ของเหลวในข้อใดพบในช่องว่างระหว่าง bony labyrinth และ membranous labyrinth</b>", options: ["Vitreous humor","Cerebrospinal fluid","Aqueous humor","Perilymph","Endolymph"], correctAnswer: "Perilymph" },
-        { question: "<b>ผู้ป่วยชายประสบอุบัติเหตุจักรยานยนต์ชนท้ายรถบรรทุกพ่วง โดยไม่สวมหมวกนิรภัย ไม่ สามารถรับกลิ่นได้ ดังนั้น กระดูกชิ้นใดได้รับการบาดเจ็บมากที่สุด</b>", options: ["Mastoid process","Orbit","Cribriform plate of ethmoid bone","Maxilla","Zygoma"], correctAnswer: "Cribriform plate of ethmoid bone" },
-        { question: "<b>Pseudostratified ciliated columnar epithelium เป็นเนื้อเยื่อบุผิวพบที่บริเวณใด</b>", options: ["Nasolacrimal duct","Semicircular duct","External auditory canal","Superior nasal concha","Eustachian tube"], correctAnswer: "Superior nasal concha" },
-        { question: "<b>Microvilli พบได้ในอวัยวะใด</b>", options: ["ช่องคลอด (vagina)","ปอด (lung)","กระเพราะอาหาร (stomach)","กระเพราะปัสสาวะ (urinary bladder)","ลำไส้เล็ก (small intestine)"], correctAnswer: "ลำไส้เล็ก (small intestine)" },
-        { question: "<b>ข้อสะโพก (hip joint) เป็น synovial joint ชนิดใด</b>", options: ["Condyloid","Saddle","Hinge","Plane","Ball and socket"], correctAnswer: "Ball and socket" },
-        { question: "<b>หญิงไทยวัย 75 ปี ตรวจพบต้อหิน (glaucoma) เนื่องจากความดันลูกตาสูง เพราะเกิดการ อุดตันของโครงสร้างใด</b>", options: ["Anterior chamber","Optic artery","Posterior cavity","Canal of Schlemm","Episcleral vein"], correctAnswer: "Anterior chamber" },
-        { question: "<b>โครงสร้างใดต่อไปนี้เป็นส่วนประกอบของ Triad ในกล้ามเนื้อลาย</b>", options: ["Cisternae of sarcoplasmic reticulum and T-tubule","Sarcoplasmic reticulum and myofibril","Sarcomere and myosin","T-tubule and sarcolemma","Sarcolemma and sarcoplasm"], correctAnswer: "Cisternae of sarcoplasmic reticulum and T-tubule" },
-        { question: "<b>เซลล์ชนิดใดพบมากที่สุด ในขั้นตอน fibrocartilaginous (soft) callus formation ของ กระบวนการซ่อมแซมกระดูก</b>", options: ["Chodroblast","Chondrocyte","Osteoclast","Osteocyte","Osteoblast"], correctAnswer: "Chodroblast" },
-        { question: "<b>หากมีการอุดตันของหลอดเลือดแดงที่ไปเลี้ยงสมองทางด้านนอก (lateral surface) ส่วน ใหญ่ หลอดเลือดแดงที่เกิดพยาธิสภาพชื่อว่าอะไร</b>", options: ["Vertebral artery","Pontine artery","Middle cerebral artery","Anterior cerebral artery","Posterior cerebral artery"], correctAnswer: "Middle cerebral artery" },
-        { question: "<b>วิตามินใดมีอิทธิพลต่อการเจริญเติบโตของกระดูก</b>", options: ["วิตามินบี12","วิตามินซี","วิตามินบี6","วิตามินอี","วิตามินเค"], correctAnswer: "วิตามินซี" },
-        { question: "<b>ในภาวะภูมิแพ้อย่างรุนแรง การตอบสนองของทางเดินหายใจข้อใดที่ผู้ป่วยมีโอกาสเสีย ชีวิตได้สูงสุด</b>", options: ["Cilia ในโพรงจมูกสูญเสียหน้าที่","กล้ามเนื้อเรียบที่ bronchiole หดตัวอย่างมาก","Tracheal gland สร้างมูกลดลง","พบ dust cell มากขึ้น","มีการสะสมของของเหลวภายในถุงลม"], correctAnswer: "กล้ามเนื้อเรียบที่ bronchiole หดตัวอย่างมาก" },
-        { question: "<b>กล้ามเนื้อใด ทําหน้าที่เหยียดเข่า (knee extension)</b>", options: ["Obturator internus","Gluteus maximus","Semitendinosus","Iliosoas","Rectus femoris"], correctAnswer: "Rectus femoris" },
-        { question: "<b>Auditory tube (Eustachian tube) มีช่องเปิดที่บริเวณใด</b>", options: ["Laryngopharynx","Nasopharynx","Oropharynx","Trachea","Larynx"], correctAnswer: "Nasopharynx" },
-        { question: "<b>ข้อใดเป็น กล้ามเนื้อด้านตรงกันข้าม (antagonist muscle) ในการงอตอก ในท่า Anatomical position</b>", options: ["Brachioradialis","Anconeous","Triceps brachii","Flexor carpi radialis","Flexor carpi ulnaris"], correctAnswer: "Triceps brachii" },
-        { question: "<b>การดัดระนาบตามขวาง แบ่งร่างกายออกเป็นส่วนบน (superior) และส่วนล่าง (inferior) เรียกระนาบดังกล่าวนี้ว่าอะไร</b>", options: ["Oblique plane","Mid-sagittal plane","Coronal plane","Sagittal plane","Horizontal plane"], correctAnswer: "Horizontal plane" },
-        { question: "<b>โครงสร้าง ใดสัมพันธ์กับการออกเสียงมากที่สุด</b>", options: ["Laryngopharynx","Trachea","Nasopharynx","Vocal cord","Oropharynx"], correctAnswer: "Vocal cord" },
-        { question: "<b>เชลล์ใดที่สร้างสารในช่องเยื่อหุ้มปอด</b>", options: ["Alveolar macrophage","Mesothelium","Type I alveolar cells","Type II alveolar cells","Goblet cell"], correctAnswer: "Type II alveolar cells" },
-        { question: "<b>กลีบสมองใดจะทำหน้าที่รับและแปลความรู้สึกในการรับรส</b>", options: ["Temporal lobe","Occipital lobe","Insular lobe","Parietal lobe","Frontal lobe"], correctAnswer: "Insular lobe" },
-        { question: "<b>เซลล์ในข้อใดสามารถแบ่งตัว และสามารถเปลี่ยนแปลไปเป็น olfactory receptor ได้</b>", options: ["Basal stem cells","Dendrites","Supporting cells","Bowman's glands","Glial cells"], correctAnswer: "Basal stem cells" },
-        { question: "<b>ลักษณะการจัดเรียงตัวกล้ามเนื้อแบบ circular พบได้ในกล้ามเนื้อมัดใด</b>", options: ["Mentalis","Pectoralis major","Deltoid","Orbicularis oculi","Rectus abdominis"], correctAnswer: "Orbicularis oculi" },
-        { question: "<b>โครงสร้างใดไม่พบ pain receptor (ตัวรับความรู้สึกเจ็บปวด)</b>", options: ["Stomach","Intestine","Connective tissue","Skin","Nervous tissue"], correctAnswer: "Nervous tissue" },
-        { question: "<b>ตำแหน่งที่หลอดลมแยกออกเป็น main bronchi ทั้งชวาและซ้าย เรียกว่า</b>", options: ["Bronchiole","Costal angle","Jugular notch","False vocal fold","Carina"], correctAnswer: "Carina" },
-        { question: "<b>ชั้นใดของชั้นหนังกำพร้าที่ประกอบด้วย keratinocyte ที่ตายแล้ว เรียงตัว 20-30 ชั้น ภายใน บรรจุเพียง keratin เท่านั้น หรือที่เรียกว่าชั้นช์โคล ซึ่งช่วยในการป้องกันไม่ให้น้ำทะลุผ่าน เซลล์ผิวหนังออกสู่ภายนอก เรียกชั้นดังกล่าวนี้ว่า</b>", options: ["Stratum corneum","Stratum granulosum","Stratum basale","Stratum spinosum","Stratum lucidum"], correctAnswer: "Stratum corneum" },
-        { question: "<b>หลอดเลือดดำ (Dural venous sinus) ใด ที่วางตัวอยู่ด้านบนของเยื่อหุ้มสมองระหว่างสมอง ซีกซ้าย-ขวา</b>", options: ["Sigmoid sinus","Superior sagittal sin","Tentorium cerebell","Transverse sinus","Straight sinus"], correctAnswer: "Superior sagittal sin" },
-        { question: "<b>ข้อใดเป็นกระดูกอ่อนชนิด Elastic cartilage</b>", options: ["Pinna (ใบ)","Thyroid","Costal cartilage","Symphysis pubis","Intervertebral disc"], correctAnswer: "Pinna (ใบ)" },
-        { question: "<b>การงอข้อเข่า เรียกการเคลื่อนไหว (movement) ของร่างกายแบบนี้ว่าอะไร</b>", options: ["Shoulder joint circumduction","Knee joint extension","Elbow joint flexion","Elbow joint extension","Knee joint flexion"], correctAnswer: "Knee joint flexion" },
-        { question: "<b>น้ำหล่อเลี้ยงสองและไขสันหลัง ถูกสร้างจากโครงสร้างใด</b>", options: ["Choroid plexus","Dura mater","Astrocyte","Pia mater","Arachnoid mater"], correctAnswer: "Choroid plexus" },
-        { question: "<b>การร้องไห้จนน้ำตาไหลไปออกที่จมูกได้ จะผ่านทาง โครงสร้างใด</b>", options: ["Submandibular duct","Parotid duct","Nasolacrimal duct","Puncta lacrimalis","Nasopalatine duct"], correctAnswer: "Nasolacrimal duct" },
-        { question: "<b>กล้ามเนื้อใดมีหน้าที่หลักในท่าเขย่งปลายเท้า (plantar flexion)</b>", options: ["Fibularis longus","Biceps femoris","Tibialis anterior","Popliteus","Gastrocnemius"], correctAnswer: "Gastrocnemius" },
-        { question: "<b>ช่องว่างในร่างกายใดที่บรรจุสมองใหญ่ (brain) และสมองน้อย (cerebellum) เรียกช่องว่างดังกล่าวนี้ว่าอะไร</b>", options: ["Nasal cavity","Orbital cavity","Abdominal cavity","Oral cavity","Cranial cavity"], correctAnswer: "Cranial cavity" },
-        { question: "<b>ร่องในข้อใดใช้แบ่ง frontal lobe ออกจาก parietal lobe</b>", options: ["Precentral sulcus","Lateral sulcus","Longitudinal fissure","Parieto-occipital sulcus","Central sulcus"], correctAnswer: "Central sulcus" },
-        { question: "<b>Photo receptor cells ที่พบในชั้น retina จัดเป็นเซลล์ประสาทชนิดใด</b>", options: ["Multipolar","Bipolar","Interneuron","Motor","Mono polar"], correctAnswer: "Bipolar" },
-        { question: "<b>Transverse foramen พบได้ที่กระดูกสันหลังระดับใด</b>", options: ["Thoracic","Sacrum","Lumbar","Coccyx","Cervical"], correctAnswer: "Cervical" },
-        { question: "<b>ลักษณะโครงสร้างพิเศษบริเวณทางด้านข้างของเซลล์ (specialization of lateral surface) ที่ทำหน้าที่ในการยึดเกาะมีลักษณะยึดเป็นจุ กล่าวนี้ว่าอะไร</b>", options: ["Zonula adherens","Hemidesmosome","Macular adherens","Macula adherens","Zonula occudens"], correctAnswer: "Macula adherens" },
-        { question: "<b>โครงสร้างใดป้องกันการสำลักอาหารเข้าไปในปอดขณะกลืน</b>", options: ["Cricoid cartilage","True vocal folds","Uvula","False vocal folds","Epiglottis"], correctAnswer: "Epiglottis" },
-        { question: "<b>การเรียงตัวแบบกระจายกันอยู่ห่างๆ หลวมๆ ของเส้นใยโปรตีน (protein fiber) ที่ถูกฝังตัว อยู่ในสารพื้น (ground substance) ปริมาณมาก และมีกลุ่มเซลล์ต่างๆ เรียกเนื้อเยื่อเกี่ยว พันนี้ว่า</b>", options: ["Dense irregular connective tissue","Elastic connective tissue","Reticular connective tissue","Dense regular connective tissue","Loose connective tissue"], correctAnswer: "Loose connective tissue" },
-        { question: "<b>เยื่อบุผิวของระบบทางเดินหายใจส่วนใหญ่ (respiratory epithelium) เป็นประเภทใด</b>", options: ["Pseudostratified ciliated columnar epithelium","Simple squamous epithelium","Stratified columnar ciliated epithelium","Transitional epithelium","Pseudostratified ciliated columnar epithelium with goblet cell"], correctAnswer: "Pseudostratified ciliated columnar epithelium with goblet cell" },
-        { question: "<b>ข้อใดเป็นลักษณะของเซลล์กล้ามเนื้อเรียบ</b>", options: ["มีลาย","เซลล์มีนิวเคลียสหลายอัน","มีนิวเคลียส อยู่ขอบเซลล์","มี intercalated disc","เซลล์กล้ามเนื้อมีรูปทรงกระสวย"], correctAnswer: "เซลล์กล้ามเนื้อมีรูปทรงกระสวย" },
-        { question: "<b>Dense regular connective tissue พบได้ที่อวัยวะใด</b>", options: ["ผิวหนัง (skin)","กล้ามเนื้อ (muscular tissue)","ต่อมน้ำลาย (salivary gland)","เอ็นซีด (tendon)","กระดูก (bone)"], correctAnswer: "เอ็นซีด (tendon)" },
-        { question: "<b>กระดูก ใดเป็นส่วนประกอบบริเวณ Pterion ทั้งหมด</b>", options: ["Temporal and occipital bones","Frontal and sphenoid bones","Parietal and ethmoid bones","Sphenoid and ethmoid bones","Occipital and parietal bones"], correctAnswer: "Frontal and sphenoid bones" },
-        { question: "<b>ข้อใดกล่าวถูกต้องเกี่ยวกับเยื่อหุ้มปอด</b>", options: ["ปอดถูกยึดติดกับกะบังลมด้วย costal pleura","ช่องว่างระหว่างเยื่อหุ้มปอดทั้งสองชั้นเรียกว่า mediastinum","บริเวณที่เส้นเลือดและหลอดลมผ่านเข้าออกที่ปอดเรียกว่า hilum","เซลล์ที่บุในชั้น parietals pleura จะสร้าง pleural fluid","เยื่อปอดชั้นในเรียกว่า visceral pleura"], correctAnswer: "เยื่อปอดชั้นในเรียกว่า visceral pleura" },
-        { question: "<b>การเจาะน้ำไขสันหลังนิยมเจาะที่กระดูกสันหลังระดับใด</b>", options: ["ระหว่าง T11-T12","ระหว่าง L1-L2","ระหว่าง L3-L4","ระหว่าง S1-S2","ระหว่าง T8-T9"], correctAnswer: "ระหว่าง L3-L4" },
-        { question: "<b>การฉีดยาเข้ากล้ามเนื้อบริเวณก้นควรฉีดที่กล้ามเนื้อใดเพื่อหลีกเหลี่ยงการบาดเจ็บของเส้น ประสาท sciatic</b>", options: ["กล้ามเนื้อ Piriformis","กล้ามเนื้อ obturator internus","กล้ามเนื้อ Gluteus maximus","กล้ามเนื้อ Gluteus minimus","กล้ามเนื้อ Gluteus medius"], correctAnswer: "กล้ามเนื้อ Gluteus medius" },
-        { question: "<b>การเกิดของกระดูกแบบ Endochondral ossification พบได้ที่กระดูกชนิดใด</b>", options: ["Vertebrae","Sternum","Humerus","Mandible","Zygoma"], correctAnswer: "Humerus" },
-        { question: "<b>กระดูกหักแบบ Greenstick Fracture มักเกิดขึ้นในเด็กมากกว่าผู้ใหญ่เนื่องจากกระดูกมี คุณสมบัติใด</b>", options: ["มีความยืดหยุ่นสูง","มีรูพรุนน้อย","มีเยื่อหุ้มกระดูกบาง","มีปริมาณน้ำน้อย","มีเกลือแร่มาก"], correctAnswer: "มีความยืดหยุ่นสูง" }
-];
+//////////////////// ซัน 1-8
+//////////////////// บอส 9-17
+            { question: "<b> นิยมนำต้นกัญชาอนุบาลในวัสดุปลูกชนิดใด </b>", options: ["พีทมอส","เพอร์ไลต์","เวอร์มิคูไลต์","ขุยมะพร้าว","หินพัมมิช"], correctAnswer: "พีทมอส" },
+            { question: "<b> ประเทศที่ปลูกกัญชามากที่สุดคือ </b>", options: ["จีน","อินเดีย","ญี่ปุ่น","อังกฤษ","อเมริกา"], correctAnswer: "อเมริกา" },
+            { question: "<b> พระราชบัญญัติยาเสพติดให้โทษพ.ศ. 2522 นี้กำหนดให้ยาเสพติดให้โทษแบ่งออกเป็น 5ประเภท ข้อใดกล่าวถูกต้อง </b>", options: ["ยาเสพติดประเภท 1 เช่น มอร์ฟิน","ยาเสพติดประเภท 2 เช่น เฮโรอีน โคคาอีน","ยาเสพติดประเภท 3 เช่น ยาแก้ไอผสมฝิ่น","ยาเสพติดประเภท 4 เช่น พืชกระท่อม","ยาเสพติดประเภท 5 เช่น กัญชา"], correctAnswer: "ยาเสพติดประเภท 5 เช่น กัญชา" },
+/////////////////// จอน 18-26
+            { question: '<B>การปลูกกัญชาในข้อใดที่ทำให้ได้ผลผลิตกัญชาที่มีคุณภาพและสม่ำเสมอ</B>',options: ["ปลูกกลางแจ้ง","ปลูกในโรงเรือนอุโมงค์","ปลูกในโรงเรือนพลาสติก","ปลูกในโรงเรือนกลางแจ้ง","ปลูกในโรงเรือนปิด"], correctAnswer: "ปลูกในโรงเรือนปิด" },
+            { question: '<B>ตามพระราชบัญญัติยาเสพติดให้โทษ พ.ศ. 2562 การครอบครอง กัญชา ปริมาณเท่าใดจัดว่าเป็นการผลิต นำเข้า หรือส่งออกเพื่อการจำหน่าย</B>',options: ["ตั้งแต่ 10 กิโลกรัมขึ้นไป","ตั้งแต่ 15 กิโลกรัมขึ้นไป","ตั้งแต่ 20 กิโลกรัมขึ้นไป","ตั้งแต่ 25 กิโลกรัมขึ้นไป","ตั้งแต่ 30 กิโลกรัมขึ้นไป"], correctAnswer: "ตั้งแต่ 10 กิโลกรัมขึ้นไป" },
+            { question: '<B>สาระสำคัญที่พบในกัญชาเป็นสารออกฤทธิ์ต่อจิตประสาทประเภทใด</B>',options: ["สารกดประสาท","สารเสริมประสาท","สารหลอนประสาท","สารกระตุ้นประสาท","สารยับยั้งประสาท"], correctAnswer: "สารหลอนประสาท" },
+            { question: '<B>ปัจจุบันกัญชาถูกจัดเป็นยาเสพติดประเภทใด</B>',options: ["ประเภท 5","ประเภท 4","ประเภท 3","ประเภท 2","ประเภท 1"], correctAnswer: "ประเภท 5" },
+            { question: '<B>การปลูกกัญชง พื่อใช้ประโยชน์ทางด้านอุตสาหกรรม กฎหมายกำหนดค่า THC ว่าต้องมีปริมาณตำกว่าที่เปอร์เซ็นต์</B>',options: ["0.1%","0.3%","0.5%","0.7%","1.0%"], correctAnswer: "0.3%" },
+            { question: '<B>ข้อใดเป็นการแบ่งชนิดย่อยของกัญชาและกัญชง</B>',options: ["Cannabis Sativa Subsp. Sativa","Cannabis Sativa Subsp. Indica","Cannabis Sativa Subsp. Rudellaris","Cannabis Sativa Subsp. Indicat + Cannabis Sativa Subsp. Rudellaris","ถูกทุกข้อ"], correctAnswer: "ถูกทุกข้อ" },
+            { question: '<B>กัญชาพืชเสพติด ตามพระราชบัญญัติยาเสพติดให้โทษ พ.ศ. 2522 เนื่องจากมีสารออกฤทธิ์ต่อจิตประสาท และสารที่ออกฤทธิ์ต่อจิตประสาทคือสารในข้อใด</B>',options: ["CBD","CBN","THC","CBC","CBG"], correctAnswer: "THC" },
+            { question: '<B>หากนิสิตม์กัญชวไว้ในครอบครอง จะได้รับโทษทางกฎหมายในข้อใด</B>',options: ["จำคุกไม่เกิน 5 ปี ปรับไม่เกิน 100,000 บาท","จำคุกไม่เกิน 5 ปี ปรับไม่เกิน 150,000 บาท","จำคุกไม่เกิน 10 ปี ปรับไม่เกิน 100,000 บาท","จำคุกไม่เกิน 10 ปี ปรับไม่เกิน 150,000 บาท","จำคุกไม่เกิน 1 ปี ปรับไม่เกิน 100,000 บาท"], correctAnswer: "จำคุกไม่เกิน 5 ปี ปรับไม่เกิน 150,000 บาท" },
+            { question: '<B>ข้อใดถูกต้อง</B>',options: ["กัญชาถูกใช้เป็นยาโดย จักรพรรดิ shen Neng แห่งอาณาจักรจีน - (ก)","ศัลยแพทย์ชาวอังกฤษได้ใช้กัญชาเป็นยาชา และยาแก้ปวด - (ข)","ประเทศอาหรับได้เริ่มใช้กระดาษที่ผลิตจากเส้นใยกัญชา - (ค)","ข้อ ก และ ข้อ ข","ถูกทุกข้อ"], correctAnswer: "กัญชาถูกใช้เป็นยาโดย จักรพรรดิ shen Neng แห่งอาณาจักรจีน - (ก)" },
+/////////////////// ดิว 27-35
+/////////////////// ลี่ 36-44
+/////////////////// เซฟ 45-53
+/////////////////// โฉ 53-60
+
+    ];
       
     let currentQuestionIndex = -1;
 
@@ -327,6 +271,40 @@ function displayCelebration() {
         displayQuestion();  // ดำเนินการไปที่คำถามถัดไป
     },6000);
 }
+
+
+
+function authenticate() {
+    const passwordInput = prompt("Enter password:");
+    const ipAddress = getIpAddress();
+
+    if (passwords.includes(passwordInput)) {
+        if (!ipAddresses.hasOwnProperty(passwordInput)) {
+            ipAddresses[passwordInput] = ipAddress;
+            alert("Authentication successful!");
+        } else if (ipAddresses[passwordInput] === ipAddress) {
+            alert("Authentication successful!");
+        } else {
+            alert("Password is already used by another IP address.");
+        }
+    } else {
+        alert("Authentication failed. Invalid password.");
+    }
+}
+
+
+
+function getIpAddress() {
+    // ตรวจสอบ IP address ของเครื่องที่ใช้งาน
+    // โปรดทราบว่านี้เป็นตัวอย่างเท่านั้น และอาจไม่ทำงานบนทุกๆ เครื่อง
+    // ในบางกรณีคุณอาจต้องใช้บริการภายนอกเพื่อดึงข้อมูล IP address
+    // เช่น https://api.ipify.org/?format=json
+    const ipAddress = "127.0.0.1"; // ให้เปลี่ยนเป็นการดึงจากบริการจริงในการใช้งานจริง
+    return ipAddress;
+}
+
+// เพิ่ม event listener ที่เรียกใช้ authenticate เมื่อมีคนคลิกที่ลิงก์หรือปุ่มที่เหมาะสม
+document.getElementById('login-button').addEventListener('click', authenticate);
  
 </script>
 
