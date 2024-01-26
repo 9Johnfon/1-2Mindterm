@@ -1,27 +1,3 @@
-let passwordsAndOwners = [
-    { password: '253612', ip: '' },
-    { password: '746723', ip: '' },
-    { password: '842372', ip: '' },
-    { password: '213122', ip: '' },
-    { password: '123322', ip: '' },
-    { password: '123445', ip: '' },
-    { password: '567544', ip: '' },
-    { password: '131123', ip: '' }
-];
-
-let adminIP = ['192.168.0.100'];  // IP ของ Admin ที่สามารถเข้าถึงทุกเครื่องได้
-// ตรวจสอบว่ามีการบันทึก IP และรหัสผ่านหรือไม่
-let savedData = localStorage.getItem('savedData');
-if (!savedData) {
-    savedData = {};
-} else {
-    savedData = JSON.parse(savedData);
-}
-
-
-
-
-
 let backButtonClicked = false;
 let correctAnswersCount = 0;  // เพิ่มตัวแปรเก็บจำนวนข้อที่ตอบถูก
 let IncorrectAnswersCount = 0;
@@ -117,6 +93,11 @@ function toggleMenu() {
         } else {
             setTimeout(displayQuestion, 1000);
         }
+
+        if (correctAnswersCount === totalQuestions) {
+            correctAnswersCount = 0;  // รีเซ็ต correctAnswersCount สำหรับการทดลองในอนาคต
+            IncorrectAnswersCount = 0;           
+        }
     } else {
         resultElement.textContent = 'Incorrect! Try again.';
         resultElement.classList.add('incorrect');
@@ -176,7 +157,7 @@ function addConfetti() {
         document.body.removeChild(confettiContainer);
         congratsEffect.style.transition = 'opacity 1s ease-in-out';
         congratsEffect.style.opacity = '0';  // ทำให้ opacity เป็น 0 เพื่อให้หายไป
-    }, 15000);
+    }, 10000);
 }
 
 // Function สุ่มสี
@@ -203,10 +184,6 @@ function displayCelebration() {
     // เพิ่ม effect Confetti
     addConfetti();
 
-    setTimeout(() => {
-        window.open("https://youtu.be/jSG1hwdST7I?si=xVP3SnqtFz1RfZaE&t=108", '_blank');
-    },2000);
-
     // รีเซ็ต correctAnswersCount และ แสดง effect ลงทะเบียน
     setTimeout(() => {
         document.body.removeChild(congratsEffect);
@@ -215,62 +192,4 @@ function displayCelebration() {
         displayQuestion();  // ดำเนินการไปที่คำถามถัดไป
     },6000);
 }
-function authenticate() {
-    const passwordInput = prompt("Enter password:");
-    const ipAddress = getIPAddress();
 
-    const user = passwordsAndOwners.find(info => info.password === passwordInput);
-
-    if (user) {
-        if (user.ip === '' || user.ip === ipAddress) {
-            if (!passwordsAndOwners.some(info => info.ip === ipAddress && info.password !== passwordInput)) {
-                user.ip = ipAddress;
-                alert("Authentication successful!");
-                document.getElementById('login-button').style.display = 'none';
-                document.getElementById('login-button').style.width = '0';
-                document.getElementById('login-button').style.height = '0';
-            } else {
-                alert("Password is already used by another IP address.");
-                window.close();
-            }
-        } else {
-            alert("Authentication failed. Invalid IP address for this password.");
-            window.close();
-        }
-    } else {
-        alert("Authentication failed. Invalid password.");
-        window.close();
-    }
-}
-
-// ฟังก์ชันเพื่อดึง IP Address
-function getIPAddress() {
-    // ทดลองดึง IP จาก localStorage หากมีการบันทึกไว้
-    const storedIPAddress = localStorage.getItem('ipAddress');
-    if (storedIPAddress) {
-        return storedIPAddress;
-    }
-
-    // หากไม่มีการบันทึก IP ใน localStorage ให้ใช้ external service แบบไม่คำนึงถึง Same-Origin Policy (SOP)
-    // นี่เป็นตัวอย่างเท่านั้นและไม่ควรนำไปใช้ใน Production ในกรณีที่ต้องการใช้จริงควรใช้ server ที่เชื่อถือได้เพื่อป้องกันการโจมตีแบบ Man-in-the-middle (MITM)
-    // โดยที่เว็บไซต์สามารถทำ request ไปยัง server นี้ได้
-    // เช่น https://api64.ipify.org?format=json
-    const apiUrl = 'https://api64.ipify.org?format=json';
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            const ipAddress = data.ip;
-            // บันทึก IP Address ลงใน localStorage
-            localStorage.setItem('ipAddress', ipAddress);
-            return ipAddress;
-        })
-        .catch(error => {
-            console.error('Error fetching IP Address:', error);
-        });
-}
-
-// เรียกใช้ฟังก์ชัน getIPAddress เพื่อดึงหรือบันทึก IP Address
-getIPAddress();
-
-// เพิ่ม event listener ที่เรียกใช้ authenticate เมื่อมีคนคลิกที่ลิงก์หรือปุ่มที่เหมาะสม
-document.getElementById('login-button').addEventListener('click', authenticate);
