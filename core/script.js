@@ -215,73 +215,34 @@ function displayCelebration() {
         displayQuestion();  // ดำเนินการไปที่คำถามถัดไป
     },6000);
 }
-
-
-/*
 function authenticate() {
     const passwordInput = prompt("Enter password:");
-    const ipAddress = getIpAddress();
+    const ipAddress = getIPAddress();
 
-    if (passwords.includes(passwordInput)) {
-        if (!ipAddresses.hasOwnProperty(passwordInput)) {
-            ipAddresses[passwordInput] = ipAddress;
-            alert("Authentication successful!");
-            document.getElementById('login-button').style.display = 'none';
-            document.getElementById('login-button').style.width = '0'; // ปรับขนาดเป็น 0 เพื่อซ่อนปุ่ม
-            document.getElementById('login-button').style.height = '0'; // ปรับขนาดเป็น 0 เพื่อซ่อนปุ่ม
-        } else if (ipAddresses[passwordInput] === ipAddress) {
-            alert("Authentication successful!");
-            document.getElementById('login-button').style.display = 'none';
-            document.getElementById('login-button').style.width = '0'; // ปรับขนาดเป็น 0 เพื่อซ่อนปุ่ม
-            document.getElementById('login-button').style.height = '0'; // ปรับขนาดเป็น 0 เพื่อซ่อนปุ่ม
+    const user = passwordsAndOwners.find(info => info.password === passwordInput);
+
+    if (user) {
+        if (user.ip === '' || user.ip === ipAddress) {
+            if (!passwordsAndOwners.some(info => info.ip === ipAddress && info.password !== passwordInput)) {
+                user.ip = ipAddress;
+                alert("Authentication successful!");
+                document.getElementById('login-button').style.display = 'none';
+                document.getElementById('login-button').style.width = '0';
+                document.getElementById('login-button').style.height = '0';
+            } else {
+                alert("Password is already used by another IP address.");
+                window.close();
+            }
         } else {
-            alert("Password is already used by another IP address.");
-            window.close();  // ใช้ window.close() เพื่อปิดหน้าต่างเว็บ
+            alert("Authentication failed. Invalid IP address for this password.");
+            window.close();
         }
     } else {
         alert("Authentication failed. Invalid password.");
-        window.close();  // ใช้ window.close() เพื่อปิดหน้าต่างเว็บ
+        window.close();
     }
 }
-*/
-function authenticate() {
-    const enteredPassword = prompt('Enter password:');
-    const currentIp = getCurrentIp(); // สมมติว่า getCurrentIp() เป็นฟังก์ชันที่ได้รับ IP ปัจจุบัน
 
-    // ตรวจสอบว่ารหัสผ่านถูกต้องหรือไม่
-    const passwordInfo = passwordsAndOwners.find(info => info.password === enteredPassword);
-
-    if (passwordInfo) {
-        const passwordOwner = passwordInfo.ip;
-
-        // ตรวจสอบว่าเครื่องนี้เป็นเจ้าของรหัสหรือไม่
-        if (passwordOwner === '' || passwordOwner === currentIp) {
-            // ตรวจสอบว่ามีผู้เข้าใช้ IP นี้หรือไม่
-            if (!ipOwners[currentIp] || ipOwners[currentIp] === enteredPassword) {
-                // กำหนดผู้เข้าใช้ IP นี้เป็นเจ้าของรหัส
-                passwordInfo.ip = currentIp;
-
-                alert('Login successful!');
-
-                // ถ้ามีการเข้าสู่ระบบเรียบร้อยแล้ว กำหนดให้รหัสนี้ใช้ไม่ได้
-                passwordsAndOwners = passwordsAndOwners.filter(info => info.password !== enteredPassword);
-
-                document.getElementById('login-button').style.display = 'none';
-                document.getElementById('login-button').style.width = '0'; // ปรับขนาดเป็น 0 เพื่อซ่อนปุ่ม
-                document.getElementById('login-button').style.height = '0'; 
-            } else {
-                alert('Authentication failed. IP already used by another user.');
-                closeWindow();
-            }
-        } else {
-            alert('Authentication failed. Invalid IP address for this password.');
-            closeWindow();
-        }
-    } else {
-        alert('Authentication failed. Invalid password.');
-        closeWindow();
-    }
-}
 
 // ฟังก์ชันเพื่อดึง IP Address
 function getIPAddress() {
