@@ -243,7 +243,6 @@ function authenticate() {
     }
 }
 
-
 // ฟังก์ชันเพื่อดึง IP Address
 function getIPAddress() {
     // ทดลองดึง IP จาก localStorage หากมีการบันทึกไว้
