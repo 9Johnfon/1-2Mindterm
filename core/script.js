@@ -1,6 +1,10 @@
-let passwords = ["253612", "746723", "842372","213122","123322","123445","567544"];
-let ipAddresses = {};
+let passwordsAndIPs = [
+    { password: 'password1', ip: '49.48.117.94' },
+    { password: 'password2', ip: '192.168.0.2' },
+    { password: 'password3', ip: '192.168.0.3' },
+];
 
+let adminIP = ['192.168.0.100'];  // IP ของ Admin ที่สามารถเข้าถึงทุกเครื่องได้
 // ตรวจสอบว่ามีการบันทึก IP และรหัสผ่านหรือไม่
 let savedData = localStorage.getItem('savedData');
 if (!savedData) {
@@ -235,40 +239,31 @@ function authenticate() {
     }
 }
 */
-
 function authenticate() {
     const passwordInput = prompt("Enter password:");
     const ipAddress = getIPAddress();
 
     // ตรวจสอบว่ารหัสผ่านถูกต้องหรือไม่
-    if (passwords.includes(passwordInput)) {
-        // ตรวจสอบว่า IP นี้เคยใช้รหัสหรือไม่
-        if (savedData[ipAddress] && savedData[ipAddress] === passwordInput) {
-            // IP นี้เคยใช้รหัส, ไม่ต้องทำอะไร
-            alert('Welcome back!');
+    const matchedPassword = passwordsAndIPs.find(item => item.password === passwordInput);
+    if (matchedPassword) {
+        // ตรวจสอบว่า IP ตรงกับรหัสหรือไม่
+        if (matchedPassword.ip === ipAddress) {
+            // IP และรหัสผ่านถูกต้อง
+            alert('Login successful!');
             document.getElementById('login-button').style.display = 'none';
             document.getElementById('login-button').style.width = '0'; // ปรับขนาดเป็น 0 เพื่อซ่อนปุ่ม
             document.getElementById('login-button').style.height = '0'; // ปรับขนาดเป็น 0 เพื่อซ่อนปุ่ม
         } else {
-            // IP นี้ไม่เคยใช้รหัสหรือรหัสผ่านถูกเปลี่ยน
-            alert('Login successful!');
-            document.getElementById('login-button').style.display = 'none';
-            document.getElementById('login-button').style.width = '0'; // ปรับขนาดเป็น 0 เพื่อซ่อนปุ่ม
-            document.getElementById('login-button').style.height = '0'; // ปรับขนาดเป็น 0 เพื่อ
-            // บันทึก IP และรหัส
-            savedData[ipAddress] = passwordInput;
-            localStorage.setItem('savedData', JSON.stringify(savedData));
+            // IP ไม่ตรงกับรหัสผ่าน
+            alert('Authentication failed. Invalid IP address.');
+            window.close();
         }
-
-        // ซ่อนปุ่ม login เพื่อไม่ให้ใช้ซ้ำ
-        document.getElementById('login-button').style.display = 'none';
     } else {
+        // ไม่พบรหัสผ่านที่ตรงกับที่ป้อน
         alert('Authentication failed. Invalid password.');
         window.close();
     }
 }
-
-
 
 // ฟังก์ชันเพื่อดึง IP Address
 function getIPAddress() {
