@@ -1,7 +1,7 @@
-let passwordsAndIPs = [
-    { password: 'password1', ip: '49.48.117.94' },
-    { password: 'password2', ip: '192.168.0.2' },
-    { password: 'password3', ip: '192.168.0.3' },
+let passwordsAndOwners = [
+    { password: 'a', ip: '' },
+    { password: 'b', ip: '' },
+    { password: 'c', ip: '' }
 ];
 
 let adminIP = ['192.168.0.100'];  // IP ของ Admin ที่สามารถเข้าถึงทุกเครื่องได้
@@ -240,28 +240,41 @@ function authenticate() {
 }
 */
 function authenticate() {
-    const passwordInput = prompt("Enter password:");
-    const ipAddress = getIPAddress();
+    const enteredPassword = prompt('Enter password:');
+    const currentIp = getCurrentIp(); // สมมติว่า getCurrentIp() เป็นฟังก์ชันที่ได้รับ IP ปัจจุบัน
 
     // ตรวจสอบว่ารหัสผ่านถูกต้องหรือไม่
-    const matchedPassword = passwordsAndIPs.find(item => item.password === passwordInput);
-    if (matchedPassword) {
-        // ตรวจสอบว่า IP ตรงกับรหัสหรือไม่
-        if (matchedPassword.ip === ipAddress) {
-            // IP และรหัสผ่านถูกต้อง
-            alert('Login successful!');
-            document.getElementById('login-button').style.display = 'none';
-            document.getElementById('login-button').style.width = '0'; // ปรับขนาดเป็น 0 เพื่อซ่อนปุ่ม
-            document.getElementById('login-button').style.height = '0'; // ปรับขนาดเป็น 0 เพื่อซ่อนปุ่ม
+    const passwordInfo = passwordsAndOwners.find(info => info.password === enteredPassword);
+
+    if (passwordInfo) {
+        const passwordOwner = passwordInfo.ip;
+
+        // ตรวจสอบว่าเครื่องนี้เป็นเจ้าของรหัสหรือไม่
+        if (passwordOwner === '' || passwordOwner === currentIp) {
+            // ตรวจสอบว่ามีผู้เข้าใช้ IP นี้หรือไม่
+            if (!ipOwners[currentIp] || ipOwners[currentIp] === enteredPassword) {
+                // กำหนดผู้เข้าใช้ IP นี้เป็นเจ้าของรหัส
+                passwordInfo.ip = currentIp;
+
+                alert('Login successful!');
+
+                // ถ้ามีการเข้าสู่ระบบเรียบร้อยแล้ว กำหนดให้รหัสนี้ใช้ไม่ได้
+                passwordsAndOwners = passwordsAndOwners.filter(info => info.password !== enteredPassword);
+
+                document.getElementById('login-button').style.display = 'none';
+                document.getElementById('login-button').style.width = '0'; // ปรับขนาดเป็น 0 เพื่อซ่อนปุ่ม
+                document.getElementById('login-button').style.height = '0'; 
+            } else {
+                alert('Authentication failed. IP already used by another user.');
+                closeWindow();
+            }
         } else {
-            // IP ไม่ตรงกับรหัสผ่าน
-            alert('Authentication failed. Invalid IP address.');
-            window.close();
+            alert('Authentication failed. Invalid IP address for this password.');
+            closeWindow();
         }
     } else {
-        // ไม่พบรหัสผ่านที่ตรงกับที่ป้อน
         alert('Authentication failed. Invalid password.');
-        window.close();
+        closeWindow();
     }
 }
 
