@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./core/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>TOP SECERT</title>
+
+<style>
+  
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap');
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* ให้ body มีความสูงขั้นต่ำเท่ากับ viewport */
+        }
+/* สไตล์สำหรับหน้าจอขนาดเล็ก (เช่น โทรศัพท์) */
+@media only screen and (max-width: 600px) {
+    #question-container {
+        max-width: 100%;
+    }
+    .switch {
+        position: static;
+        margin-bottom: 10px;
+    }
+    /* เพิ่มการปรับขนาดหรือการซ่อนส่วนหนึ่งๆ ของเว็บไซต์ที่ไม่ต้องการแสดงในหน้าจอขนาดเล็ก */
+}
+
+/* สไตล์สำหรับหน้าจอขนาดกลาง (เช่น แท็บเล็ต) */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+    /* เพิ่มสไตล์ที่ต้องการให้แสดงผลในหน้าจอขนาดกลาง */
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+        .switch {
+            position: fixed;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            top: 10px; 
+            right: 10px;
+            z-index: 1000;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: background-color 0.4s ease;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: transform 0.4s ease, background-color 0.4s ease;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #4CAF50;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+            background-color: #fff;
+        }
+        #question-title {
+            animation: fadeIn 1s ease;
+            transition: color 0.3s ease;
+        }
+
+        #question-container.green-background {
+            background-color: #4CAF50; /* สีเขียว */
+            color: white;
+        }
+
+        #question-container {
+            background-color: #fff;
+            position: relative;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #options-container {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        .option {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .option:hover {
+            background-color: #ddd;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .option.green-background {
+            background-color: #80c982; /* สีเขียว */
+            color: white;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        h4 {
+            font-family: 'Prompt';
+            margin: 10px;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            color: #555;
+        }
+
+        h4:nth-child(2) {
+            right: 0;
+        }
+        .incorrect {
+            color: red;
+        }
+        .correct {
+            color: greenyellow;
+        }
+
+        /* Common styles for menu toggle and navigation */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+            background: none;
+            border: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 20%;
+            justify-content: space-between;
+            padding: 15px;
+            z-index: 1000;
+        }
+
+        .nav-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+          }
+        
+          .nav-list li {
+            margin-right: 15px;
+            animation: fadeIn 0.5s ease;
+          }
+        
+          .nav-list a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center; /* จัดให้เนื้อหาอยู่ตรงกลาง */
+          }
+        
+          .nav-list a:hover {
+            color: #4CAF50;
+          }
+
+        /* Styles for the hamburger icon */
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 6px 0;
+            transition: background-color 0.3s, transform 0.3s ease-in-out;
+        }
+
+        /* Styles for active state of hamburger icon */
+        .menu-toggle.active .bar:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .menu-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .bar:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Media query for responsive design */
+        @media screen and (max-width: 600px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-list {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                border-radius: 5px;
+                z-index: 999;
+            }
+
+            .nav-list.show {
+                display: flex;
+            }
+
+            .nav-list li {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .nav-menu {
+                justify-content: space-between;
+                padding: 15px;
+            }
+
+            .bar {
+                width: 30px;
+            }
+        }
+
+
+
+
+
+
+        #back-button {
+            background-color: transparent;
+            border: none;
+            color: black; /* Set the text color */
+            cursor: pointer;
+            outline: none; /* Remove the default focus outline */
+            text-decoration: none;
+            font-family: 'Prompt';
+            margin: 10px;
+            transition: opacity 1s ease-in-out;
+        }
+
+        #back-button:hover {
+            color: #2e6e30;
+        }
+
+
+/* CSS สำหรับ Confetti */
+#confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    transition: opacity 1s ease-in-out;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #f00; /* สีเริ่มต้น */
+    border-radius: 50%;
+    pointer-events: none;
+    animation: fall linear infinite;
+    transition: opacity 1s ease-in-out;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+    }
+}
+
+
+#login-button {
+    width: 100vw; /* ขนาดเต็มหน้าจอในแนวนอน */
+    height: 100vh; /* ขนาดเต็มหน้าจอในแนวตั้ง */
+    position: absolute;
+    margin: 0; /* ลบ margin ที่เป็นค่าเริ่มต้น */
+}
+</style>
+</head>
+<body>
+    <h4 style="font-family: 'Prompt'; position: absolute; bottom: 0; right: 0; margin: 10px;">With คนหล่อ B.ATM | Dev ByTanaTherd</h4>
+    <h4 style="font-family: 'Prompt';position: absolute; bottom: 0; left: 0; margin: 10px;"><a href="https://tipme.in.th/hyorick" target="_blank"><img src='./images/coffee.PNG' width="40" height="40"></a></h4>
+    <div id="question-container" class="switch-container">
+        <div style="position: absolute; top: 10px; right: 10px;">
+            <label class="switch">
+                <input type="checkbox" id="switch" onclick="toggleBackground()">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div style="font-family: 'Prompt'; position: absolute; bottom: 0; right: 0; margin: 10px; color: rgb(0, 0, 0);">
+            <span id="current-question-number">0</span> / <span id="total-questions">0</span>
+        </div>
+
+        <p id="question-title">TEST</p>
+        <div id="options-container" class="options-container"></div>
+        <div id="result" class="result"></div>
+        <button id="back-button" style="font-family: 'Prompt'; position: absolute; bottom: 0; left: 10px; margin: 10px; display: none; font-size: 17.25px;" onclick="goBack()">Back</button>
+ </div>
+
+ <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- ... (HTML และ CSS เดิม) ... -->
+<script>
+    const questions = [
+        { question: "<b>ไม่คารใช้คำกามใด ในการซักประวัติการเ จ็บป่าย (illness)</b>", options: ["มีโรคประจำตัวหรือไม่","มีไข้มากี่วันแล้วค่ะ","อาการปวดท้องเป็นลักษณะแบบไหน","คุณป๋าทราบหรือไม่ว่า ป่วยเป็นอะไร","ใช้ยาสมุนไพรอะไรบ้าง"], correctAnswer: "มีโรคประจำตัวหรือไม่" },
+        { question: "<b>สุขภาพหนึ่งเดียว (One Health) หมายก๊งสุขภาพของ</b>", options: ["คนในชุมชนทั้งหมด","ดน สัตว์ สิ่งแวตล้อม","คน สิ่งแวดล้อม องค์กรสุขภาพ","เต็ก คนวัยหางาน วันสูงอายุ","ผู้ป่วย ครอบครัว ชุมชน"], correctAnswer: "ดน สัตว์ สิ่งแวตล้อม" },
+        { question: "<b>ข้อใดไม่ได้จัดเป็นการดูแลผู้ป่วยแบบ Holistic care</b>", options: ["เภสัชกรแนะนำผู้ป่วยรับประทานยาโดยใช้หลัก IFFE","Community-oriented care","Family-oriented care","การดูแลผู้ป่วยโดยใช้หลัก disease management โดยเฉพาะ","การซักประวัติผู้ป่วยด้านความเชื่อและจิตวิญญาณ"], correctAnswer: "การดูแลผู้ป่วยโดยใช้หลัก disease management โดยเฉพาะ" },
+        { question: "<b>การรณรงค์ Social distancing จัดอยู่ในหลัก Primary care ข้อใด</b>", options: ["Comprehensive care","Family care","Coordinated care","First contact care","Continuity of care"], correctAnswer: "Comprehensive care" },
+        { question: "<b>การทำกายภาพบำบัด ให้แก่ผู้ป่วยที่มีอาการแขนขาช้ายอ่อนแรงจากโรคหลอดเลือดในสมองตีบ จัดอยู่ในหลักข้อใด</b>", options: ["Comprehensive care","Family care","Coordinated care","First contact care","Continuity of care"], correctAnswer: "Comprehensive care" },
+        { question: "<b>การทำกายภาพบำบัด ให้แก่ผู้ป่วยที่มีอาการแขนขาซ้ายอ่อนแรงจากโรคหลอดเลือดในสมองตีบ จัดอยู่นหลัก Primary care ข้อใด</b>", options: ["Comprehensive care","Family care","Coordinated care","First contact care","Continuity of care"], correctAnswer: "Comprehensive care" },
+        { question: "<b>การรณรงค์ Social distancing จัดอยู่ในหลัก Primary care ข้อใด</b>", options: ["Comprehensive care","Family care","Coordinated care","First contact care","Continuity of care"], correctAnswer: "Comprehensive care" },
+        { question: "<b>การเยี่ยมบ้านผู้ป่วยในชุมชนร่วมกันของแพทย์ พยาบาล เภสัชกร และแพทย์แผนไทย จัดอยู่นหลัก Primary care ข้อใด</b>", options: ["Comprehensive care","Family care","Coordinated care","First contact care","Continuity of care"], correctAnswer: "Coordinated care" },
+        { question: "<b>ผู้ป่วยไข้มา 3 วัน ไปพบแพทย์ที่ รพ.สต.ใกล้บ้าน เมื่อเช้านี้ เข้าได้กับข้อใด</b>", options: ["Comprehensive care","Family care","Coordinated care","First contact care","Continuity of care"], correctAnswer: "First contact care" },
+        { question: "<b>หลักการของเวชศาสตร์ครอบครัว มีความสำคัญต่อระบบสุขภาพในประเทศไทยอย่างไร</b>", options: ["จัดการปัญหาความเจ็บปวยฉับพลันและปัญหาสุขภาพเรื้อรัง","ให้การดูแลผู้ป่วยหลังผ่าตัดในโรงพยาบาลเทนั้น","ให้ค่าปรึกษาแก่ผู้ป่วยและครอบครัว เฉพาะที่โรงพยาบาล","มุ่งน้นการดูแล!พาะด่นครอบครัวเป็นหลัก โดยไม่ได้มุ่งเน้นที่ตัวบุคคล","ให้ผู้ป่วยพึ่งพิงหมอให้มากที่สุด"], correctAnswer: "จัดการปัญหาความเจ็บปวยฉับพลันและปัญหาสุขภาพเรื้อรัง" },
+        { question: "<b>ข้อใดเป็นหลักของ Family physician of Thailand</b>", options: ["มุ่งเน้นชุมชน มุ่งเน้นโรค","มุ่งเน้นครอบครัว มุ่งเน้นจิตใจ","การจัดบริการปฐมภูมิ ดูแลประชากรตามเพศ","ยึดผู้ป่วยเป็นศูนย์กลาง ทักษะการแก้ปัญหาเฉพาะ","เน้นดูแลแบบการป้องกันโรค ตามนโยบายของรัฐ"], correctAnswer: "มุ่งเน้นครอบครัว มุ่งเน้นจิตใจ" },
+        { question: '<b>ข้อใดไม่ได้จัดเป็นการดูเลผู้ป่วยแบบ Holistic care</b>', options: ["การดูแลผู้ป่วยโดยใช้หลัก disease management โดยเฉพาะ","เกสัชกรแนะนำาผู้ป่วยรับประทานยาโดบใช้หลัก IFFE","Family-oriented care","การซักประวัติผู้ป่วยด้านความเชื่อและจิตวิญญาณ","Community-oriented care"], correctAnswer: "การดูแลผู้ป่วยโดยใช้หลัก disease management โดยเฉพาะ" },
+        { question: '<b>ทุกข้อต่อไปนี้คือ "ทักษะที่พลเมืองยุคดิจิทัลควรต้องมี" ยกเว้นข้อใด</b>', options: ["ทักษะในการจัดสรรเวลาหน้าจอ","ทักษะในการบริหารจัดการความสัมพันธ์ในโลกออนไลน์","ทักษะในการรักษาอัตลักษณ์ที่ดีของตนเอง","ทักษะในการรับมือกับการคุกคามทางโลกออนไลน์","ทักษะในการรักษาอัตลักษณ์ที่ดีของตนเอง"], correctAnswer: "ทักษะในการบริหารจัดการความสัมพันธ์ในโลกออนไลน์" },
+        { question: '<b>ทุกข้อต่อไปนี้คือ "ลักษณะของสื่อที่ส่งผลให้ประชาชนต้องรู้เท่าทันสื่อ" ยกเว้นข้อใด</b>', options: ["สื่อแต่ละชนิดมีเอกลักษณ์และข้อจำกัด","สื่อสร้างคำนิยมและอุดมการณ์","องค์กรด้านวิชาชีพสื่อในประเทศไทยไม่มีประสิทธิภาพ","สื่อทั้งหมดมีผู้สร้าง","สื่อสร้างผลสะท้อนสืบเนื่องทางสังคมและการเมือง"], correctAnswer: "องค์กรด้านวิชาชีพสื่อในประเทศไทยไม่มีประสิทธิภาพ" },
+        { question: "<b>จากสถานการณ์ใดที่เป็นสาเหตุทำให้เราต้องรู้เท่าทันสื่อ</b>", options: ["Virtual world (C)","ข้อ (B) และ ข้อ (C)","Media Convergence (B)","Media Literacy (A)","ข้อ (A) และ ข้อ (B)"], correctAnswer: "ข้อ (B) และ ข้อ (C)" },
+        { question: "<b>ข้อใดต่อไปนี้ กล่าวถึง Principles of family medicine of Thailand ไม่ถูกต้อง</b>", options: ["พยาบาลชุมชนแนะนำการล้างมือ 7 ขั้นตอนแก่ผู้ป่วยที่มาใช้บริการที่ PCU","ผู้ใหญ่บ้านประชุมกับทีมหมอครอบครัว เพื่อแก้ปัญหาผู้ป่วยเบาหวานในชุมชน","อบต.จัดทำโครงการการป้องกันการแพร่ระบาดของ Covid-19 ร่วมกับมหาวิทยาลัย","การดูแลหญิงหลังคลอดต่อเนื่องที่บ้าน","สร้างความสัมพันธ์ที่ดีระหว่าง อสม.และผู้ป่วย"], correctAnswer: "อบต.จัดทำโครงการการป้องกันการแพร่ระบาดของ Covid-19 ร่วมกับมหาวิทยาลัย" },
+        { question: "<b>ศูนย์บริการทางการแพทย์ วัดศรีสวัสดิ์ โรงพยาบาลสุทธาเวช จัดอยู่ในเวชปฎิบัติระดับใด</b>", options: ["Primary care","Secondary care","Hospital care","Community care","Tertiary care"], correctAnswer: "Primary care" },
+        { question: '<b>ทุกข้อต่อไปนี้คือ "ทักษะที่พลเมืองยุคดิจิทัลควรต้องมี" ยกเว้นข้อใด</b>', options: ["ทักษะในการจัดสรรเวลาหน้าจอ","ทักษะในการรักษาอัตลักษณ์ที่ดีของตนเอง","ทักษะในการบริหารจัดการความสัมพันธ์ในโลกออนไลน์","ทักษะในการรักษาอัตลักษณ์ที่ดีของตนเอง","ทักษะในการรับมือกับการคุกคามทางโลกออนไลน์"], correctAnswer: "ทักษะในการบริหารจัดการความสัมพันธ์ในโลกออนไลน์" },
+        { question: "<b>ข้อใดไม่ใข่องค์ประกอบของการเรียนแบบสหวิชาชีพ</b>", options: ["ผู้เรียนเกิดพฤติกรรมและสมรรถนะในการทำงานเป็นทีมร่วมกันระหว่างวิชาชีพ","บรรยากาศของการเรียนรู้ร่วมกัน","ผู้เรียนจากวิชาชีพสุขภาพและวิชาชีพอื่นๆ ตั้งแต่ 2 วิชาชีพขึ้นไป","ผู้สอนจากวิชาชีพสุขภาพและวิชาชีพอื่นๆ ตั้งแต่ 2 วิชาชีพขึ้นไป","กิจกรรมลงชุมชนร่วมกันของผู้เรียนและผู้สอน"], correctAnswer: "กิจกรรมลงชุมชนร่วมกันของผู้เรียนและผู้สอน" },
+        { question: "<b>ใครมีความรู้เท่าทันสารสนเทษ (Information Literacy) มากที่สุด</b>", options: ["เอใช้ข้อมูลจาก website ทีมีคนนิยมสืบค้นมากที่สุด","ดีใช้ข้อมูลจาก website ที่สื่อมวลชนใช้มากที่สุด","ซีใช้ข้อมูลจาก website ที่สามารถเข้าถึงได้รวดเร็ว","บีใช้ข้อมูลจาด website ที่หลากหลาย"], correctAnswer: "บีใช้ข้อมูลจาด website ที่หลากหลาย" }  
+    ];
+
+    let backButtonClicked = false;
+let correctAnswersCount = 0;  // เพิ่มตัวแปรเก็บจำนวนข้อที่ตอบถูก
+let IncorrectAnswersCount = 0;
+let confettiDisplayed = false;  // เพิ่มตัวแปรเพื่อตรวจสอบว่า Confetti ถูกแสดงหรือไม่
+function toggleMenu() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navList = document.querySelector('.nav-list');
+            menuToggle.classList.toggle('active');
+            navList.classList.toggle('show');
+        }
+    
+    let currentQuestionIndex = -1;
+
+    function shuffleArray(array) {
+        return array.sort(() => Math.random() - 0.5);
+    }
+
+
+    function toggleBackground() {
+        const switchElement = document.getElementById('switch');
+        const options = document.getElementsByClassName('option');
+
+        if (switchElement.checked) {
+            // ถ้า switch ถูกเปิด
+            for (let i = 0; i < options.length; i++) {
+                const option = options[i];
+                if (option.textContent === questions[currentQuestionIndex].correctAnswer) {
+                    option.classList.add('green-background');
+                }
+            }
+        } else {
+            // ถ้า switch ถูกปิด
+            for (let i = 0; i < options.length; i++) {
+                const option = options[i];
+                option.classList.remove('green-background');
+            }
+        }
+    }
+
+    const totalQuestions = questions.length;
+
+    function displayQuestion() {
+        if (backButtonClicked) {
+            currentQuestionIndex = (currentQuestionIndex - 1 + totalQuestions) % totalQuestions;
+            correctAnswersCount--;
+        } else {
+            currentQuestionIndex = (currentQuestionIndex + 1) % totalQuestions;  // ใช้ totalQuestions แทน questions.length
+            correctAnswersCount++;
+        }
+        const currentQuestion = questions[currentQuestionIndex];     
+        backButtonClicked = false; // Reset the flag
+
+        document.getElementById('options-container').innerHTML = '';
+        document.getElementById('question-title').innerHTML = currentQuestion.question;
+        document.getElementById('current-question-number').textContent = currentQuestionIndex + 1;
+            document.getElementById('total-questions').textContent = totalQuestions;  // อัปเดตจำนวนข้อทั้งหมด
+
+        currentQuestion.options = shuffleArray(currentQuestion.options);
+
+        document.getElementById('back-button').style.display = (currentQuestionIndex > 0) ? 'block' : 'none';
+
+        currentQuestion.options.forEach((option, index) => {
+            const optionElement = document.createElement('div');
+            optionElement.classList.add('option');
+            optionElement.textContent = option;
+            optionElement.addEventListener('click', () => checkAnswer(index));
+            document.getElementById('options-container').appendChild(optionElement);
+
+            // ตรวจสอบถ้าเป็น correctAnswer ให้เพิ่ม class สีเขียวตรงนี้
+            if (option === currentQuestion.correctAnswer && document.getElementById('switch').checked) {
+                optionElement.classList.add('green-background');
+            }
+        });
+
+
+        document.getElementById('result').textContent = '';
+    }
+
+
+
+    function checkAnswer(selectedIndex) {
+    const currentQuestion = questions[currentQuestionIndex];
+    const correctIndex = currentQuestion.options.findIndex(option => option === currentQuestion.correctAnswer);
+    document.getElementById('question-title').innerHTML = currentQuestion.question;
+
+    const resultElement = document.getElementById('result');
+    if (selectedIndex === correctIndex) {
+        resultElement.textContent = "Correct!";
+        resultElement.classList.remove('incorrect');
+
+        if (correctAnswersCount === totalQuestions & IncorrectAnswersCount === 0) {
+            displayCelebration();  // Trigger celebration effect
+        } else {
+            setTimeout(displayQuestion, 1000);
+        }
+
+        if (correctAnswersCount === totalQuestions) {
+            correctAnswersCount = 0;  // รีเซ็ต correctAnswersCount สำหรับการทดลองในอนาคต
+            IncorrectAnswersCount = 0;           
+        }
+    } else {
+        resultElement.textContent = 'Incorrect! Try again.';
+        resultElement.classList.add('incorrect');
+        IncorrectAnswersCount = IncorrectAnswersCount + 1;
+    }
+}
+
+    // Display the first question
+    displayQuestion();
+
+    function goBack() {
+        backButtonClicked = true;
+            displayQuestion();
+    }
+
+
+    // ตรวจสอบการเปิด Developer Tools
+    function checkDevTools() {
+        const isOpen = () => {
+            const element = new Image();
+            element.__defineGetter__('id', () => {
+                console.log('Developer Tools is open!');
+                // ทำบางสิ่งที่คุณต้องการทำเมื่อ Developer Tools ถูกเปิด
+            });
+            console.clear();
+            console.log('%c', element);
+        };
+
+        setInterval(isOpen, 1000);
+    }
+
+    // เรียกใช้งานฟังก์ชัน checkDevTools
+    checkDevTools();
+
+
+
+
+// Function เพิ่ม effect Confetti
+function addConfetti() {
+    const confettiContainer = document.createElement('div');
+    confettiContainer.id = 'confetti-container';
+    document.body.appendChild(confettiContainer);
+
+    // สร้าง Confetti
+    for (let i = 0; i < 200; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.backgroundColor = getRandomColor();
+        confetti.style.left = Math.random() * window.innerWidth + 'px';
+        confetti.style.animationDuration = Math.random() * 2 + 1 + 's';
+        confetti.style.opacity = Math.random();
+        confettiContainer.appendChild(confetti);
+    }
+
+    // ลบ Confetti หลังจาก animation เสร็จสิ้น
+    setTimeout(() => {
+        document.body.removeChild(confettiContainer);
+        congratsEffect.style.transition = 'opacity 1s ease-in-out';
+        congratsEffect.style.opacity = '0';  // ทำให้ opacity เป็น 0 เพื่อให้หายไป
+    }, 10000);
+}
+
+// Function สุ่มสี
+function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+// Function แสดงประกาศยินดีพร้อม Effect Confetti
+function displayCelebration() {
+    // เพิ่ม effect แสดงประกาศยินดี
+    const congratsEffect = document.createElement('div');
+    congratsEffect.id = 'congratulation-effect';
+    congratsEffect.textContent = 'Congratulations!';  // ข้อความประกาศยินดี
+    congratsEffect.style.position = 'absolute';
+    congratsEffect.style.top = '100px';
+    congratsEffect.style.font = 'Prompt';
+    document.body.appendChild(congratsEffect);
+
+    // เพิ่ม effect Confetti
+    addConfetti();
+
+    // รีเซ็ต correctAnswersCount และ แสดง effect ลงทะเบียน
+    setTimeout(() => {
+        document.body.removeChild(congratsEffect);
+        correctAnswersCount = 0;  // รีเซ็ต correctAnswersCount สำหรับการทดลองในอนาคต
+        IncorrectAnswersCount = 0;
+        displayQuestion();  // ดำเนินการไปที่คำถามถัดไป
+    },6000);
+}
+
+
+
+
+
+window.onload = function () {
+    document.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+    }, false);
+    document.addEventListener("keydown", function (e) {
+        //document.onkeydown = function(e) {
+        // "I" key
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+            disabledEvent(e);
+        }
+        // "J" key
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+            disabledEvent(e);
+        }
+        // "S" key + macOS
+        if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+            disabledEvent(e);
+        }
+        // "U" key
+        if (e.ctrlKey && e.keyCode == 85) {
+            disabledEvent(e);
+        }
+        // "F12" key
+        if (event.keyCode == 123) {
+            disabledEvent(e);
+        }
+    }, false);
+    function disabledEvent(e) {
+        if (e.stopPropagation) {
+            e.stopPropagation();
+        } else if (window.event) {
+            window.event.cancelBubble = true;
+        }
+        e.preventDefault();
+        return false;
+    }
+}
+</script>
+
+
+
+</body>
+</html>
