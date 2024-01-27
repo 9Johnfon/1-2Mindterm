@@ -85,7 +85,7 @@ function toggleMenu() {
 
     const resultElement = document.getElementById('result');
     if (selectedIndex === correctIndex) {
-        resultElement.textContent = 'Correct!';
+        resultElement.textContent = "Correct!";
         resultElement.classList.remove('incorrect');
 
         if (correctAnswersCount === totalQuestions & IncorrectAnswersCount === 0) {

@@ -53,20 +53,7 @@
             <li><a href="SpacialPhysioNEW.html">PhysioNEW</a></li>
         </ul>
     </div>
-
-    <script src="./core/script.js"></script>
     <script>
-
-        let backButtonClicked = false;
-        let correctAnswersCount = 0;
-        let IncorrectAnswersCount = 0;
-        let confettiDisplayed = false;
-        function toggleMenu() {
-            const menuToggle = document.querySelector('.menu-toggle');
-            const navList = document.querySelector('.nav-list');
-            menuToggle.classList.toggle('active');
-            navList.classList.toggle('show');
-        }
         const questions = [
 //////////////////// โจโฉ 1 - 12
             { question: "<B> ชายอายุ 45 ปี มีอาการมือสั่นมาประมาณ 4 เดือน์ มีอาการมากขึ้นขณะพัก และลดลงเมื่อยื่นมือไปจับสิ่งของ ลำตัว rigid อาการทางคลินิกดังกล่าวเกิดจากความผิดปกติของข้อใดต่อไป </B>",options: ["Pons", "BA4", "Basal ganglia", "Cerebellum ", "Midbrain "], correctAnswer: "Basal ganglia" },
@@ -84,11 +71,10 @@
             { question: "<B>ในทางเดินประสาทของระบบรับความรู้สึก Spinothalamic tract มีการ Cross midline ของร่างกายที่ระดับใด</B>",options: ["Thalamus", "Spinal cord", "Pons", "Medulla", "Midbrain"], correctAnswer: "Spinal cord"},
             { question: "<B>แพทย์ให้การรักษาผู้ป่วยโรคลมชักโดยให้ยาที่ทำให้เซลล์ประสาทเกิดไฮเปอร์โพลาไรเซชั่น อยากทราบว่ายานี้มีผลเกี่ยวข้องกับไอออนใดต่อไปนี้</B>",options: ["โซเดียมเท่านั้น", "คลอไรด์และโพแทสเซียม", "คลอไรด์และโซเดียม", "แคลเซียมและโซเดียม", "โพแทสเซียมและโซเดียม"], correctAnswer: "โพแทสเซียมและโซเดียม"},
             { question: "<B>ผู้ป่วยหญิงอายุ 35 ปี มาพบแพทย์เนื่องจากยา antihistamine ที่เธอกินอยู่เพื่อรักษาอาการแพ้อากาศทำให้เธอง่วงมาก แพทย์จึงแนะนำให้ใช้ยาตัวใหม่ที่จะมีฤทธิ์ ทำให้ง่วงน้อยลงเนื่องจากไม่สามารถผ่าน blood brain barrier ได้ อยากทราบว่าเซลล์ชนิดใดที่เป็นส่วนหนึ่งในการสร้าง blood brain barrier</B>",options: ["Oligodendrocyte", "Microglia", "Astrocyte", "Schwann cell", "Satellite cell"], correctAnswer: "Satellite cell"},
-            { question: "<B> เมื่ออุณหภูมิแกนลดต่ำลง ร่างกายจะพยายามรักษาอุณ(ภูมิโดยเกิด cutaneousvasoconstriction และเพื่อป้องกันไม่ให้อวัยวะส่วนปลายเราขาดเลือดจึงเกิด......ตามมา*** </B>",options: ["Fever", "Cold-induced-vasoconstriction", "Shivering", "Hunting reaction", "Sweating"], correctAnswer: "Hunting reaction"},
+            { question: "<B> เมื่ออุณหภูมิแกนลดต่ำลง ร่างกายจะพยายามรักษาอุณ(ภูมิโดยเกิด cutaneousvasoconstriction และเพื่อป้องกันไม่ให้อวัยวะส่วนปลายเราขาดเลือดจึงเกิด......ตามมา*** </B>",options: ["Fever", "Cold-induced-vasoconstriction", "Shivering", "Hunting reaction", "Sweating"], correctAnswer: "Cold-induced-vasoconstriction"},
             { question: "<B> ผู้ป่วยเกิดภาวะโซเดียมในเลือดต่ำ (hyponatremai) เนื่องมาจากการหลั่งฮอร์โมน ADHมากกว่าปกติ ทำให้ osmolarity ในเลือดต่ำลง น้ำแพร่เข้าเซลล์ทำให้ปริมาตรของเชลล์เพิ่มขึ้น จะมีผลให้เกิดภาวะที่เรียกว่า สมองบวม (cerebral edema) มีอาการมึนงง สับสนหมดสติ การรักษาผู้ป่วยรายนี้จะใช้สารน้ำชนิดใด * </B>",options: ["lsotonic solution", "0.45%NaCl", "Hypertonic solution ", "0.9%NaC", "Hypotonic solution "], correctAnswer: "Hypertonic solution "},
             { question: "<B> ข้อใดถูกต้องเกี่ยวกับ Body temperature<br/><br/><p style='text-align:left';>a.อุณหภูมิกายมีค่าต่ำในตอนกลางคืน<br/>b.Estrogen ทำให้อุณหภูมิกาย สูงขึ้น progesterone ทำให้อุณหภูมิกาย ต่ำลง<br/>c.อายุมากขึ้น metabolism ลดล้ง และ อุณหภูมิกายต่ำลง<br/>d.Catecholamine เพิ่ม metaboism ทำให้อุณหภูมิกายสูงขึ้น<br/>e.Thyroxin ลด metabolism ทำให้อุณหภูมิกายสูงขึ้น* </p></B>",options: ["a,b,c", "b,c,d", "a,c,d", "aและe", "ถูกทุกข้อ"], correctAnswer: "a,c,d"},
             { question: "<B> การตรวจ......ใช้ต้ามค้อนยางขีดที่ฝ้าเท้าจากบริเวณสันเท้าไปถึงปลายเท้า ถ้าการตอบสนอง ของผู้ป่วยเกิด จาก dorsiflexion และ abduction ของนิ้วเท้าจะเกิดความผิดปกติที่...... </B>",options: ["Babinski's sign, lower motor neuron", "Babinski's sign, lower motor neuron", "Babinski's sign, meninges", "clonus, upper motor neuron", "Babinski's sign, upper motor neuron"], correctAnswer: "Babinski's sign, upper motor neuron"},
-            { question: "<B> ผู้ป่วยอายุ 40 ปี มาพบแพทย์ด้วยอาการอ่อนแรงและมีปัญหาทางการรับความรู้สึกของทั้งแขนและขา แพทย์ตรวจพบว่ามีการเสื่อมสลายของปลอกไมอีลิน (demyelinating) ของ axon ในระบบประสาทส่วนกลาง ข้อใดต่อไปนี้ถูกต้องเกี่ยวกับ supporting cell ที่เกี่ยวข้องกับผู้ป่วยรายนี้ </B>",options: ["A. Microgia เก็บกินสิ่งแปลกปลอมที่เข้ามาจับบนปลอกไมอีลินของเส้นประสาทส่วนปลาย", "B. Schwann cell มีหน้าที่สร้าง myelin sheath ให้ axonsองเซลล์ใน  peripheral nervoussystem", "C.Oligodendrocytes  มีหน้าที่สร้าง myelin sheath ให้ axon กับเซลล์ประสาทใน centralnervous system", "D.Oligodendrocytes มีหน้าที่สร้าง myelin sheath ให้ axon ของเซลล์ใน peripheral nervoussystem", "ข้อ B and C ถูก"], correctAnswer: "C.Oligodendrocytes  มีหน้าที่สร้าง myelin sheath ให้ axon กับเซลล์ประสาทใน centralnervous system"},
             { question: "<B> การวัดอุณหภูมิร่างกายทางใดต่อไปนี้ให้ค่าอุณหภูมิใกล้เคียงอุณหภูมิแกนมากที่สุด ** </B>",options: ["Forehead", "Tympanic", "Rectal", "Axillary", "Oral"], correctAnswer: "Axillary"},
 //////////////////// เกม 13 - 24
             { question: "<B>ข้อใดต่อไปนี้มีกลไกการควบคุมแบบ Positive feedback control</B>",options: ["Sugar metabolism", "Body temperature", "Lactation", "Blood gas", "Blood osmolality"], correctAnswer: "Lactation" },
@@ -121,7 +107,7 @@
             { question: "<B>นักปฏิบัติการฉุกเฉินทางการแพทย์กำลังช่วยเหลือผู้ป่วยที่มีภาวะวิกฤติที่ โดยให้ epinephrine หรือ adrenaline กับผู้ป่วย อยากทราบว่ายานี้มีผลต่อหัวใจผู้ป่วยอย่างไร</B>", options: ["ยาจะออกฤทธิ์กระตุ้นตัวรับ α2 ทำให้หัวใจเต้นเร็วขึ้น", "ยาจะออกฤทธิ์กระตุ้นตัวรับ α1 ทำให้หัวใจเต้นเร็วขึ้น", "ยาจะออกฤทธิ์กระตุ้นตัวรับ β3 ทำให้หัวใจเต้นเร็วขึ้น", "ยาจะออกฤทธิ์กระตุ้นตัวรับ β2 ทำให้หัวใจเต้นเร็วขึ้น", "ยาจะออกฤทธิ์กระตุ้นตัวรับ β1 ทำให้หัวใจเต้นเร็วขึ้น"], correctAnswer: "ยาจะออกฤทธิ์กระตุ้นตัวรับ β1 ทำให้หัวใจเต้นเร็วขึ้น" },
             { question: "<B>ข้อต่อไปนี้กล่าวผิดเกี่ยวกับองค์ประกอบของวงจรรีเฟล็ก</B>", options: ["Effector organ เป็นอวัยวะแสดงผล เช่น กล้ามเนื้อ", "Efferent pathway นำสัญญาณประสาทออกจาก reflex center", "Reflex center อยู่ที่ส่วน white matter ของไขสันหลัง", "Afferent pathway นำกระแสประสาทจากตัวรับเข้าสู่ reflex center", "Sensory receptor จะเปลี่ยนสิ่งที่มากระตุ้นให้เป็นศักย์ไฟฟ้าขณะทำงาน"], correctAnswer: "Sensory receptor จะเปลี่ยนสิ่งที่มากระตุ้นให้เป็นศักย์ไฟฟ้าขณะทำงาน" },
             { question: "<B>วิศวกรหนุ่มชาวอเมริกันเดินทางมาทำงานในประเทศไทยเป็นเวลา 2 เดือน ในช่วงดือนเมษายนและ พฤษภาคม โดยต้องทำงานกลางแจ้งทุกวัน เมื่อเปรียบเทียบการปรับตัวของร่างกายชายหนุ่มคนนี้เมื่อมาถึงวันแรกกับเวลาผ่านไป 2 เดือน ค่าใดต่อไปนี้จะเพิ่มขึ้น</B>", options: ["Sweat salt concentration", "Core temperature", "Sweating rate", "Heart rate", "Thermoregulatory set point"], correctAnswer: "Thermoregulatory set point" },
-            { question: "<B>เมื่ออุณหภูมิแกนลดต่ำลง ร่างกายจะพยายามรักษาอุณหภูมิโดยเกิด citancous vasocoutaneous tadeontriction และเพื่อป้องกันไม่ให้อวัยวะส่วนปลายเราขาดเลือดจึงเกิด………… ตามมา</B>", options: ["Cold-induced-vasoconstriction", "Shivering", "Hunting reaction", "Sweating", "Fever"], correctAnswer: "Hunting reaction" },
+            { question: "<B>เมื่ออุณหภูมิแกนลดต่ำลง ร่างกายจะพยายามรักษาอุณหภูมิโดยเกิด citancous vasocoutaneous tadeontriction และเพื่อป้องกันไม่ให้อวัยวะส่วนปลายเราขาดเลือดจึงเกิด………… ตามมา</B>", options: ["Cold-induced-vasoconstriction", "Shivering", "Hunting reaction", "Sweating", "Fever"], correctAnswer: "Cold-induced-vasoconstriction" },
             { question: "<B>สารที่หลั่งจากนิวรอนหนึ่งเพื่อไปติดต่อกับนิวรอนหรือเซลล์อื่นที่อยู่ติดกัน ……… สารที่หลั่งจากนิวรอนหนึ่งแล้วเข้าสู่กระแสเลือดเพื่อไปมีผลกับเซลล์อื่น ………… สารที่หลั่งจากเซลล์ของต่อมไร้ท่อแล้วเข้าสู่กระแสเลือดไปมีผลกับเซลล์อื่น …………</B>", options: ["Neurotransmitter, neurohormone, autocrine", "Neurotransmitter, neurohormone, endocrine", "Neurohormone, neurotransmitter, paracrine", "Paracrine, neurotransmitter, autocrine", "Neurotransmitter, endocrine, paracrine"], correctAnswer: "Neurotransmitter, neurohormone, autocrine" },
             { question: "<B>การวัดอุณหภูมิร่างกายทางใดต่อไปนี้ให้ค่าอุณหภูมิใกล้เคียงอุณหภูมิแกนมากที่สุด</B>", options: ["Rectal", "Tympanic", "Forehead", "Axillary", "Oral"], correctAnswer: "Axillary" },
             { question: "<B>ผู้ป่วยเกิดภาวะ โซเดียมในเลือดต่ำ (hyponatremai) เนื่องมาจากการหลั่งฮอร์ โมน ADH มากกว่าปกติ ทำให้ osmolarity ในเลือดต่ำลง น้ำแพร่เข้าเซลล์ทำให้ปริมาตรของเซลล์เพิ่มขึ้น จะมีผลให้เกิดภาวะที่รียกว่า สมองบวม (cerebral dema) มีอาการมึนงง สับสนหมดสติ การรักษาผู้ป่วยรายนี้จะใช้สารน้ำชนิดใด </B>", options: ["Isotonic solution", "Hypotonic solution", "0.9% Nacl", "0.45% Nacl", "Hypertonic solution"], correctAnswer: "Hypertonic solution" },
@@ -174,195 +160,9 @@
 
         ];
 
-        let currentQuestionIndex = -1;
-
-        function shuffleArray(array) {
-            return array.sort(() => Math.random() - 0.5);
-        }
-
-
-        function toggleBackground() {
-            const switchElement = document.getElementById('switch');
-            const options = document.getElementsByClassName('option');
-
-            if (switchElement.checked) {
-                // ถ้า switch ถูกเปิด
-                for (let i = 0; i < options.length; i++) {
-                    const option = options[i];
-                    if (option.textContent === questions[currentQuestionIndex].correctAnswer) {
-                        option.classList.add('green-background');
-                    }
-                }
-            } else {
-                // ถ้า switch ถูกปิด
-                for (let i = 0; i < options.length; i++) {
-                    const option = options[i];
-                    option.classList.remove('green-background');
-                }
-            }
-        }
-
-        const totalQuestions = questions.length;
-
-        function displayQuestion() {
-            if (backButtonClicked) {
-                currentQuestionIndex = (currentQuestionIndex - 1 + totalQuestions) % totalQuestions;
-                correctAnswersCount--;
-            } else {
-                currentQuestionIndex = (currentQuestionIndex + 1) % totalQuestions;  // ใช้ totalQuestions แทน questions.length
-                correctAnswersCount++;
-            }
-            const currentQuestion = questions[currentQuestionIndex];
-            backButtonClicked = false; // Reset the flag
-
-            document.getElementById('options-container').innerHTML = '';
-            document.getElementById('question-title').innerHTML = currentQuestion.question;
-            document.getElementById('current-question-number').textContent = currentQuestionIndex + 1;
-            document.getElementById('total-questions').textContent = totalQuestions;  // อัปเดตจำนวนข้อทั้งหมด
-
-            currentQuestion.options = shuffleArray(currentQuestion.options);
-
-            document.getElementById('back-button').style.display = (currentQuestionIndex > 0) ? 'block' : 'none';
-
-            currentQuestion.options.forEach((option, index) => {
-                const optionElement = document.createElement('div');
-                optionElement.classList.add('option');
-                optionElement.textContent = option;
-                optionElement.addEventListener('click', () => checkAnswer(index));
-                document.getElementById('options-container').appendChild(optionElement);
-
-                // ตรวจสอบถ้าเป็น correctAnswer ให้เพิ่ม class สีเขียวตรงนี้
-                if (option === currentQuestion.correctAnswer && document.getElementById('switch').checked) {
-                    optionElement.classList.add('green-background');
-                    IncorrectAnswersCount = IncorrectAnswersCount + 1;
-                }
-            });
-
-
-            document.getElementById('result').textContent = '';
-        }
-
-
-
-        function checkAnswer(selectedIndex) {
-            const currentQuestion = questions[currentQuestionIndex];
-            const correctIndex = currentQuestion.options.findIndex(option => option === currentQuestion.correctAnswer);
-            document.getElementById('question-title').innerHTML = currentQuestion.question;
-
-            const resultElement = document.getElementById('result');
-            if (selectedIndex === correctIndex) {
-                resultElement.textContent = 'Correct!';
-                resultElement.classList.remove('incorrect');
-
-                if (correctAnswersCount === totalQuestions & IncorrectAnswersCount === 0) {
-                    displayCelebration();  // Trigger celebration effect
-                    currentQuestionIndex = -1;
-                } else {
-                    setTimeout(displayQuestion, 1000);
-                }
-            } else {
-                resultElement.textContent = 'Incorrect! Try again.';
-                resultElement.classList.add('incorrect');
-                IncorrectAnswersCount = IncorrectAnswersCount + 1;
-            }
-        }
-
-        // Display the first question
-        displayQuestion();
-
-        function goBack() {
-            backButtonClicked = true;
-            displayQuestion();
-        }
-
-
-        // ตรวจสอบการเปิด Developer Tools
-        function checkDevTools() {
-            const isOpen = () => {
-                const element = new Image();
-                element.__defineGetter__('id', () => {
-                    console.log('Developer Tools is open!');
-                    // ทำบางสิ่งที่คุณต้องการทำเมื่อ Developer Tools ถูกเปิด
-                });
-                console.clear();
-                console.log('%c', element);
-            };
-
-            setInterval(isOpen, 1000);
-        }
-
-        // เรียกใช้งานฟังก์ชัน checkDevTools
-        checkDevTools();
-
-
-
-
-        // Function เพิ่ม effect Confetti
-        function addConfetti() {
-            const confettiContainer = document.createElement('div');
-            confettiContainer.id = 'confetti-container';
-            document.body.appendChild(confettiContainer);
-
-            // สร้าง Confetti
-            for (let i = 0; i < 200; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.backgroundColor = getRandomColor();
-                confetti.style.left = Math.random() * window.innerWidth + 'px';
-                confetti.style.animationDuration = Math.random() * 2 + 1 + 's';
-                confetti.style.opacity = Math.random();
-                confettiContainer.appendChild(confetti);
-            }
-
-            // ลบ Confetti หลังจาก animation เสร็จสิ้น
-            setTimeout(() => {
-                document.body.removeChild(confettiContainer);
-                congratsEffect.style.transition = 'opacity 1s ease-in-out';
-                congratsEffect.style.opacity = '0';  // ทำให้ opacity เป็น 0 เพื่อให้หายไป
-            }, 15000);
-        }
-
-        // Function สุ่มสี
-        function getRandomColor() {
-            const letters = '0123456789ABCDEF';
-            let color = '#';
-            for (let i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-        }
-
-        // Function แสดงประกาศยินดีพร้อม Effect Confetti
-        function displayCelebration() {
-            // เพิ่ม effect แสดงประกาศยินดี
-            const congratsEffect = document.createElement('div');
-            congratsEffect.id = 'congratulation-effect';
-            congratsEffect.textContent = 'Congratulations!';  // ข้อความประกาศยินดี
-            congratsEffect.style.position = 'absolute';
-            congratsEffect.style.top = '100px';
-            congratsEffect.style.font = 'Prompt';
-            document.body.appendChild(congratsEffect);
-
-            // เพิ่ม effect Confetti
-            addConfetti();
-
-            setTimeout(() => {
-                window.open("https://youtu.be/jSG1hwdST7I?si=xVP3SnqtFz1RfZaE&t=108", '_blank');
-            }, 2000);
-
-            // รีเซ็ต correctAnswersCount และ แสดง effect ลงทะเบียน
-            setTimeout(() => {
-                document.body.removeChild(congratsEffect);
-                correctAnswersCount = 0;  // รีเซ็ต correctAnswersCount สำหรับการทดลองในอนาคต
-                IncorrectAnswersCount = 0;
-                displayQuestion();  // ดำเนินการไปที่คำถามถัดไป
-            }, 6000);
-        }
-
-
     </script>
 
-
+<script src="../core/script.js"></script>
 
 </body>
 

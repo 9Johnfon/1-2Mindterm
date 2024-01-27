@@ -157,6 +157,9 @@ img {
         .incorrect {
             color: red;
         }
+        .correct {
+            color: greenyellow;
+        }
 
         /* Common styles for menu toggle and navigation */
         .menu-toggle {
@@ -184,24 +187,27 @@ img {
             padding: 0;
             margin: 0;
             display: flex;
-        }
-
-        .nav-list li {
+            align-items: center;
+          }
+        
+          .nav-list li {
             margin-right: 15px;
             animation: fadeIn 0.5s ease;
-        }
-
-        .nav-list a {
+          }
+        
+          .nav-list a {
             text-decoration: none;
             color: #333;
             font-weight: bold;
             font-size: 16px;
             transition: color 0.3s ease;
-        }
-
-        .nav-list a:hover {
+            display: flex;
+            align-items: center; /* จัดให้เนื้อหาอยู่ตรงกลาง */
+          }
+        
+          .nav-list a:hover {
             color: #4CAF50;
-        }
+          }
 
         /* Styles for the hamburger icon */
         .bar {
