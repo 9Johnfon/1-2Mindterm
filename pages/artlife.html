@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../core/style.css">
+    <title>Midterm Art&life</title>
+</head>
+<body>
+    <h4 style="font-family: 'Prompt'; position: absolute; bottom: 0; right: 0; margin: 10px;">เรียบเรียงโดยชายฉกรรจ์ทั้ง 7 | Dev ByTanaTherd</h4>
+    <h4 style="font-family: 'Prompt';position: absolute; bottom: 0; left: 0; margin: 10px;"><a href="https://tipme.in.th/hyorick" target="_blank"><img src='../images/coffee.PNG' width="40" height="40"></a></h4>
+    <div id="question-container" class="switch-container">
+        <div style="position: absolute; top: 10px; right: 10px;">
+            <label class="switch">
+                <input type="checkbox" id="switch" onclick="toggleBackground()">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div style="font-family: 'Prompt'; position: absolute; bottom: 0; right: 0; margin: 10px; color: rgb(0, 0, 0);">
+            <span id="current-question-number">0</span> / <span id="total-questions">0</span>
+        </div>
+
+        <p id="question-title">TEST</p>
+        <div id="options-container" class="options-container"></div>
+        <div id="result" class="result"></div>
+        <button id="back-button" style="font-family: 'Prompt'; position: absolute; bottom: 0; left: 10px; margin: 10px; display: none; font-size: 17.25px;" onclick="goBack()">Back</button>
+
+       
+        
+        
+    </div>
+
+    <div class="nav-menu">
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <ul class="nav-list">
+            <li><a href="./artlife.html">Art&Life</a></li>
+            <li><a href="../index.html">IPE</a></li>
+            <li><a href="./EMR.html">EMR</a></li>
+            <li><a href="./Anatomy.html">Anatomy</a></li>
+            <li><a href="./LabPing.html">AnatomyPing</a></li>
+            <li><a href="./Cannabis.html">Cannabis</a></li>
+            <li><a href="./Physio.html">Physio</a></li>
+        </ul>
+    </div>
+
+
+<!-- ... (HTML และ CSS เดิม) ... -->
+<script>
+    const questions = [
+/////////////////// ดิว 3-11
+/////////////////// จอน 12-19
+        { question: "<b>สถาปัตยกรรม ถือเป็นงานศิลปะประเภทใดเพราะเหตุใด</b>", options: ["เป็นงานวิจิตรศิลป์ เพราะไม่เน้นประโยชน์ทางด้านการนำไปใช้","เป็นงานวิจิตรศิลป์ เพราะสร้างสรรค์ขึ้นเพื่อการรับรู้ทางด้านความงาม ความวิจิตรอลังการ","เป็นงานประยุกต์ศิลป์ เพราะสร้างขึ้นเพื่อประโยชน์การนำไปใช้","เป็นไปได้ทั้งวิจิตรศิลป์ และประยุกต์ศิลปั ขึ้นอยู่กับว่าสถาปนิกสร้างขึ้นเพื่อเน้นวัตถุประสงค์ใดเป็นหลัก","เป็นไปได้ทั้งวิจิตรศิลย์ และประยุกต์ศิลป์ เพราะมีความงาน"], correctAnswer: "เป็นไปได้ทั้งวิจิตรศิลป์ และประยุกต์ศิลปั ขึ้นอยู่กับว่าสถาปนิกสร้างขึ้นเพื่อเน้นวัตถุประสงค์ใดเป็นหลัก" },
+        { question: "<b>สิ่งที่ทำให้ งาน Printing ต่างจากงาน painting คืออะไร</b>", options: ["เนื้อหา","สีสัน","รูปแบบ","แม่พิมพ์","แรงบันดาลใจ"], correctAnswer: "แม่พิมพ์" },
+        { question: "<b>การชื่นชมผลงานทัศนศิลปั มีการชื่นชมความงามในทุกด้านดังต่อไปนี้ยกเว้นข้อใด</b>", options: ["เทคนิค และกลวิธีในการสร้างสรรค์","งบประมาณในการสร้างสรรค์ผลงาน","รูปทรง และการจัดการองค์ประกอบ","เนื้อหา ที่มาของแรงบันดาลใจ และแนวความคิด","รูปแบบ ที่ศิลปินถ่ายทอด"], correctAnswer: "งบประมาณในการสร้างสรรค์ผลงาน" },
+        { question: "<b>ข้อใดถูกต้องที่สุดเกี่ยวกับทฤษฎี ความงามเป็นอุบัติการณ์ใหม่ (Beauty as Emergent)</b>", options: ["ความงามขึ้นอยู่กับผู้ชมหรือผู้ดูเป็นสำคัญ วัตถุจะงามหรือไม่งามขึ้นอยู่กับผู้ชม","ความงามเกิดจากทั้งตัววัตถุเอง กับผู้ชม และใช้กฎเกณฑ์ที่คนหมู่มากยอมรับมาตัดสินร่วมด้วย","ความงามเกิดขึ้นจากความสัมพันธ์ระหว่างตัววัตถุและผู้ชม","ความงามเกิดจากความพึงพอใจที่ผู้ชมมองวัตถุ","ความงามขึ้นอยู่กับวัตถุเป็นสำคัญ และมีอยู่เติมแล้วในตัวของมันเอง"], correctAnswer: "ความงามขึ้นอยู่กับวัตถุเป็นสำคัญ และมีอยู่เติมแล้วในตัวของมันเอง" },
+        { question: "<b>ข้อใดไม่ใช่ทัศนธาตุในงานทัศนศิลป์</b>", options: ["ปริมาณ","พื้นที่ว่าง","จังหวะ","น้ำหนักอ่อน-แก่","พื้นผิว"], correctAnswer: "จังหวะ" },
+        { question: "<b>วัตถุประสงค์หลักในการสร้างสรรค์ผลงานทัศนศิลป์ของศิลปะยุคก่อนประวัติศาสตร์คือข้อใด</b>", options: ["เพื่อบันทึกเรื่องราว และเป็นเครื่องมือยังชีพ","เพื่อบูชาเทพเจ้า และประดับตกแต่งถ้ำ","เพื่อรับใช้ศาสนา และ บูชาเทพเจ้า","เพื่อรับใช้สถาบันชั้นสูง","เพื่อแสดงตัวตนของศิลปิน"], correctAnswer: "เพื่อบันทึกเรื่องราว และเป็นเครื่องมือยังชีพ" },
+        { question: "<b>องค์ประกอบใดสำคัญน้อยที่สุดในทางทฤษฎีการชื่นชมผลงานทัศนศิลป์</b>", options: ["ผู้สร้างสรรค์ผลงาน","สถานที่จัดแสดงผลงาน","ผู้ชมผลงาน","ผลงานทัศนศิลป์","ความรู้ความสามารถของผู้ชื่นชมผลงาน"], correctAnswer: "ความรู้ความสามารถของผู้ชื่นชมผลงาน" },
+        { question: "<b>ถ้าพิจารณาตามทฤษฎีทางศิลปะแล้ว ทฤษฎีไหน น่าจะมีแนวโน้มถูกนำมาใช้สร้างสรรค์ศิลปะใน ศตวรรษที่ 21 และในอนาคตมากที่สุด</b>", options: ["Art as Expression","Art as Thinking","Art as Representation","Art as Relation","Art as Pure Form"], correctAnswer: "Art as Expression" },
+//////////////////// บอส 12-17
+/////////////////// เซฟ 18-23
+//////////////////// ซัน 24-29
+/////////////////// ลี่ 30-35
+        
+/////////////////// โฉ 51-60   
+    ];
+</script>
+
+<script src="../core/script.js"></script>
+
+
+</body>
+</html>
